@@ -16,7 +16,6 @@ body {
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-
 }
 
 
@@ -33,6 +32,7 @@ body {
     padding-top: 50px;
     padding-left: 200px ;
     padding-right: 100px ;
+    position: fixed;
 }
 /*header 부분*/
 .jb-text {
@@ -44,7 +44,6 @@ body {
 .jb-text h1 a {
     display: flex;
     color: white;
-
 }
 
 /*nav 부분*/
@@ -86,7 +85,7 @@ body {
     width: 100%;
 }
 
-.jb-center p {
+.jb-center img {
     margin-top: -24px;
     text-align: center;
     font-size: 48px;
@@ -94,22 +93,96 @@ body {
 }
 /*메인1*/
 .inner{
-    height: 800px;
+    height: 1080px;
+    background-color: #6f42c1;
 }
 .inner .inner_title {
+    padding-top: 200px;
+    height: 132px;
+
+
+}
+.inner .inner_title h1 {
     margin-top: 200px;
     height: 132px;
+
 }
 
 .inner .inner_title span {
     font-size: 50px;
 
+
 }
 .inner .inner_text {
     font-weight: 100;
     font-size: 30px;
-    padding-bottom: 5px;
+    margin-top: 150px;
+    line-height: 50px;
 }
+
+
+/*메인 2 부분*/
+.inner1{
+    height: 1080px;
+    background-color:#0069d9;
+}
+.inner1 .inner_title {
+    padding-top: 200px;
+    height: 132px;
+
+
+}
+.inner1 .inner_title h1 {
+    margin-top: 200px;
+    height: 132px;
+
+}
+
+.inner1 .inner_title span {
+    font-size: 50px;
+
+
+}
+.inner1 .inner_text {
+    font-weight: 100;
+    font-size: 30px;
+    margin-top: 150px;
+    line-height: 50px;
+}
+
+
+/*메인 3 부분*/
+
+
+.inner2{
+    height: 1080px;
+    background-color:#2ac1bc;
+}
+.inner2 .inner_title {
+    padding-top: 200px;
+    height: 132px;
+
+
+}
+.inner2 .inner_title h1 {
+    margin-top: 200px;
+    height: 132px;
+
+}
+
+.inner2 .inner_title span {
+    font-size: 50px;
+
+
+}
+.inner2 .inner_text {
+    font-weight: 100;
+    font-size: 30px;
+    margin-top: 150px;
+    line-height: 50px;
+}
+
+
 /* Feature1 부분*/
 
 .img2 .txt-ani {
@@ -367,7 +440,7 @@ body {
     background-color: #007aff;
     padding-bottom: 120px;
     padding-left: 40px;
-    height: 500px;
+    height: 1080px;
 }
 
 .img5 > #lottiebox6 {
@@ -469,8 +542,20 @@ body {
     padding: 0;
     margin: 0;
     text-align: center;
+    width:100%;
+    height:100%;
+}
+html {
+    scroll-snap-type:y mandatory;
 }
 
+.item {
+    width:100%;
+    height:100%;
+
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+}
 *,
 *:before,
 *:after {
@@ -621,4 +706,3 @@ body {
     -o-animation: fadein 5s; /* Opera */
     animation-iteration-count: 100;
 }
-
