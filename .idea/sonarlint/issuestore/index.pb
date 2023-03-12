@@ -23,5 +23,5 @@ U
 %pybo/templates/exercisedata_list.html,2\3\23189dd49e77f8544397b3d5b4e7cc9e1aa1d716
 O
 pybo/templates/form_errors.html,0\4\0457e9d67d717cfd84dd51cd52719942c803bfa9
-S
-#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+R
+"pybo/static/js/jquery-3.5.1.min.js,9\1\91bc05e49f403e5c0a55b7cbf2a51b1a9648edec
