@@ -1,0 +1,624 @@
+@font-face {
+    font-family: "NEXON Lv2 Gothic Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic Bold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "NEXON Lv2 Gothic Bold";
+    background: white;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+.jb-box .jb-text {
+    width: 100%;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 50px;
+    padding-left: 200px ;
+    padding-right: 100px ;
+}
+/*header 부분*/
+.jb-text {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+}
+
+.jb-text h1 a {
+    display: flex;
+    color: white;
+
+}
+
+/*nav 부분*/
+
+.jb-text. nav navbar-nav ul li a {
+    color: white;
+    margin-right: auto;
+}
+
+.jb-text .nav {
+    display: flex;
+    float: right;
+
+}
+
+.jb-text .nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+
+}
+
+.jb-text .nav ul li a {
+    text-decoration: none;
+    display: flex;
+    float: right;
+    color: white;
+}
+
+.jb-text .nav ul li a:hover {
+    color: black;
+}
+
+/* mov*/
+
+
+.jb-center {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+.jb-center p {
+    margin-top: -24px;
+    text-align: center;
+    font-size: 48px;
+    color: #ffffff;
+}
+/*메인1*/
+.inner{
+    height: 800px;
+}
+.inner .inner_title {
+    margin-top: 200px;
+    height: 132px;
+}
+
+.inner .inner_title span {
+    font-size: 50px;
+
+}
+.inner .inner_text {
+    font-weight: 100;
+    font-size: 30px;
+    padding-bottom: 5px;
+}
+/* Feature1 부분*/
+
+.img2 .txt-ani {
+    transition: clip-path 1s, transform 1s, opacity 1s;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    transform: translate3d(0, 1em, 0) skewY(5deg);
+    display: inline-block;
+    opacity: 0;
+}
+
+.jhs-appear.jhs-appear-active > .img2 .txt-ani {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translate3d(0, 0, 0) skewY(0deg);
+    opacity: 1;
+}
+
+.img2 .txt-ani > p {
+    display: inline-block;
+    transition: transform 1s;
+    transform: translate3d(0, 3vw, 0) skewY(15deg);
+    transform-origin: left;
+}
+.img2 button {
+    background: none;
+    color: black;
+    padding: 15px 20px;
+    border-radius: 20px;
+    margin-top: 30px;
+    outline: 30px;
+    cursor: pointer;
+    transition: all 0.4s;
+    text-decoration: none;
+}
+
+.img2 button:hover {
+    background-color: #2ac1bc;
+}
+
+.jhs-appear.jhs-appear-active > .img2 .txt-ani p {
+    transform: translateZ(0) skewY(0deg);
+}
+/* jhs-appear 라이브러리 시작 */
+.jhs-appear {
+    margin-top: 10px;
+}
+
+.jhs-appear-slide-up {
+    opacity: 0;
+    transition: opacity 1s, transform 0.5s;
+    transform: translateY(100%);
+}
+
+.jhs-appear-slide-up.jhs-appear-active {
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.jhs-appear-slide-right {
+    opacity: 0;
+    transition: opacity 1s, transform 0.5s;
+    transform: translateX(-100%);
+}
+
+.jhs-appear-slide-right.jhs-appear-active {
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+.jhs-appear {
+    width: 100%;
+    height: 500px;
+    background-color: #f0f8ff;
+}
+
+.jhs-appear > h1 {
+    padding-top: 50px;
+    color: black;
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.img2 {
+    width: 1000px;
+    margin: 0 auto;
+    height: 285px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.img2 .txt-ani > h3 {
+    width: 500px;
+    height: 108px;
+    width: 392px;
+    align-items: center;
+    display: flex;
+    font-size: 30px;
+}
+
+.img2 .txt-ani > p {
+    height: 155px;
+    width: 365px;
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    line-height: 160%;
+}
+
+.img2 > p {
+    display: flex;
+    height: 285px;
+    width: 750px;
+    align-items: center;
+}
+
+.img2 > #lottiebox2 {
+    width: 1000px;
+    height: 100%;
+}
+
+.img2 > #lottie2 {
+    width: 100%;
+    height: 100%;
+    size: 500px;
+}
+
+/*Feature2 부분*/
+
+.Feature2 {
+    width: 100%;
+    height: 500px;
+    background-color: white;
+}
+
+.Feature2 > h1 {
+    padding-top: 50px;
+    color: black;
+    width: 965px;
+    margin: 0 auto;
+    text-align: right;
+}
+
+.img3 {
+    width: 1000px;
+    margin: 0 auto;
+    height: 285px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Feature1 > h1 {
+    padding-top: 50px;
+    color: black;
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.Feature2_h3 > h3 {
+    height: 100px;
+    width: 580px;
+    align-items: center;
+    display: flex;
+    font-size: 30px;
+}
+
+.Feature2_h3 > p {
+    display: flex;
+    height: 107px;
+    width: 577px;
+    align-items: center;
+    font-size: 17px;
+    line-height: 175%;
+}
+
+.img3 > #lottiebox3 {
+    width: 1000px;
+    height: 100%;
+}
+
+.lottilebox3 > .lottie3 {
+    width: 100px;
+    height: 100%;
+    size: 500px;
+}
+
+/*Feature3 부분*/
+
+.Feature3 {
+    width: 100%;
+    height: 500px;
+    background-color: #f0f8ff;
+}
+
+.Feature3 > h1 {
+    padding-top: 50px;
+    color: black;
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.img4 {
+    width: 1000px;
+    margin: 0 auto;
+    height: 285px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Feature3_h3 {
+    width: 500px;
+}
+
+.Feature3_h3 > h3 {
+    height: 120px;
+    width: 365px;
+    align-items: center;
+    display: flex;
+    font-size: 30px;
+}
+
+.Feature3_h3 > p {
+    height: 170px;
+    width: 365px;
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    line-height: 180%;
+}
+
+.img4 > p {
+    display: flex;
+    height: 285px;
+    width: 750px;
+    align-items: center;
+}
+
+.img2 > #lottiebox4 {
+    width: 1000px;
+    height: 100%;
+}
+
+#lottie4 {
+    width: 60%;
+    margin-left: 180px;
+}
+
+/* FAQ 부분*/
+
+.FAQ {
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    background-color: #007aff;
+    padding-bottom: 120px;
+    padding-left: 40px;
+    height: 500px;
+}
+
+.img5 > #lottiebox6 {
+    width: 1000px;
+    height: 100%;
+}
+
+#lottie6 {
+    width: 680px;
+    margin-left: 180px;
+}
+
+.FAQ > h1 {
+    padding-top: 50px;
+    color: black;
+    width: 800px;
+    padding-top: 50px;
+    color: black;
+    width: 1150px;
+}
+
+.block {
+    display: inline;
+    width: 1280px;
+    height: 300px;
+
+    margin: auto;
+}
+
+.block > li {
+    width: 630px;
+
+    overflow: hidden;
+
+    height: 150px;
+}
+
+.block > li:not(:last-child) {
+    margin-right: 20px;
+}
+
+.contents1 {
+    font-size: 18px;
+    font-weight: lighter;
+}
+
+.contents1_bold {
+    font-size: 16px;
+    line-height: 200%;
+}
+
+.contents1_bold > h1 {
+    margin: auto;
+    display: flex;
+    line-height: 200%;
+}
+
+.contents1_bold > p {
+    margin: auto;
+    display: flex;
+    text-align: left;
+}
+
+.End {
+    width: 100%;
+    min-width: 1250px;
+    background-color: #2ac1bc;
+    height: 200px;
+}
+
+.End > h3 {
+    padding-top: 50px;
+    color: black;
+    width: 945px;
+}
+
+.img6 {
+    width: 1250px;
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+    display: flex;
+    margin: auto;
+}
+
+.img6 > p {
+    display: flex;
+    height: 107px;
+    width: 416px;
+    align-items: center;
+    font-size: 17px;
+}
+
+/* slide */
+
+html,
+body {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+    float: none;
+}
+
+.title {
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 30px;
+    color: #333;
+}
+
+.link,
+.link:visited {
+    display: inline-block;
+    margin: 20px 0;
+    color: #555;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link:hover,
+.link:focus {
+    color: #9fd6c2;
+}
+
+/* container - body */
+
+#con {
+    width: 1000px;
+    margin: auto;
+}
+
+.slide_wrap {
+    position: relative;
+    width: 1000px;
+    margin: auto;
+    padding-bottom: 30px;
+}
+
+.slide_box {
+    width: 1000px;
+    height: 100%;
+    margin: auto;
+    overflow-x: hidden;
+}
+
+.slide_content {
+    display: table;
+    float: left;
+    width: 1000px;
+    height: 400px;
+}
+
+.slide01 {
+    background: #9933ff;
+}
+
+.slide02 {
+    background: skyblue;
+}
+
+.slide03 {
+    background: #009966;
+}
+
+.slide_btn_box > button {
+    position: absolute;
+    top: 50%;
+    margin-top: -45px;
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    color: #999;
+    background: none;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.slide_btn_box > .slide_btn_prev {
+    left: -100px;
+}
+
+.slide_btn_box > .slide_btn_next {
+    right: -100px;
+}
+
+.slide_pagination {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transform: translateX(-50%);
+}
+
+.slide_pagination .dot {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    overflow: hidden;
+    background: #ddd;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.slide_pagination .dot.dot_active {
+    background: #333;
+}
+
+.slide_pagination .dot a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* slide */
+
+.Feature2_h3 {
+    display: inline-block;
+    background: white;
+    padding: 10px;
+    animation: fadein 5s;
+    -moz-animation: fadein 5s; /* Firefox */
+    -webkit-animation: fadein 5s; /* Safari and Chrome */
+    -o-animation: fadein 5s; /* Opera */
+    animation-iteration-count: 100;
+}
+
+
+.Feature3_h3 {
+    display: inline-block;
+    background: #f0f8ff;
+    padding: 10px;
+    animation: fadein 5s;
+    -moz-animation: fadein 5s; /* Firefox */
+    -webkit-animation: fadein 5s; /* Safari and Chrome */
+    -o-animation: fadein 5s; /* Opera */
+    animation-iteration-count: 100;
+}
+

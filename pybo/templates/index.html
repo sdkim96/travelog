@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+    <script src="{{ url_for('static', filename='js/js/popup.js') }}"></script>
+
+    <!-- 그래프 js-->
+    <link rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/theme/datalab.min.css">
+    <script src="https://naver.github.io/billboard.js/release/latest/dist/billboard.pkgd.min.js"></script>
+    <!-- 그래프 js-->
+    <title>운동의 민족</title>
+    <link rel="icon" href="{{url_for('static', filename='image/favicon (2).ico')}}">
+
+</head>
+<body>
+<div class="wrap">
+    <!-- Header start-->
+    <div class="header">
+        <h1><a href="/">운동의 민족</a></h1>
+        <div class="nav">
+            {% if g.user %}
+            <ul class="navbar-nav">
+                <li><a href="/training/">Training</a></li>
+                <li><a href="/question/list">Community</a></li>
+                <li><a href="/input">MyPage</a></li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} Loginout</a>
+                </li>
+            </ul>
+            {% else %}
+            <ul>
+                <li><a href="/training/">Training</a></li>
+                <li><a href="/question/list">Community</a></li>
+                <li><a href="/input">MyPage</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href=/signup>SignUp</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Header end-->
+
+    <!-- Section start-->
+    <div id="section">
+        <div class="blank"></div>
+
+        <!-- Fisrt section-->
+        <div class="firstsection">
+            <div class="myprofilearea">
+                <div class="myprofile">
+                    {% if g.user%}
+                    <p>마이 프로필</p>
+                    <h1 class="username">{{ g.user.user_name}} </h1>
+                    <h4 class="email">{{ g.user.email}}</h4>
+
+                    {% if profile_last_exercise %}
+                    <p class="lastexercise">{{ profile_last_exercise[0].create_date|datetime }}<br>마지막으로 운동한 날</p>
+                    {% else %}
+                    <p class="lastexercise">---<br>마지막으로 운동한 날</p>
+                    {% endif %}
+                    <p class="address">{{ g.user.address }}<br>주소</p>
+                    <p class="phonenumber"> {{ g.user.phone}}<br>핸드폰 번호</p>
+                    <input type="button" value="프로필 수정하기" class="button" onClick="location.href='/input/profilechange'">
+                    {% else %}
+                    <h2>마이 프로필</h2>
+                    <p class="pleaselogin">로그인을 해주세요</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

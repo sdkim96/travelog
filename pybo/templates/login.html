@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>운동의 민족</title>
+    <link rel="icon" href="{{url_for('static', filename='image/favicon (2).ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+</head>
+<body>
+<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+<!-- Bootstrap JS -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+<div class="box">
+    <h2>로그인</h2>
+    <form method="post">
+        {{ form.csrf_token }}
+        {% if form.errors %}
+        {% include "form_errors.html" %}
+        <div class="alert alert-danger" role="alert">
+            {% for field, errors in form.errors.items() %}
+            <strong>{{ form[field].label }}</strong>
+            <ul>
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- flash 오류 -->
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        <div>
+            <input type="text" name="userid" id="userid" required="" autocomplete="off" ,
+                   value="{{ form.userid.data or '' }}">
+            <label>아이디</label>
+        </div>
+        <div>
+            <input type="password" name="password" id="password" required="" autocomplete="off" ,
+                   value="{{ form.password.data or '' }}">
+            <label>비밀번호</label>
+        </div>
+
+
+        <input type="submit" value="입력하기">
+
+
+        <a href=/signup>Sign Up</a>
+
+
+    </form>
+</div>
+</body>
+</html>

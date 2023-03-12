@@ -1,0 +1,148 @@
+body {
+  font-family: "MaplestoryOTFLight";
+  margin: 0px;
+  padding: 0px;
+  color: black;
+  box-sizing: border-box;
+  background: #f0f8ff;
+}
+
+@font-face {
+  font-family: "MaplestoryOTFLight";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: white;
+  padding: 40px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  height : 385px;
+}
+
+.box h2 {
+  margin: 0 0 40px;
+  padding: 0;
+  color: #2AC1BC;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.box input {
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+.box .input > #a{
+text-decoration : none;
+}
+.box textarea {
+  height: 80px;
+  padding: 10px 0;
+  margin-bottom: 40px;
+}
+
+.box input,
+.box textarea {
+  width: 320px;
+  box-sizing: border-box;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #999;
+}
+
+.box textarea {
+  margin-bottom: 20px;
+}
+
+.box input[type="submit"] {
+  border-bottom: none;
+  cursor: pointer;
+  background: #2AC1BC;
+  color: white;
+margin-top: 35px;
+  text-transform: uppercase;
+}
+.header {
+  width: 100%;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2ac1bc;
+  padding-left: 200px;
+  position: fixed;
+  z-index: 1;
+
+}
+.header h1 a {
+  text-decoration: none;
+  color: white;
+}
+.header a:hover {
+  color: black;
+}
+
+/*nav 부분*/
+.nav {
+  padding-right: 413px;
+}
+.nav ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+.nav ul li a {
+  text-decoration: none;
+  color: white;
+}
+.nav ul li a:hover {
+  color: black;
+}
+
+.box form div {
+  position: relative;
+  height: 50px;
+}
+.box a{
+    text-decoration: none;
+    color: #999;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+.box form div label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  color: #999;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.box input:focus ~ label,
+.box input:valid ~ label,
+.box textarea:focus ~ label,
+.box textarea:valid ~ label {
+  top: -12px;
+  left: 0;
+  color: #2AC1BC;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.box input:focus,
+.box input:valid,
+.box textarea:focus,
+.box textarea:valid {
+  border-bottom: 2px solid #2AC1BC;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='get.css')}}">
+   <title>운동의 민족</title>
+         <link rel="icon" href="{{url_for('static', filename='favicon (2).ico')}}">
+</head>
+<body>
+
+    <div class="box">
+        <h2>프로필 수정</h2>
+        <form method="post">
+            <div>
+                <input type="text" name="username" id="username"  autocomplete="off">
+                <label>회원 이름</label>
+            </div>
+            <div>
+                <input type="text" name="useremail" id="useremail"  autocomplete="off">
+                <label>이메일</label>
+            </div>
+            <div>
+                <input type="text" name="useraddress" id="useraddress"  autocomplete="off">
+                <label>주소</label>
+            </div>
+            <div>
+                <input type="text" name="userphone" id="userphone"  autocomplete="off">
+                <label>핸드폰 번호</label>
+            </div>
+            <input type="submit"  value="수정하기">
+        </form>
+    </div>
+
+</body>
+</html>

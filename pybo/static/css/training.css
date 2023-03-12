@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'MaplestoryOTFLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+    body{
+        font-family: 'MaplestoryOTFLight';
+        background: #ECECEC;
+        margin: 0;
+    }
+    #video, #canvas{
+        margin-left: 0px;
+        transform: rotateY(180deg);         
+        -webkit-transform:rotateY(180deg);
+            width: 830px;
+    height: 465px;
+    }
+    .start{
+        /*background-color: #92f7fc;
+        font-size: larger;
+        width:150px;
+        height: 120px;
+        cursor: pointer;*/
+        background:white;
+        width:10%;  
+        height:100px;
+        border-radius:10px;
+        box-shadow: 1px 1px 2px 3px rgba(0,0,0,0.1); 
+        cursor: pointer;
+        font-size: larger;
+    }
+
+    .top{
+        background-color: #F0F8FF;
+        margin: 0;
+    }
+    h1.top {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    right: 10px;
+}
+
+    #startBtn{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: solid black 2px;
+    }
+
+    .videoWrap{
+        display: flex;
+       /* position: relative;*/
+    }
+
+    .videoWrap > div{
+        width: 50vw; height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-self: center;
+    }
+
+    .btnWrap{
+        width: 100%;
+        display: flex;
+       position:relative;
+       left:755px;
+        flex-direction: row;
+
+
+    }
+
+    #timer{
+        width: 200px;
+        height: 50px;
+     /*   position: absolute; /*
+        top: 10px;
+        left: 15px; */
+
+        font-size: 3rem;
+        padding-left: 65px;
+        z-index: 1;
+    }
+    h3{
+    padding-left:65px
+    }
+    h2 {
+    padding-bottom: 20px;
+    position: relative;
+    left: 15px;
+}
+    .webcamWrap{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .blank2{
+        width: 100%;
+        height: 60px;
+    }

@@ -1,0 +1,115 @@
+@font-face {
+    font-family: 'MaplestoryOTFLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'MaplestoryOTFLight';
+    background: #F0F8FF;
+}
+
+
+#header{
+    width:100%;
+    background: #2ac1bc;
+}
+
+.logoarea{
+    width:100%;
+    margin:auto;    
+    max-width:1170px;
+    height: 70px;
+}
+
+.logo{
+    color:white;
+    line-height: 70px;
+    text-align: left;
+}
+
+#section{
+    width: 79%;
+    margin: auto;
+}
+
+.intro{
+    margin: 35px 0px;
+}
+
+.intro h3{
+    margin-left: 17px;
+    color:#2AC1BC;
+}
+
+.firstsection{
+    display:flex;
+
+}
+
+
+.myprofile{
+
+    margin: 35px 15px;
+    text-align: center;
+    
+}
+
+.trainingVideo > h1{
+    margin: 0 auto;
+}
+
+.trainingVideo{
+    background:white;
+    width:100%;  
+    height:50%;
+    border-radius:10px;
+    box-shadow: 1px 1px 2px 3px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin: 0 0 40px 0;
+}
+
+a {
+    text-decoration-line: none;
+  }
+
+.clearfix:after { content: ''; display: block; clear: both; float: none; }
+
+.link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
+
+.link:hover, .link:focus { color: #9fd6c2; }
+
+.trainingWrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.trainingWrap > a {
+    width: 32%;
+}
+
+.trainBtnWrap > img:hover {
+    opacity: 0.5;
+}
+
+.trainBtnWrap > img:hover ~ span{
+    opacity: 1;
+}
+
+.trainBtnWrap{
+    position: relative;
+}
+
+.trainBtnWrap > span {
+    opacity: 0;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    text-align: center;
+    font-size: x-large;
+}

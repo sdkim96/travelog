@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>여행로그</title>
+    <link rel="icon" href="{{url_for('static', filename='image/favicon (2).ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+</script>
+<script>
+
+</script>
+<div class="jb-box">
+    <video muted autoplay loop>
+        <source src="{{ url_for('static', filename='image/intro.mp4') }}"/>
+    </video>
+    <div class="jb-text">
+        <h1><a href="#link_jb-box">Travel.log</a></h1>
+        <div class="nav">
+            {% if g.user %}
+            <ul class="navbar-nav">
+                <li><a href="/question/list">Community</a></li>
+                <li><a href="/input">MyPage</a></li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
+                </li>
+            </ul>
+            {% else %}
+            <ul>
+                <li><a href="/question/list">Community</a></li>
+                <li><a href="/input">MyPage</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href=/signup>SignUp</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="jb-center">
+        <p>로고 or 디자인</p>
+    </div>
+</div>
+
+</div>
+<div class="inner">
+    <h1 class="inner_title" style="user-select: auto;">
+        <span class="blind" style="user-select: auto;">여행이 쌓이면 기록이 된다<br>Travel.log</span>
+    </h1>
+    <p class="inner_text" style="user-select: auto;"> 트레블로그.로그는 자유롭게 여행을 <br style="user-select: auto;"> 지도에 기록하고 기억할 수 있습니다<br
+            style="user-select: auto;">당신의 여행을 Travel.log에 기록하세요!
+    </p>
+</div>
+
+<!-- // .container -->
+
+
+<div class="FAQ" id="link_FAQ">
+    <h1>FAQ
+        <div id="lottiebox6">
+            <div id="lottie6"></div>
+            <script src="{{ url_for('static', filename='js/lottie.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/custom6.js') }}"></script>
+        </div>
+    </h1>
+
+    <ul class="block">
+        <li>
+            <div class="contents1_bold">
+                <h1>Q. 카메라가 내 모습을 저장하나요?</h1>
+                <p>
+                    안심하세요! 카메라는 사용자의 정보를 저장하지 않습니다. 사용자가
+                    원하는 경우에만 자신의 모습을 녹화해 다시보기 할 수 있습니다.
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="contents1_bold">
+                <h1>Q. 모바일에서는 안되나요?</h1>
+                <p>
+                    최적의 운동 경험을 제공하기 위해 웹 서비스로 먼저 출시되었습니다.
+                    모바일에서도 곧 만나실 수 있으니 조금만 기다려주세요!
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="contents1_bold">
+                <h1>Q. 카메라가 꼭 필요한가요?</h1>
+                <p>
+                    100% 즐기기 위해서는 '노트북' 또는 '데스크탑 + 외장카메라'가
+                    필요해요! 카메라를 통해 운동동작을 분석하기 때문이에요!
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="End">
+    <h3>여행</h3>
+    <div class="img6">
+        <p>
+            졸업프로젝트 <br/>김성동 김준섭 한상민
+            <br/>
+
+        </p>
+    </div>
+</div>
+</body>
+</html>

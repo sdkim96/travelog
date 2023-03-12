@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <title>운동의 민족</title>
+         <link rel="icon" href="{{url_for('static', filename='image/favicon (2).ico')}}">
+</head>
+<body>
+    <div class="header">
+        <h1><a href="/">운동의 민족</a></h1>
+        <div class="nav">
+             {% if g.user %}
+				<ul>
+					<li><a href="/training/">Training</a></li>
+					<li><a href="/question/list">Community</a></li>
+					<li><a href="/input">MyPage</a></li>
+					<li class="nav-item ">
+					<a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.username }} Loginout</a>
+					</li>
+				</ul>
+			{% else %}
+				<ul>
+					<li><a href="/training/">Training</a></li>
+					<li><a href="/question/list">Community</a></li>
+					<li><a href="/input">MyPage</a></li>
+					<li><a href="/login">Login</a></li>
+					<li><a href=/signup>SignUp</a></li>
+				</ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="blackinlist"></div>
+    <div class="container my-3">
+        <table class="table">
+            <thead>
+            <tr class="table-dark">
+                <th>번호</th>
+                <th>운동종류</th>
+                <th>운동시간(분)</th>
+                <th>운동메모</th>
+                <th>작성일시</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if exercisedata_list %}
+            {% for exercisedata in exercisedata_list.items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ exercisedata.exercise_type }}</td>
+                <td>{{ exercisedata.exercise_time }}</td>
+                <td>{{ exercisedata.exercise_note }}</td>
+                <td>{{ exercisedata.create_date|datetime }}</td>
+                <td><a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+               data-uri="{{ url_for('list.delete_exercisedata', exercisedata_id=exercisedata.id) }}">삭제</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="3">운동정보가 없습니다.</td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if exercisedata_list.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ exercisedata_list.prev_num }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">이전</a>
+        </li>
+        {% endif %}
+        {% for page_num in exercisedata_list.iter_pages() %}
+        {% if page_num %}
+        {% if page_num != exercisedata_list.page %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+        </li>
+        {% else %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="javascript:void(0)">{{ page_num }}</a>
+        </li>
+        {% endif %}
+        {% else %}
+        <li class="disabled">
+            <a class="page-link" href="javascript:void(0)">...</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if exercisedata_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ exercisedata_list.next_num }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    </div>
+    <script type='text/javascript'>
+                    const delete_elements = document.getElementsByClassName("delete");
+                    Array.from(delete_elements).forEach(function(element) {
+                        element.addEventListener('click', function() {
+                            if(confirm("정말로 삭제하시겠습니까?")) {
+                                location.href = this.dataset.uri;
+                            };
+                        });
+                    });
+    </script>
+</body>
+</html>

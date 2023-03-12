@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'MaplestoryOTFLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'MaplestoryOTFLight';
+    background: #F0F8FF;
+
+}
+
+.han_nav{
+    background: #2ac1bc;
+    color:white;
+}
+
+.logo{
+    font-size:30px;
+    color:white
+
+}
+
+.comment{
+    border-top:dotted 1px #ddd;
+    font-size:0.7em;
+}
+
+.hello {
+
+    margin-left:190px
+}
+
+.hello1 {
+    margin-left:950px
+
+}
+
+#btn_search {
+    color:white;
+    background:#2ac1bc;
+}
+
+.nav-link{
+margin-left : 20px;}
+
+.py-2{
+    font-size: 15px;
+    text-align: center;
+
+}
+btn-secondary{
+color:#2ac1bc;
+ }
+
+a:link {
+
+  text-decoration: none;
+}
+a:visited {
+
+  text-decoration: none;
+}
+a:hover {
+
+  text-decoration: underline;
+}
+a:active {
+
+  text-decoration: none;
+}
