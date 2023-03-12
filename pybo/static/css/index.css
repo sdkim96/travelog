@@ -31,6 +31,12 @@ body{
   z-index: 1;
 
 }
+.secondsection{
+    position: relative;
+    background:#F0F8FF;
+    left:316px;
+    top:-600px;
+}
 .header h1 a {
   text-decoration: none;
   color: white;
