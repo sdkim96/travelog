@@ -1,5 +1,5 @@
 *{
-    font-family: 'MaplestoryOTFLight';
+    font-family: "NEXON Lv2 Gothic Bold";
     text-decoration: none;
     margin: 0px;
     padding: 0px;
@@ -8,7 +8,7 @@
 }
 
 @font-face {
-    font-family: 'MaplestoryOTFLight';
+    font-family: "NEXON Lv2 Gothic Bold";
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -18,31 +18,68 @@ body{
     font-family: 'BMJUA';
     background: #F0F8FF;
 }
-.header {
-  width: 100%;
-  height: 60px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #2ac1bc;
-  padding-left: 200px;
-  position: fixed;
-  z-index: 1;
+::-webkit-scrollbar {
+    display: none;
+}
+.jb-box .jb-text {
+    background-color: #2ac1bc;
+    width: 100%;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    padding-left: 200px ;
 
+    position: fixed;
+}
+/*header 부분*/
+.jb-text {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+}
+
+.jb-text h1 a {
+    display: flex;
+    color: white;
+}
+
+/*nav 부분*/
+
+.jb-text. nav navbar-nav ul li a {
+    color: white;
+    margin-right: auto;
+}
+
+.jb-text .nav {
+    display: flex;
+    float: right;
+
+}
+
+.jb-text .nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+
+}
+
+.jb-text .nav ul li a {
+    text-decoration: none;
+    display: flex;
+    float: right;
+    color: white;
+}
+
+.jb-text .nav ul li a:hover {
+    color: black;
 }
 .secondsection{
     position: relative;
     background:#F0F8FF;
     left:316px;
     top:-600px;
-}
-.header h1 a {
-  text-decoration: none;
-  color: white;
-}
-.header a:hover {
-  color: black;
 }
 
 /*nav 부분*/
