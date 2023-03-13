@@ -11,34 +11,36 @@
     <link rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/theme/datalab.min.css">
     <script src="https://naver.github.io/billboard.js/release/latest/dist/billboard.pkgd.min.js"></script>
     <!-- 그래프 js-->
-    <title>운동의 민족</title>
+    <title>Travel.log</title>
     <link rel="icon" href="{{url_for('static', filename='image/favicon (2).ico')}}">
 
 </head>
 <body>
 <div class="wrap">
     <!-- Header start-->
-    <div class="header">
-        <h1><a href="/">Travel.log</a></h1>
-        <div class="nav">
-            {% if g.user %}
-            <ul class="navbar-nav">
-                <li><a href="/question/list">Blog</a></li>
-                <li><a href="/input">MyPage</a></li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} Loginout</a>
-                </li>
-            </ul>
-            {% else %}
-            <ul>
-                <li><a href="/training/">Training</a></li>
-                <li><a href="/question/list">Community</a></li>
-                <li><a href="/input">MyPage</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href=/signup>SignUp</a></li>
-            </ul>
-            {% endif %}
+    <div class="jb-box">
+        <div class="jb-text">
+            <h1><a href="/">Travel.log</a></h1>
+            <div class="nav">
+                {% if g.user %}
+                <ul class="navbar-nav">
+                    <li><a href="/question/list">Blog</a></li>
+                    <li><a href="/input">MyPage</a></li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul>
+                    <li><a href="/question/list">Blog</a></li>
+                    <li><a href="/input">MyPage</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href=/signup>SignUp</a></li>
+                </ul>
+                {% endif %}
+            </div>
         </div>
+
     </div>
     <!-- Header end-->
 
