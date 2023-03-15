@@ -3,7 +3,7 @@ var params = {
   renderer: "canvas",
   loop: true,
   autoplay: true,
-  path: "static/json/FAQ.json",
+  path: "static/js/FAQ.json",
 };
 
 var anim;
