@@ -13,6 +13,4 @@ import functools
 bp = Blueprint('training', __name__, url_prefix='/training')
 
 
-@bp.route('/training/')
-def training():
-    return render_template('training_index.html')
+
