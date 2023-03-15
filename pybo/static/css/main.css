@@ -10,8 +10,7 @@ body {
     background: white;
 }
 
-*
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -22,6 +21,7 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+
 .jb-box .jb-text {
     width: 100%;
     height: 60px;
@@ -30,10 +30,11 @@ body {
     justify-content: space-between;
     align-items: center;
     padding-top: 50px;
-    padding-left: 200px ;
-    padding-right: 100px ;
+    padding-left: 200px;
+    padding-right: 100px;
     position: fixed;
 }
+
 /*header 부분*/
 .jb-text {
     position: absolute;
@@ -91,17 +92,20 @@ body {
     font-size: 48px;
     color: #ffffff;
 }
+
 /*메인1*/
-.inner{
+.inner {
     height: 1080px;
     background-color: #6f42c1;
 }
+
 .inner .inner_title {
     padding-top: 200px;
     height: 132px;
 
 
 }
+
 .inner .inner_title h1 {
     margin-top: 200px;
     height: 132px;
@@ -113,6 +117,7 @@ body {
 
 
 }
+
 .inner .inner_text {
     font-weight: 100;
     font-size: 30px;
@@ -122,16 +127,18 @@ body {
 
 
 /*메인 2 부분*/
-.inner1{
+.inner1 {
     height: 1080px;
-    background-color:#0069d9;
+    background-color: #0069d9;
 }
+
 .inner1 .inner_title {
     padding-top: 200px;
     height: 132px;
 
 
 }
+
 .inner1 .inner_title h1 {
     margin-top: 200px;
     height: 132px;
@@ -143,6 +150,7 @@ body {
 
 
 }
+
 .inner1 .inner_text {
     font-weight: 100;
     font-size: 30px;
@@ -154,16 +162,18 @@ body {
 /*메인 3 부분*/
 
 
-.inner2{
+.inner2 {
     height: 1080px;
-    background-color:#2ac1bc;
+    background-color: #2ac1bc;
 }
+
 .inner2 .inner_title {
     padding-top: 200px;
     height: 132px;
 
 
 }
+
 .inner2 .inner_title h1 {
     margin-top: 200px;
     height: 132px;
@@ -175,6 +185,7 @@ body {
 
 
 }
+
 .inner2 .inner_text {
     font-weight: 100;
     font-size: 30px;
@@ -205,6 +216,7 @@ body {
     transform: translate3d(0, 3vw, 0) skewY(15deg);
     transform-origin: left;
 }
+
 .img2 button {
     background: none;
     color: black;
@@ -224,6 +236,7 @@ body {
 .jhs-appear.jhs-appear-active > .img2 .txt-ani p {
     transform: translateZ(0) skewY(0deg);
 }
+
 /* jhs-appear 라이브러리 시작 */
 .jhs-appear {
     margin-top: 10px;
@@ -542,20 +555,22 @@ body {
     padding: 0;
     margin: 0;
     text-align: center;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 }
+
 html {
-    scroll-snap-type:y mandatory;
+    scroll-snap-type: y mandatory;
 }
 
 .item {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 
-    scroll-snap-align:center;
-    scroll-snap-stop:always;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
 }
+
 *,
 *:before,
 *:after {

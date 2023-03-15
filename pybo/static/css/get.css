@@ -1,4 +1,4 @@
-body{
+body {
     font-family: 'MaplestoryOTFLight';
     margin: 0px;
     padding: 0px;
@@ -15,20 +15,20 @@ body{
 }
 
 
-.box{
+.box {
     position: absolute;
     top: 50%;
-    left:50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
     background: white;
     padding: 40px;
     box-sizing: border-box;
-    border: 1px solid rgba(0,0,0,.1);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    border: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 }
 
-.box h2{
+.box h2 {
     margin: 0 0 40px;
     padding: 0;
     color: #2AC1BC;
@@ -36,10 +36,10 @@ body{
     text-align: center;
 }
 
-.box input{
+.box input {
     padding: 10px 0;
-    width:320px;
-    margin-bottom:  30px;
+    width: 320px;
+    margin-bottom: 30px;
     box-sizing: border-box;
     box-shadow: none;
     outline: none;
@@ -48,8 +48,7 @@ body{
 }
 
 
-
-.box input[type="submit"]{
+.box input[type="submit"] {
     border-bottom: none;
     cursor: pointer;
     background: #2AC1BC;
@@ -58,11 +57,11 @@ body{
     text-transform: uppercase;
 }
 
-.box form div{
+.box form div {
     position: relative;
 }
 
-.box form div label{
+.box form div label {
     position: absolute;
     top: 10px;
     left: 0;
@@ -72,15 +71,15 @@ body{
 }
 
 .box input:focus ~ label,
-.box input:valid ~ label{
+.box input:valid ~ label {
     top: -12px;
-    left:0;
-    color:#2AC1BC;
+    left: 0;
+    color: #2AC1BC;
     font-size: 12px;
     font-weight: bold;
 }
 
 .box input:focus,
-.box input:valid{
+.box input:valid {
     border-bottom: 2px solid #2AC1BC;
 }
