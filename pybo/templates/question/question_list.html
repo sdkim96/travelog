@@ -38,7 +38,7 @@
                 {% for question in question_list.items %}
 
                 <tr class="text-center">
-                    <td class="text-left">
+                    <tr class="text-left">
                         <a href="{{ url_for('question.detail', question_id=question.id) }}">
                             <img src="{{ url_for('static', filename='image/img3.png') }}" width="100" height="50" align="center" border="0" >
                         </a>
@@ -47,9 +47,9 @@
                         {% if question.answer_set|length > 0 %}
                         <span class="text-center text-danger small ml-2">{{ question.answer_set|length }}</span>
                         {% endif %}
-                    </td>
+                    </tr>
 
-                    <td>{{ question.create_date|datetime }}</td>
+                    <tr> {{ question.create_date|datetime }}</tr>
                 </tr>
                 {% endfor %}
                 {% else %}
