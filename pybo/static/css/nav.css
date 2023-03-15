@@ -5,68 +5,73 @@
     font-style: normal;
 }
 
-body{
+body {
     font-family: 'MaplestoryOTFLight';
     background: #F0F8FF;
 
 }
 
-.han_nav{
+.han_nav {
     background: #2ac1bc;
-    color:white;
+    color: white;
 }
 
-.logo{
-    font-size:30px;
-    color:white
+.logo {
+    font-size: 30px;
+    color: white
 
 }
 
-.comment{
-    border-top:dotted 1px #ddd;
-    font-size:0.7em;
+.comment {
+    border-top: dotted 1px #ddd;
+    font-size: 0.7em;
 }
 
 .hello {
 
-    margin-left:190px
+    margin-left: 190px
 }
 
 .hello1 {
-    margin-left:950px
+    margin-left: 950px
 
 }
 
 #btn_search {
-    color:white;
-    background:#2ac1bc;
+    color: white;
+    background: #2ac1bc;
 }
 
-.nav-link{
-margin-left : 20px;}
+.nav-link {
+    margin-left: 20px;
+}
 
-.py-2{
+.py-2 {
     font-size: 15px;
     text-align: center;
 
 }
-btn-secondary{
-color:#2ac1bc;
- }
+
+btn-secondary {
+    color: #2ac1bc;
+}
 
 a:link {
 
-  text-decoration: none;
+    text-decoration: none;
 }
+
 a:visited {
 
-  text-decoration: none;
+    text-decoration: none;
 }
+
 a:hover {
 
-  text-decoration: underline;
+    text-decoration: underline;
 }
+
 a:active {
 
-  text-decoration: none;
+    text-decoration: none;
 }
