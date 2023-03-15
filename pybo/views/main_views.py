@@ -75,4 +75,3 @@ def login_required(view):
             return redirect(url_for('main.login_page', next=_next))
         return view(*args, **kwargs)
     return wrapped_view
-
