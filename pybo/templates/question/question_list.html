@@ -29,7 +29,7 @@
         </div>
 
     </div>
-    <div class="container my-3">
+    <!--<div class="container my-3">
         <div id="section">
 
             <table class="table">
@@ -37,20 +37,19 @@
                 {% if question_list %}
                 {% for question in question_list.items %}
 
-                <tr class="text-center">
-                <tr class="text-left">
+                <td class="text-center">
+                <td class="text-left">
                     <a href="{{ url_for('question.detail', question_id=question.id) }}">
-                        <img src="{{ url_for('static', filename='image/img3.png') }}" width="100" height="50"
-                             align="center" border="0">
+                        <img src="{{ url_for('static', filename='image/img3.png') }}" width="100" height="50">
                     </a>
                     <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
 
                     {% if question.answer_set|length > 0 %}
                     <span class="text-center text-danger small ml-2">{{ question.answer_set|length }}</span>
                     {% endif %}
-                </tr>
+                </td>
 
-                <tr> {{ question.create_date|datetime }}</tr>
+                <td> {{ question.create_date|datetime }}</td>
                 </tr>
                 {% endfor %}
                 {% else %}
@@ -60,52 +59,75 @@
                 {% endif %}
                 </tbody>
             </table>
+        </div>-->
 
-        </div>
-
-        <!-- 페이징처리 시작 -->
-        <ul class="pagination justify-content-center">
-            <!-- 이전페이지 -->
-            {% if question_list.has_prev %}
-            <li class="page-item">
-                <a class="page-link" data-page="{{ question_list.prev_num }}" href="#">이전</a>
+        <dd class="p_photo_d">
+        <p class="p_img">
+            {% if question_list %}
+            {% for question in question_list.items %}
+            <a href="{{ url_for('question.detail', question_id=question.id) }}">
+                <img src="{{ url_for('static', filename='image/img3.png') }}" width="179" height="185">
+            </a>
+        </p>
+        <ul>
+            <li class="p_title">
+                <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
+                {% if question.answer_set|length > 0 %}
+                <span class="text-center text-danger small ml-2">{{ question.answer_set|length }}</span>
+                {% endif %}
             </li>
-            {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            <li class="p_date">
+                <td> {{ question.create_date|datetime }}</td>
             </li>
-            {% endif %}
-            {% for page_num in question_list.iter_pages() %}
-            {% if page_num %}
-            {% if page_num != question_list.page %}
-            <li class="page-item">
-                <a class="page-link" data-page="{{ page_num }}" href="#">{{ page_num }}</a>
-            </li>
-            {% else %}
-            <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">{{ page_num }}</a>
-            </li>
-            {% endif %}
-            {% else %}
-            <li class="disabled">
-                <a class="page-link" href="#">...</a>
-            </li>
-            {% endif %}
             {% endfor %}
-            <!-- 다음페이지 -->
-            {% if question_list.has_next %}
-            <li class="page-item">
-                <a class="page-link" data-page="{{ question_list.next_num }}" href="#">다음</a>
-            </li>
             {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-            </li>
-            {% endif %}
         </ul>
-        <!-- 페이징처리 끝 -->
-        <a href="{{ url_for('question.create') }}" class="btn btn-primary">질문 등록하기</a>
-    </div>
+        {% endif %}
+    </dd>
+
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if question_list.has_prev %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ question_list.prev_num }}" href="#">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        {% for page_num in question_list.iter_pages() %}
+        {% if page_num %}
+        {% if page_num != question_list.page %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ page_num }}" href="#">{{ page_num }}</a>
+        </li>
+        {% else %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">{{ page_num }}</a>
+        </li>
+        {% endif %}
+        {% else %}
+        <li class="disabled">
+            <a class="page-link" href="#">...</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if question_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ question_list.next_num }}" href="#">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    <a href="{{ url_for('question.create') }}" class="btn btn-primary">질문 등록하기</a>
+</div>
 </div>
 <form id="searchForm" method="get" action="{{ url_for('question._list') }}">
     <input type="hidden" id="kw" name="kw" value="{{ kw or '' }}">
