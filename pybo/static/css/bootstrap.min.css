@@ -1998,7 +1998,7 @@ pre code {
 .table th {
     padding: 0.75rem;
     vertical-align: top;
-    border-top: 1px solid #dee2e6;
+    /*준섭 수정 border-top: 1px solid #dee2e6;   */
 }
 
 .table thead th {
@@ -2513,7 +2513,7 @@ select.form-control[size] {
 }
 
 textarea.form-control {
-    height: auto;
+    height: 50px;
 }
 
 .form-group {
