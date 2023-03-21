@@ -71,12 +71,13 @@ body {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
-    line-height: 1.5;
     color: #212529;
     text-align: left;
     background-color: #fff;
 }
-
+::-webkit-scrollbar {
+    display: none;
+}
 [tabindex="-1"]:focus:not(:focus-visible) {
     outline: 0 !important;
 }
@@ -11534,6 +11535,95 @@ a.text-dark:hover {
     .table .thead-dark th {
         color: inherit;
         border-color: #dee2e6;
+    }
+
+
+
+
+    #prologue .p_photo_d .p_img img {
+        width: 179px;
+        height: 185px;
+    }
+
+    #prologue .p_img img {
+        vertical-align: top;
+    }
+
+    #prologue .p_post_top dd {
+        float: left;
+        margin: 0;
+        padding: 0;
+    }
+    #prologue .p_photo_d {
+        width: 180px;
+        height: 240px;
+        word-break: break-all;
+    }
+    #prologue .p_photo_d .p_title {
+        margin: 0;
+        padding: 0;
+    }
+    #prologue .p_post_top .p_title {
+        margin: 0 0 6px 0;
+    }
+    #prologue ul li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    #prologue .p_photo_d .p_date span {
+        background: transparent;
+        border: none;
+        font-size: 11px;
+        font-family: 돋움;
+        font-weight: normal;
+        text-align: left;
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+        display: inline-block;
+        padding-top: 4px;
+    }
+    #prologue .p_post_top .p_date span {
+        background: transparent;
+        border: none;
+        font-size: 11px;
+        font-family: 돋움;
+        font-weight: normal;
+        text-align: left;
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+        display: inline-block;
+        padding-top: 4px;
+    }
+    #post-area .pcol2 {
+        color: rgb(138, 131, 126);
+    }
+    .fil5 {
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    .fil5 {
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    .pcol2 {
+        color: rgb(138, 131, 126);
+    }
+    .fil5 {
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    #prologue ul li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    table, div, ul, li, dl, dd {
+        font-size: 12px;
     }
 }
 
