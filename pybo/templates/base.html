@@ -7,18 +7,25 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <!-- pybo CSS -->
-
+    <script src="{{ url_for('static', filename='js/ckeditor.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
     <title>운동의 민족</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <style>
+        .ck-editor__editable {
+            min-height:300px;
+        }
+    </style>
 </head>
 <body>
+    <script src="{{ url_for('static', filename='js/ckeditor.js') }}"></script>
 {% include "navbar.html" %}
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 {% block content %}
 {% endblock %}
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
 <!-- jQuery JS -->
+
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
 <!-- Bootstrap JS -->
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
