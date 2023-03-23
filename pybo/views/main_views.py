@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, url_for, render_template, flash, request, session, g
+from flask import Blueprint, url_for, render_template, flash, request, session, g, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
@@ -14,6 +14,7 @@ bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/')
 def main():
+    current_app.logger.info("INFO 레벨로 출력")
     return render_template('main.html')
 
 @bp.route('/signup', methods=('GET', 'POST'))
