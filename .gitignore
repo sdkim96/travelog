@@ -9,6 +9,8 @@ __pycache__/
 
 mydata2.db
 
+logs
+
 *.pem
 # *.pem
 private_key.pe
