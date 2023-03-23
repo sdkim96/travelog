@@ -22,11 +22,24 @@
             <input type="text" class="form-control" name="local" id="local"
                    value="{{ form.local.data or '' }}" placeholder="[지역]">
         </div>
-
         <div class="form-group">
-            <label for="content">내용</label>
+            <br>
+
+            <input type="file" name="title_image" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="editor">내용</label>
             <textarea class="form-control" name="content"
-                      id="content" rows="10">{{ form.content.data or '' }}</textarea>
+                      id="editor" rows="10">{{ form.content.data or '' }}</textarea>
+            <script>
+                ClassicEditor
+                    .create( document.querySelector( '#editor'), {
+                        language: { ui: 'ko', content: 'ko' }
+                    })
+                    .catch( error => {
+                        console.error( error );
+                    });
+            </script>
         </div>
 
         <button type="submit" class="btn btn-primary">저장하기</button>
