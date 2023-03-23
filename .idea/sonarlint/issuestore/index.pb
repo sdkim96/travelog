@@ -77,13 +77,8 @@ Z
 *pybo/templates/question/question_list.html,4\a\4acaad5b6f87898b2c48a75bce7dd08a72b1cd7d
 G
 pybo/static/js/index.js,9\b\9b4d7cb174823400561f93d8e97f17bc9e26bce5
-H
-pybo/views/main_views.py,2\d\2df9e4d1a1e7db5448d965d1386927dbdf4deeb1
 A
 config/mydata2.db,c\9\c9c87a31c4b2fdd03e125f85c1b9513a61c8df56
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 w
 G.idea/sonarlint/issuestore/8/c/8c3c9a1effd708a6252042c49e62f1e3a0fd8525,1\2\122562784cb11aaaa079b38107d003605c54a56a
 w
