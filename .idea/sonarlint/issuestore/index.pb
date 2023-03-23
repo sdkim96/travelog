@@ -37,8 +37,6 @@ G
 pybo/static/css/nav.css,6\9\6970718593e9f47fbd219f2f8cf66db3fd57e9e8
 G
 pybo/static/js/login.js,7\6\761f0c32a61423a2113e39771a543cf3fe88a218
-Z
-*pybo/templates/question/question_form.html,5\1\510e096f598b331e722f23c5a2939837cb8f6a40
 J
 pybo/templates/navbar.html,9\5\9513429366755cab34a01855fac315aa4b608f2f
 V
@@ -53,8 +51,6 @@ L
 pybo/views/question_views.py,c\e\ce4c5e9fd05ee4e96355fb266fe49fbac576a0f9
 >
 pybo/filter.py,c\5\c50b8f5b7cc27d520a6a4f60b000c686bf1374ff
-=
-pybo/forms.py,7\9\79036cdcbd9bf246b2686af054b8a72558f94dd7
 O
 pybo/templates/form_errors.html,0\4\0457e9d67d717cfd84dd51cd52719942c803bfa9
 I
@@ -67,8 +63,6 @@ I
 pybo/templates/login.html,a\2\a2230be4b1fb10fadd3ddca7ff6d2e4d49860911
 >
 pybo/models.py,9\b\9b74eff19813520c75eeaa8271ca3ba91879d319
-H
-pybo/templates/base.html,3\c\3cd18d717d0611693b3103feb41a6d463e8a19d7
 Q
 !pybo/static/css/bootstrap.min.css,d\5\d53bbf609bda888a951eef6901463b9d2ef4c81d
 H
@@ -123,3 +117,7 @@ w
 G.idea/sonarlint/issuestore/0/4/0457e9d67d717cfd84dd51cd52719942c803bfa9,c\a\ca1d77e15909d3066e0e5c0c6382d6e95734dc0d
 w
 G.idea/sonarlint/issuestore/d/5/d53bbf609bda888a951eef6901463b9d2ef4c81d,6\3\63ab782c5b5b49b2e89ec0300fc0e2f1f4293cb1
+I
+pybo/templates/index.html,c\e\ce55a05ca6fbf26265fabca9cb836cf15ec4b3e1
+B
+config/__init__.py,7\c\7c4c5de0ae6801f08fa7c742af850c6198fdb35d
