@@ -7,31 +7,35 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <!-- pybo CSS -->
-    <script src="{{ url_for('static', filename='js/ckeditor.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
     <title>운동의 민족</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <script src="{{ url_for('static', filename='js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ckeditor/config.js') }}"></script>
+
+    <script type="text/javascript">
+
+    </script>
     <style>
         .ck-editor__editable {
-            min-height:300px;
+            min-height:500px;
         }
     </style>
 </head>
 <body>
-    <script src="{{ url_for('static', filename='js/ckeditor.js') }}"></script>
 {% include "navbar.html" %}
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<!— 기본 템플릿 안에 삽입될 내용 Start —>
 {% block content %}
 {% endblock %}
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
-<!-- jQuery JS -->
-
+<!— 기본 템플릿 안에 삽입될 내용 End —>
+<!— jQuery JS —>
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
-<!-- Bootstrap JS -->
+<!— Bootstrap JS —>
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-<!-- 자바스크립트 Start -->
+<!— 자바스크립트 Start —>
 {% block script %}
 {% endblock %}
-<!-- 자바스크립트 End -->
+<!— 자바스크립트 End —>
 </body>
 </html>
