@@ -135,38 +135,6 @@ def profile_change():
     return render_template('profilechange.html')
 
 
-@bp.route('/profilechange', methods=('POST',))
-def input_profile_change():
-    profile = Signup_Data.query.filter(Signup_Data.id == g.user.id)[0]
-
-    if request.form['username']:
-        username = request.form['username']
-    else:
-        username = profile.user_name
-
-    if request.form['useremail']:
-        useremail = request.form['useremail']
-    else:
-        useremail = profile.email
-
-    if request.form['useraddress']:
-        useraddress = request.form['useraddress']
-    else:
-        useraddress = profile.address
-
-    if request.form['userphone']:
-        userphone = request.form['userphone']
-    else:
-        userphone = profile.phone
-
-    profile.user_name = username
-    profile.email = useremail
-    profile.address = useraddress
-    profile.phone = userphone
-    db.session.commit()
-    return render_template('main.html')
-
-
 @bp.route('/save/', methods=['GET','POST'])
 
 def allowed_extensions():
