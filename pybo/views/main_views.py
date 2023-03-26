@@ -5,17 +5,19 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
 from pybo import db
-from pybo.models import Health_Data, Exercise_Data,Signup_Data
+from pybo.models import Health_Data, Exercise_Data, Signup_Data
 from ..forms import UserCreateForm, UserLoginForm
 
 import functools
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
+
 @bp.route('/')
 def main():
     current_app.logger.info("INFO 레벨로 출력")
     return render_template('main.html')
+
 
 @bp.route('/signup', methods=('GET', 'POST'))
 def signup():
@@ -27,7 +29,6 @@ def signup():
                                user_id=form.userid.data,
                                user_password=generate_password_hash(form.password1.data),
                                email=form.email.data,
-                               address=form.address.data,
                                phone=form.phone_number.data
                                )
             db.session.add(user)
@@ -55,6 +56,7 @@ def login_page():
         flash(error)
     return render_template('login.html', form=form)
 
+
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -63,10 +65,12 @@ def load_logged_in_user():
     else:
         g.user = Signup_Data.query.get(user_id)
 
+
 @bp.route('/logout/')
 def logout():
     session.clear()
     return redirect(url_for('main.main'))
+
 
 def login_required(view):
     @functools.wraps(view)
@@ -75,4 +79,5 @@ def login_required(view):
             _next = request.url if request.method == 'GET' else ''
             return redirect(url_for('main.login_page', next=_next))
         return view(*args, **kwargs)
+
     return wrapped_view
