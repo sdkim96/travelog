@@ -40,7 +40,6 @@ class Signup_Data(db.Model):
     user_id = db.Column(db.String(200), unique=True,nullable=False)
     user_password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    address = db.Column(db.String(150), nullable=False)
     phone = db.Column(db.String(150), nullable=False)
 
 class Question(db.Model):
