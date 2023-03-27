@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, url_for, request, render_template, g
+from flask import Blueprint, url_for, request, render_template, g, flash
 from werkzeug.utils import redirect
 
 from .. import db
