@@ -12,6 +12,8 @@
 <body>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script type="text/JavaScript" src="./my-script.js"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
 <div class="login">
     <div class="login__content">
         <div class="login__img">
@@ -45,7 +47,7 @@
                     <h1 class="login__title">Sign In</h1>
                     <div>
                         <div class="login__box" class="login__regist1">
-                            <i class='bx bx-user login__icon'></i>
+                            <i class="iconify login__icon" data-icon="fluent-emoji-high-contrast:id-button"></i>
                             <input type="text" placeholder="Id" class="login__input" name="userid" required=""
                                    autocomplete="off" class="login_input" ,
                                    value="{{ form.userid.data or '' }}">
