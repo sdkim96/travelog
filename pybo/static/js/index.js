@@ -123,6 +123,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
         }
     });
 
+
     // 입력된 데이터를 저장하는 함수
     function saveData() {
         var input = document.getElementById('input-box').value;
