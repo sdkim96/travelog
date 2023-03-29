@@ -33,11 +33,11 @@
                       id="editor" rows="10">{{ form.content.data or '' }}</textarea>
             <script>
                 ClassicEditor
-                    .create( document.querySelector( '#editor'), {
-                        language: { ui: 'ko', content: 'ko' }
+                    .create(document.querySelector('#editor'), {
+                        language: {ui: 'ko', content: 'ko'}
                     })
-                    .catch( error => {
-                        console.error( error );
+                    .catch(error => {
+                        console.error(error);
                     });
             </script>
         </div>
