@@ -825,6 +825,7 @@ pre code {
     -ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
+    margin-left: auto;
 }
 
 .col-5 {
@@ -4067,6 +4068,7 @@ input[type="submit"].btn-block {
     width: 1%;
     min-width: 0;
     margin-bottom: 0;
+
 }
 
 .input-group > .custom-file + .custom-file,
