@@ -8,11 +8,7 @@
     {% endfor %}
     <h2 class="border-bottom ">[제목]: {{ question.subject }}</h2>
     <div class="row my-3">
-        <div class="col-1"> <!-- 추천영역 -->
-            <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{ question.voter|length }}</div>
-            <a href="#" data-uri="{{ url_for('vote.question', question_id=question.id) }}"
-               class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
-        </div>
+
         <div class="col-11">
             <div class="card">
                 <div class="card-body">
@@ -20,7 +16,7 @@
                     <div class="d-flex justify-content-end">
                         {% if question.modify_date %}
                         <div class="badge badge-light p-2 text-left mx-3">
-                            <div class="mb-2">modified at</div>
+                            <div class="mb-2">modified at</div>e
                             <div>{{ question.modify_date|datetime }}</div>
                         </div>
                         {% endif %}
@@ -69,7 +65,7 @@
             </div>
         </div>
     </div>
-    <h5 class="border-bottom my-3 ">{{ question.answer_set|length }}개의 답변이 있습니다.</h5>
+    <h5 class="border-bottom my-3 ">{{ question.answer_set|length }}개의 댓글이 있습니다.</h5>
     {% for answer in question.answer_set %}
     <a name="answer_{{ answer.id }}"></a>
     <div class="row my-3">
