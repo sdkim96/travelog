@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="mainpage">
     <div class="firstsection">
@@ -31,62 +30,159 @@
     </div>
     <div class="container my-3">
         <div id="section">
-
-            <table class="table">
-                <tbody>
-                {% if question_list %}
-                {% for question in question_list.items %}
-
-                <td class="text-center">
-                <td class="text-left">
-                    <a href="{{ url_for('question.detail', question_id=question.id) }}">
-                        <img src="{{ url_for('static', filename='image/img3.png') }}" width="100" height="50">
-                    </a>
-                    <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
-
-                    {% if question.answer_set|length > 0 %}
-                    <span class="text-center text-danger small ml-2">{{ question.answer_set|length }}</span>
-                    {% endif %}
-                </td>
-
-                <td> {{ question.create_date|datetime }}</td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                    <td colspan="3">질문이 없습니다.</td>
-                </tr>
-                {% endif %}
-                </tbody>
-            </table>
-        </div>
-
-
-            <div>
-            <dd class="p_photo_d">
-            <p class="p_img">
-                {% if question_list %}
-                {% for question in question_list.items %}
-                <a href="{{ url_for('question.detail', question_id=question.id) }}">
-                    <img src="{{ url_for('static', filename='image/img3.png') }}" width="179" height="185">
-                </a>
-            </p>
-            <ul>
-                <li class="p_title ">
-                    <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
-                    {% if question.answer_set|length > 0 %}
-                    <span class="text-center text-danger small ml-2">{{ question.answer_set|length }}</span>
-                    {% endif %}
-                </li>
-                <li class="p_date text-danger small ">
-                    <td> {{ question.create_date|datetime }}</td>
-                </li>
-                {% endfor %}
-                {% else %}
-            </ul>
-            {% endif %}
-            </dd>
+            <div class="col-4 input-group">
+                <input type="text" class="form-control kw" value="{{ kw or '' }}" placeholder="검색어를 입력해 주세요">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                </div>
             </div>
+        </div>
+        <div id="whole-body">
+            <div id="wrapper" class="clearfix">
+                <div id="twocols" class="clearfix">
+                    <div id="content-area" class="">
+                        <div id="post-area" class="post-area">
+                            <div class="post">
+                                <div class="post-back">
+
+                                    <table class="post-body" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                        <tr>
+                                            <td class="bcl" nowrap="nowrap"></td>
+                                            <td class="bcc">
+                                                <div id="prologue">
+                                                    <div id="BlogRecentDiv"></div>
+                                                    <dl class="p_post_top">
+                                                        <div class="row">
+                                                            {% if question_list, signup__data %}
+                                                            {% for question in question_list.items %}
+                                                            <div class="col-md-3">
+                                                                <dd class="p_photo_d">
+                                                                    <p class="p_img">
+                                                                        <a href="{{ url_for('question.detail', question_id=question.id) }}">
+                                                                            <img src="{{ url_for('static', filename='image/tripimg.png') }}"
+                                                                                 width="179" height="185">
+                                                                        </a>
+                                                                    </p>
+                                                                    <ul>
+                                                                        <li class="p_title">
+                                                                            <a href="{{ url_for('question.detail', question_id=question.id) }}">{{
+                                                                                question.subject }}</a>
+                                                                            {% if question.answer_set|length > 0 %}
+                                                                            {% endif %}
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{ question.local }}</a>
+                                                                        </li>
+                                                                        <li class="p_date">
+                                                                            <span class="pcol2 fil5">{{ question.create_date|datetime }}</span>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </dd>
+                                                            </div>
+                                                            {% endfor %}
+                                                            {% else %}
+                                                            <div class="col-md-12">
+                                                                <p>No questions found.</p>
+                                                            </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </dl>
+                                                </div><!-- 프롤로그 -->
+
+
+                                            </td>
+                                            <td class="bcr" nowrap="nowrap"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="post-footer" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                        <tr>
+                                            <td class="ftl" nowrap="nowrap"></td>
+                                            <td class="ftc"></td>
+                                            <td class="ftr" nowrap="nowrap"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <script type="text/javascript">
+                                var event_category = "prologue";
+                            </script>
+
+
+                            <script type="text/javascript">
+                                var fromClosedPost = "" === "true";
+
+                                var nilOptions = {
+                                    devMode: "true" === "false",
+                                    topReferer: (function () {
+                                        if (fromClosedPost) {
+                                            return '';
+                                        }
+
+                                        var ref = "";
+                                        var isMobile = function () {
+                                            return window.location.host.indexOf('m.blog.naver.com') >= 0;
+                                        };
+
+                                        if (isMobile()) {
+                                            return document.referrer;
+                                        } else {
+                                            if (ref == '') {
+                                                if (parent != window && parent.location.href == document.referrer) {
+                                                    return '';
+                                                } else {
+                                                    return document.referrer;
+                                                }
+                                            } else {
+                                                return ref;
+                                            }
+                                        }
+                                    })()
+                                }
+                            </script>
+                            <script type="text/javascript"
+                                    src="https://ssl.pstatic.net/t.static.blog/mylog/versioning/versioning_nil_ntm-7795059_https.js"
+                                    charset="UTF-8"></script>
+                            <script type="text/javascript">
+                                $Fn(function () {
+                                    var nilNtmLibUrl = "https://ssl.pstatic.net/t.static.blog/mylog/versioning//common/js/nilForNtm-89afd2f_https.js";
+                                    var sBlogIdForNil = "windchoco";
+                                    var gdid = "";
+                                    var uri = 'http://blog.naver.com/windchoco';
+                                    var relationType = 3;
+                                    var referrer = nilOptions.topReferer;
+                                    var dimension_1 = "";
+                                    if (true) {
+                                        var optional_1 = true;
+                                    } else {
+                                        var optional_1 = false;
+                                    }
+
+                                    try {
+                                        new nilNtmForBlogCVAnalyst(sBlogIdForNil, uri, relationType, gdid, dimension_1, referrer, optional_1, event_category, nilNtmLibUrl);
+                                    } catch (e) {
+                                    }
+
+                                }).attach(window, "load");
+
+                            </script>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
         <!-- 페이징처리 시작 -->
@@ -130,7 +226,7 @@
             {% endif %}
         </ul>
         <!-- 페이징처리 끝 -->
-        <a href="{{ url_for('question.create') }}" class="btn btn-primary">질문 등록하기</a>
+        <a href="{{ url_for('question.create') }}" class="btn btn-primary">글 작성하기</a>
     </div>
 
 </div>
