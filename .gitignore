@@ -8,7 +8,11 @@ __pycache__/
 *.so
 
 mydata2.db
+# Sonarlint plugin
+.idea/**/sonarlint/
 
+# SonarQube Plugin
+.idea/**/sonarIssues.xml
 logs
 
 *.pem
