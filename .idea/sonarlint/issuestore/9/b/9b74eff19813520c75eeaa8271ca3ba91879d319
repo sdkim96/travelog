@@ -1,6 +1,0 @@
-
-mpython:S1192"PDefine a constant instead of duplicating this literal 'signup__data.id' 7 times.(γ‘¶οϊÿÿÿÿ
-cpython:S1192"LDefine a constant instead of duplicating this literal 'question.id' 3 times.(λµΆ 
-|python:S101"eRename class "Health_Data" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(ύ½¶Ώ
-~python:S101"gRename class "Exercise_Data" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(»’ ώ
-python:S101%"eRename class "Signup_Data" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(χιν ψÿÿÿÿ
