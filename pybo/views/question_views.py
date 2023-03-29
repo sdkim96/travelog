@@ -50,8 +50,8 @@ def _list():
                         ) \
                 .distinct()
 
-        # 페이징
-        question_list = question_list.paginate(page, per_page=10)
+        # 페이징 # 한 페이지에 몇 개 넣을지 조정 가능
+        question_list = question_list.paginate(page, per_page=12)
         return render_template('question/question_list.html', question_list=question_list, page=page, kw=kw, so=so)
 
 
