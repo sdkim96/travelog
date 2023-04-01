@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
     <title>Travelog</title>
@@ -40,26 +39,27 @@
     <div id="section">
         <div class="blank"></div>
         <!-- Fisrt section-->
-        <div class="firstsection">
-            <div class="myprofilearea">
-                <div class="myprofile">
-                    {% if g.user%}
-                    <p>마이 프로필</p>
-                    <h1 class="username">{{ g.user.user_name}} </h1>
-                    <h4 class="email">{{ g.user.email}}</h4>
+        <div class="myprofilearea">
+            <div class="myprofile">
+                {% if g.user%}
+                <p>프로필</p>
+                <h2 class="username">{{ g.user.user_name}} </h2>
+                <br>
+                <h6 class="email">{{ g.user.user_}}</h6>
+                <br>
+                {% if profile_last_exercise %}
+                <br>
+                {% else %}
 
-                    {% if profile_last_exercise %}
-                    <p class="lastexercise">{{ profile_last_exercise[0].create_date|datetime }}<br>마지막으로 운동한 날</p>
-                    {% else %}
-                    <p class="lastexercise">---<br>마지막으로 운동한 날</p>
-                    {% endif %}
-                    <p class="phonenumber"> {{ g.user.phone}}<br>핸드폰 번호</p>
-                    <input type="button" value="프로필 수정하기" class="button" onClick="location.href='/input/profilechange'">
-                    {% else %}
-                    <h2>마이 프로필</h2>
-                    <p class="pleaselogin">로그인을 해주세요</p>
-                    {% endif %}
-                </div>
+                <br>
+                {% endif %}
+                <p class="phonenumber"> {{ g.user.phone}}<br>핸드폰 번호</p>
+                <br><br><br>
+                <input type="button" value="프로필 수정하기" class="button" onClick="location.href='/input/profilechange'">
+                {% else %}
+                <h2>마이 프로필</h2>
+                <p class="pleaselogin">로그인을 해주세요</p>
+                {% endif %}
             </div>
         </div>
 
