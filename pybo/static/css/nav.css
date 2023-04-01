@@ -1,77 +1,70 @@
-@font-face {
-    font-family: 'MaplestoryOTFLight';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+@media screen and (min-width: 768px) {
+    @font-face {
+        font-family: 'MaplestoryOTFLight';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    body {
+        font-family: 'MaplestoryOTFLight';
+        background: #F0F8FF;
+    }
 
-body {
-    font-family: 'MaplestoryOTFLight';
-    background: #F0F8FF;
+    .han_nav {
+        background: #4A6BD0;
+        color: white;
+    }
 
-}
+    .logo {
+        font-size: 30px;
+        color: white;
+    }
 
-.han_nav {
-    background: #4A6BD0;
-    color: white;
-}
+    .comment {
+        border-top: dotted 1px #ddd;
+        font-size: 0.7em;
+    }
 
-.logo {
-    font-size: 30px;
-    color: white
+    .hello {
+        margin-left: 190px;
+    }
 
-}
+    .hello1 {
+        margin-left: 950px;
+    }
 
-.comment {
-    border-top: dotted 1px #ddd;
-    font-size: 0.7em;
-}
+    #btn_search {
+        color: white;
+        background: #4A6BD0;
+    }
 
-.hello {
+    .nav-link {
+        margin-left: 20px;
+    }
 
-    margin-left: 190px
-}
+    .py-2 {
+        font-size: 15px;
+        text-align: center;
 
-.hello1 {
-    margin-left: 950px
+    }
 
-}
+    .btn-secondary {
+        color: #2ac1bc;
+    }
 
-#btn_search {
-    color: white;
-    background: #4A6BD0;
-}
+    a:link {
+        text-decoration: none;
+    }
 
-.nav-link {
-    margin-left: 20px;
-}
+    a:visited {
+        text-decoration: none;
+    }
 
-.py-2 {
-    font-size: 15px;
-    text-align: center;
+    a:hover {
+        text-decoration: underline;
+    }
 
-}
-
-btn-secondary {
-    color: #2ac1bc;
-}
-
-a:link {
-
-    text-decoration: none;
-}
-
-a:visited {
-
-    text-decoration: none;
-}
-
-a:hover {
-
-    text-decoration: underline;
-}
-
-a:active {
-
-    text-decoration: none;
+    a:active {
+        text-decoration: none;
+    }
 }

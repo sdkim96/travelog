@@ -8,15 +8,23 @@
     {% endfor %}
     <h2 class="border-bottom ">[제목]: {{ question.subject }}</h2>
     <div class="row my-3">
-
+        <div class="col-1"> <!-- 추천영역 -->
+            <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{ question.voter|length }}</div>
+            <a href="#" data-uri="{{ url_for('vote.question', question_id=question.id) }}"
+               class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
+        </div>
         <div class="col-11">
             <div class="card">
                 <div class="card-body">
-                    <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
+                    <div class="card-text" style="white-space: pre-line;" id="contents"></div>
+                    <script language = "javascript">
+                        var tmpStr = "{{ question.content|safe }}";
+                        document.getElementById('contents').innerHTML=tmpStr
+                    </script>
                     <div class="d-flex justify-content-end">
                         {% if question.modify_date %}
                         <div class="badge badge-light p-2 text-left mx-3">
-                            <div class="mb-2">modified at</div>e
+                            <div class="mb-2">modified at</div>
                             <div>{{ question.modify_date|datetime }}</div>
                         </div>
                         {% endif %}
@@ -65,10 +73,15 @@
             </div>
         </div>
     </div>
-    <h5 class="border-bottom my-3 ">{{ question.answer_set|length }}개의 댓글이 있습니다.</h5>
+    <h5 class="border-bottom my-3 ">{{ question.answer_set|length }}개의 답변이 있습니다.</h5>
     {% for answer in question.answer_set %}
     <a name="answer_{{ answer.id }}"></a>
     <div class="row my-3">
+        <div class="col-1">  <!-- 추천영역 -->
+            <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{ answer.voter|length }}</div>
+            <a href="#" data-uri="{{ url_for('vote.answer', answer_id=answer.id) }}"
+               class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
+        </div>
         <div class="col-11">  <!-- 답변영역 -->
             <div class="card">
                 <div class="card-body">
@@ -137,8 +150,9 @@
         <div class="form-group">
             <textarea {% if not g.user %}disabled{% endif %}
                       name="content" id="content" class="form-control" rows="10"></textarea>
+
         </div>
-        <input type="submit" value="댓글등록" class="btn btn-primary">
+        <input type="submit" value="답변등록" class="btn btn-primary">
     </form>
 </div>
 {% endblock %}

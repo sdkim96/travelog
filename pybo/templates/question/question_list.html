@@ -11,7 +11,6 @@
                 <h6 class="email">{{ g.user.user_}}</h6>
                 <br>
                 {% if profile_last_exercise %}
-                <p class="lastexercise">{{ profile_last_exercise[0].create_date|datetime }}<br>마지막으로 운동한 날</p>
                 <br>
                 {% else %}
 
@@ -60,7 +59,7 @@
                                                                 <dd class="p_photo_d">
                                                                     <p class="p_img">
                                                                         <a href="{{ url_for('question.detail', question_id=question.id) }}">
-                                                                            <img src="{{ url_for('static', filename='image/tripimg.png') }}"
+                                                                            <img src="{{ url_for('static', filename='image/img3.png') }}"
                                                                                  width="179" height="185">
                                                                         </a>
                                                                     </p>
@@ -76,6 +75,7 @@
                                                                         </li>
                                                                         <li class="p_date">
                                                                             <span class="pcol2 fil5">{{ question.create_date|datetime }}</span>
+
                                                                         </li>
 
                                                                     </ul>
