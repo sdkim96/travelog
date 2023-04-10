@@ -1,12 +1,8 @@
 
-F
-pybo/static/js/txt1.js,5\a\5af7d2b375d5053ed60c901e098331071594cd7b
 L
 pybo/static/js/js_PoseNet.js,6\b\6b7b448a563cbc84164d4067457c27ef824da5fa
 G
 pybo/static/js/FAQ.json,5\b\5b89a55c09e0239e208c90ef1341f2d95d8c22d8
-I
-pybo/static/js/custom6.js,9\3\9313f94b599276cfeda3769fd8d591ba0aea4944
 A
 config/mydata2.db,c\9\c9c87a31c4b2fdd03e125f85c1b9513a61c8df56
 w
@@ -43,8 +39,6 @@ w
 G.idea/sonarlint/issuestore/0/4/0457e9d67d717cfd84dd51cd52719942c803bfa9,c\a\ca1d77e15909d3066e0e5c0c6382d6e95734dc0d
 w
 G.idea/sonarlint/issuestore/d/5/d53bbf609bda888a951eef6901463b9d2ef4c81d,6\3\63ab782c5b5b49b2e89ec0300fc0e2f1f4293cb1
-R
-"pybo/static/css/2bootstrap.min.css,8\d\8d3916e635caf5cacec1c40a449a2232804cf134
 S
 #pybo/static/js/ckeditor/__init__.py,3\0\3017ee1e703dd23bbd7f35c074a245bad1a13652
 R
@@ -59,10 +53,6 @@ W
 'pybo/static/js/ckeditor/ckeditor.js.map,a\6\a622bda62e64029373f644ba6280c3ce9f1b3557
 R
 "pybo/static/js/jquery-3.5.1.min.js,9\1\91bc05e49f403e5c0a55b7cbf2a51b1a9648edec
-L
-pybo/static/js/lottie.min.js,1\d\1db1a000202fb51581a30a9829cde07ba79da4f5
-I
-pybo/static/css/login.css,1\c\1cfb9aecc427edea1b6c7ee4019b46e038cf8112
 G
 pybo/static/js/login.js,7\6\761f0c32a61423a2113e39771a543cf3fe88a218
 J
@@ -83,8 +73,6 @@ O
 pybo/templates/form_errors.html,0\4\0457e9d67d717cfd84dd51cd52719942c803bfa9
 J
 pybo/templates/navbar.html,9\5\9513429366755cab34a01855fac315aa4b608f2f
-H
-pybo/static/css/main.css,1\e\1e92fbfdaa14b603e7c8ffdfae0eda4e968c4491
 >
 pybo/filter.py,c\5\c50b8f5b7cc27d520a6a4f60b000c686bf1374ff
 H
@@ -105,8 +93,6 @@ O
 pybo/static/js/bootstrap.min.js,0\1\01d2ba010970f2d369fa24719d0a4d5493ffa521
 I
 pybo/templates/login.html,a\2\a2230be4b1fb10fadd3ddca7ff6d2e4d49860911
-H
-pybo/templates/main.html,5\7\570de7c283abc2c2385a26829743cedab14f8c99
 J
 pybo/templates/signup.html,7\5\754f9eff6baf238be780d617593ec623a61aaea1
 L
@@ -114,9 +100,29 @@ L
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-K
-pybo/static/css/profile.css,8\c\8c3c9a1effd708a6252042c49e62f1e3a0fd8525
 Q
 !pybo/templates/profilechange.html,8\1\811e088869cfa2fae677816dd2e9bf3ea3876ae4
-I
-pybo/static/css/index.css,f\5\f51eb902374a7a4c90a7055da1eb7b3c1cb74953
+D
+config/production.py,2\9\293c57aaf1c99a4849aaacbfe89cb1d8021b606b
+H
+pybo/templates/base.html,3\c\3cd18d717d0611693b3103feb41a6d463e8a19d7
+G
+pybo/static/js/index.js,9\b\9b4d7cb174823400561f93d8e97f17bc9e26bce5
+\
+,pybo/templates/question/question_detail.html,c\2\c27b1d8301f9b84be7b9ba1cdba804ec2f57dade
+A
+config/default.py,c\a\ca2a0426270bd0ca5da7132e861e174c5d03ab89
+E
+config/development.py,7\b\7ba2da254b194d0e9c7eea1e522e6d8059572fb2
+B
+config/__init__.py,7\c\7c4c5de0ae6801f08fa7c742af850c6198fdb35d
+@
+pybo/__init__.py,c\8\c8441a528c404f7faca6177bcb88b09b5f126e16
+9
+	config.py,1\a\1a1b9769344cb239f2e540e1e6ee1efa2d3034ea
+>
+pybo/models.py,9\b\9b74eff19813520c75eeaa8271ca3ba91879d319
+Z
+*pybo/templates/question/question_form.html,5\1\510e096f598b331e722f23c5a2939837cb8f6a40
+=
+pybo/forms.py,7\9\79036cdcbd9bf246b2686af054b8a72558f94dd7
