@@ -4,27 +4,31 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <title>Travelog</title>
+
     <link rel="icon" href="{{url_for('static', filename='favicon (2).ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/aos.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/swiper.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+
+    <script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/iscroll.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/swiper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/aos.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/assuretee.js') }}"></script>
+
 </head>
 <body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-</script>
-<script>
-
-</script>
-<section class="item">
-    <div class="jb-box">
-        <video muted autoplay loop>
-            <source src="{{ url_for('static', filename='image/intro.mp4') }}"/>
-        </video>
-        <div class="jb-text">
-            <h1><a href="#link_jb-box">Travelog</a></h1>
-            <div class="nav">
+<header id="header">
+    <div class="inner">
+        <h1><a href="#link_jb-box">Travelog</a></h1>
+            <div class="gnb">
                 {% if g.user %}
-                <ul class="navbar-nav">
+                <ul>
                     <li><a href="/question/list">Blog</a></li>
                     <li><a href="/input">MyPage</a></li>
                     <li class="nav-item ">
@@ -40,93 +44,272 @@
                 </ul>
                 {% endif %}
             </div>
-        </div>
-        <div class="jb-center">
-            <img src="{{ url_for('static', filename='image/tripimg.png ') }}">
-        </div>
     </div>
-</section>
-
-<section class="item">
-    <div class="inner">
-        <h1 class="inner_title" style="user-select: auto;">
-            <span class="blind" style="user-select: auto; margin-top: 100px">여행이 쌓이면 기록이 된다<br>Travel.log</span>
-        </h1>
-        <p class="inner_text" style="user-select: auto;"> 트레블로그.로그는 자유롭게 여행을 <br style="user-select: auto;"> 지도에 기록하고
-            기억할 수 있습니다<br
-                    style="user-select: auto;">당신의 여행을 Travel.log에 기록하세요!
-        </p>
-    </div>
-</section>
-
-<section class="item">
-    <div class="inner1">
-        <h1 class="inner_title" style="user-select: auto;">
-            <span class="blind" style="user-select: auto; margin-top: 100px">여행이 쌓이면 기록이 된다<br>Travel.log</span>
-        </h1>
-        <p class="inner_text" style="user-select: auto;"> 트레블로그.로그는 자유롭게 여행을 <br style="user-select: auto;"> 지도에 기록하고
-            기억할 수 있습니다<br
-                    style="user-select: auto;">당신의 여행을 Travel.log에 기록하세요!
-        </p>
-    </div>
-</section>
-
-<section class="item">
-    <div class="inner2">
-        <h1 class="inner_title" style="user-select: auto;">
-            <span class="blind" style="user-select: auto; margin-top: 100px">여행이 쌓이면 기록이 된다<br>Travel.log</span>
-        </h1>
-        <p class="inner_text" style="user-select: auto;"> 트레블로그.로그는 자유롭게 여행을 <br style="user-select: auto;"> 지도에 기록하고
-            기억할 수 있습니다<br
-                    style="user-select: auto;">당신의 여행을 Travel.log에 기록하세요!
-        </p>
-    </div>
-</section>
-
-
-<!-- // .container -->
-
-<section class="item">
-    <div class="FAQ" id="link_FAQ">
-        <h1>FAQ
-            <div id="lottiebox6">
-                <div id="lottie6"></div>
-                <script src="{{ url_for('static', filename='js/lottie.min.js') }}"></script>
-                <script src="{{ url_for('static', filename='js/custom6.js') }}"></script>
+</header>
+<!-- container -->
+<div class="container" id="container">
+    <div class="sec sec_kv">
+        <div class="kv_slider swiper swiper-container-fade swiper-container-initialized swiper-container-horizontal">
+            <div class="swiper-wrapper" style="transition-duration: 0ms;">
+                <div class="kv_slide slide01 bg_image swiper-slide" style="width: 1903px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"></div>
+                <div class="kv_slide slide02 bg_image swiper-slide swiper-slide-prev" style="width: 1903px; opacity: 1; transform: translate3d(-1903px, 0px, 0px); transition-duration: 0ms;"></div>
+                <div class="kv_slide slide03 bg_image swiper-slide swiper-slide-active" style="width: 1903px; opacity: 1; transform: translate3d(-3806px, 0px, 0px); transition-duration: 0ms;"></div>
             </div>
-        </h1>
-
-        <ul class="block">
-            <li>
-                <div class="contents1_bold">
-                    <h1>Q. 카메라가 내 모습을 저장하나요?</h1>
-                    <p>
-                        안심하세요! 카메라는 사용자의 정보를 저장하지 않습니다. 사용자가
-                        원하는 경우에만 자신의 모습을 녹화해 다시보기 할 수 있습니다.
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="contents1_bold">
-                    <h1>Q. 모바일에서는 안되나요?</h1>
-                    <p>
-                        최적의 운동 경험을 제공하기 위해 웹 서비스로 먼저 출시되었습니다.
-                        모바일에서도 곧 만나실 수 있으니 조금만 기다려주세요!
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="contents1_bold">
-                    <h1>Q. 카메라가 꼭 필요한가요?</h1>
-                    <p>
-                        100% 즐기기 위해서는 '노트북' 또는 '데스크탑 + 외장카메라'가
-                        필요해요! 카메라를 통해 운동동작을 분석하기 때문이에요!
-                    </p>
-                </div>
-            </li>
-        </ul>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+        <h2 class="sec_tit text_white aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">지도와 블로그에<br>설레는 여행을 기록하고,<br>기억해보세요. </h2>
     </div>
-</section>
 
+    <div class="sec sec01 sec_life">
+        <div class="bg_image">
+            <div class="sec_inner">
+                <div class="text_area">
+                    <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">지도에 사진을<br>추가해서<br>기록해보세요.</h2>
+                    <p class="sec_desc aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                        간단한<br>문구<br>추가 가능
+                    </p>
+
+                </div>
+
+                <!-- service -->
+                <div class="service_list_section swiper swiper-container-initialized swiper-container-horizontal aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="service_list swiper-wrapper">
+                        <div class="service_item swiper-slide swiper-slide-active now-show">
+                            <div class="service_box">
+                                <strong class="sv_tit">Blog</strong>
+                                <p class="sv_cont">다녀왔던 지역의 사진과 여행기만 추려서 여행을 추억할 수 있습니다.</p>
+                                <a href="/question/list" class="btn_anchor">Blog</a>
+                            </div>
+                        </div>
+                        <div class="service_item swiper-slide swiper-slide-next now-show">
+                            <div class="service_box">
+                                <strong class="sv_tit">Map</strong>
+                                <p class="sv_cont">지도에 직접 마커를 추가 해보세요.</p>
+                                <a href="/input" class="btn_anchor">Map</a>
+                            </div>
+                        </div>
+                        <div class="service_item swiper-slide now-show">
+                            <div class="service_box">
+                                <strong class="sv_tit">ChatGpt</strong>
+                                <p class="sv_cont">인공지능을 활용한 여행 추천 서비스</p>
+                                <a href=""  class="btn_anchor">자세히보기</a>
+                            </div>
+                        </div>
+                        <div class="service_item swiper-slide">
+                            <div class="service_box">
+                                <strong class="sv_tit">추가기능</strong>
+                                <p class="sv_cont">추가기능</p>
+                                <button type="button" class="btn_anchor" disabled="">준비중</button>
+                            </div>
+                        </div>
+                        <div class="service_item swiper-slide">
+                            <div class="service_box">
+                                <strong class="sv_tit">추가기능</strong>
+                                <p class="sv_cont">추가기능</p>
+                                <button type="button" class="btn_anchor" disabled="">준비중</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
+                    <div class="swiper-button-prev nav_arrow swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+                    <div class="swiper-button-next nav_arrow" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                <!--// service -->
+            </div>
+        </div>
+    </div>
+
+    <div class="sec sec02 sec_program01" data-menu-idx="0">
+        <div class="sec_inner">
+            <div class="left_box">
+                <div class="text_area">
+                    <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>추가</h2>
+                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
+                        문구 추가 <br class="mo_block">문구 추가<br>문구 추가
+                    </p>
+                </div>
+            </div>
+            <div class="right_box">
+                <div class="image_area aos-init aos-animate" data-aos="fade-left" data-aos-duration="1000">
+                    <img src="./images/img_program01.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec sec03 bg_image sec_program02">
+        <div class="sec_inner">
+            <div class="right_box">
+                <div class="text_area text_white">
+                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>
+                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
+                        문구 추가<br>문구 추가<br>문구 추가
+                    </p>
+                </div>
+            </div>
+            <div class="left_box aos-init" data-aos="fade-right" data-aos-duration="1000">
+                <div class="image_area">
+                    <img src="./images/img_program02.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec sec04 sec_program03">
+        <div class="sec_inner">
+            <div class="text_area">
+                <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>
+                <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
+                    문구 추가<br class="mo_block">문구 추가<br>문구 추가
+                    <!-- Tip -->
+                    <span class="tip_box">
+                  <button type="button" class="btn_tip">
+                    <span class="hidden">팁보기</span>
+                  </button>
+                  <span class="tip_text">
+                   문구 추가<br>문구 추가 <br>문구 추가
+                  </span>
+                </span>
+                    <!--// Tip -->
+                </p>
+            </div>
+
+            <!-- slider -->
+            <div class="cate_slider_section aos-init" data-aos="fade-left" data-aos-duration="1000">
+                <div class="cate_slider_wrap">
+                    <div class="cate_slider swiper swiper-container-initialized swiper-container-horizontal">
+                        <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-930px, 0px, 0px);"><div class="slider_item swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="2" style="width: 310px;">
+                            <div class="slider_radius">
+                                <img src="images/slide_phone_3.jpg" alt="slide 3">
+                            </div>
+                        </div>
+                            <div class="slider_item swiper-slide swiper-slide-duplicate-next" data-swiper-slide-index="0" style="width: 310px;">
+                                <div class="slider_radius">
+                                    <img src="images/slide_phone_1.jpg" alt="slide 1">
+                                </div>
+                            </div>
+                            <div class="slider_item swiper-slide swiper-slide-prev" data-swiper-slide-index="1" style="width: 310px;">
+                                <div class="slider_radius">
+                                    <img src="images/slide_phone_2.jpg" alt="slide 2">
+                                </div>
+                            </div>
+                            <div class="slider_item swiper-slide swiper-slide-active" data-swiper-slide-index="2" style="width: 310px;">
+                                <div class="slider_radius">
+                                    <img src="images/slide_phone_3.jpg" alt="slide 3">
+                                </div>
+                            </div>
+                            <div class="slider_item swiper-slide swiper-slide-duplicate swiper-slide-next" data-swiper-slide-index="0" style="width: 310px;">
+                                <div class="slider_radius">
+                                    <img src="images/slide_phone_1.jpg" alt="slide 1">
+                                </div>
+                            </div></div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                </div>
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
+                <div class="swiper-button-prev nav_arrow" tabindex="0" role="button" aria-label="Previous slide"></div>
+                <div class="swiper-button-next nav_arrow" tabindex="0" role="button" aria-label="Next slide"></div>
+            </div>
+            <!--// slider -->
+
+            <div class="cate_tabs aos-init" data-aos="fade-up" data-aos-duration="1000">
+                <button type="button" class="cate_item is_active" data-origin-text="운전">항목</button>
+                <button type="button" class="cate_item is_disabled" data-origin-text="생활">항목</button>
+                <button type="button" class="cate_item is_disabled" data-origin-text="레저">항목</button>
+                <button type="button" class="cate_item is_disabled" data-origin-text="쇼핑">항목</button>
+                <button type="button" class="cate_item is_disabled" data-origin-text="신용">항목</button>
+                <button type="button" class="cate_item is_disabled" data-origin-text="비즈니스">항목</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec sec05 bg_image sec_b2b" data-menu-idx="1">
+        <div class="sec_inner">
+            <div class="right_box">
+                <div class="text_area text_white">
+                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>
+                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
+                        문구 추가<br>문구 추가 <br class="mo_block">문구 추가
+                    </p>
+                </div>
+            </div>
+
+            <div class="left_box aos-init" data-aos="fade-right" data-aos-duration="1000">
+                <div class="image_area">
+                    <img src="./images/img_sec05.png" alt="관리자 화면">
+                </div>
+                <!-- Tip -->
+                <span class="tip_box">
+                <button type="button" class="btn_tip">
+                  <span class="hidden">팁보기</span>
+                </button>
+                <span class="tip_text">
+               문구 추가<br>문구 추가 <br>문구 추가
+
+                </span>
+              </span>
+                <!--// Tip -->
+            </div>
+        </div>
+    </div>
+
+    <div class="sec sec06 sec_case" data-menu-idx="2">
+        <div class="sec_inner sec_inner--1st">
+            <div class="left_box">
+                <div class="text_area">
+                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>
+                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
+                        문구 추가<br class="mo_block">
+                        문구 추가<br>문구 추가
+                    </p>
+                    <a href="" target="_blank" class="btn_anchor aos-init" data-aos="fade-up" data-aos-duration="1000">자세히보기</a>
+                </div>
+            </div>
+            <div class="right_box">
+                <div class="image_area aos-init" data-aos="fade-left" data-aos-duration="1000">
+                    <img src="./images/img_sec06.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="sec_inner sec_inner--2nd">
+            <div class="right_box">
+                <div class="text_area">
+                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">
+                        문구 추가 <br>문구 추가<br class="mo_block">문구 추가<br class="pc_block">문구 추가
+                    </h2>
+                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가 <br>문구 추가</p>
+                </div>
+            </div>
+            <div class="left_box aos-init" data-aos="fade-right" data-aos-duration="1000">
+                <div class="image_area">
+                    <img src="./images/img_sec06_2.png" alt="">
+                </div>
+                <!-- Tip -->
+                <span class="tip_box">
+                <span class="tip_text">
+                  Android / iOS App은 2022년 6월 출시 예정 <br>입니다.
+                  <button type="button" class="btn_close">
+                    <span class="hidden">팁닫기</span>
+                  </button>
+                </span>
+              </span>
+                <!--// Tip -->
+            </div>
+        </div>
+    </div>
+
+    <div class="sec sec07 bg_image sec_contact" data-menu-idx="3">
+        <section class="sec_inner">
+            <div class="text_area text_white">
+                <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">지금 바로<br>Travel-log<br>시작해보세요.</h2>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- //container -->
+<!--//footer-->
+</div>
+<!-- //wrap -->
+</div>
+<!-- //agreePop -->
 </body>
-</html>
+
+</body></html>
