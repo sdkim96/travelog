@@ -7534,6 +7534,8 @@ button.bg-dark:hover {
 
 .border-bottom {
     border-bottom: 1px solid #dee2e6 !important;
+    background-color: white;
+    text-align: center;
 }
 
 .border-left {
@@ -9119,6 +9121,8 @@ button.bg-dark:hover {
 .mb-3,
 .my-3 {
     margin-bottom: 1rem !important;
+    text-align: left;
+
 }
 
 .ml-3,

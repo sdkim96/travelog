@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/nav.css')}}">
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
     <title>Travelog</title>
     <link rel="icon" href="{{url_for('static', filename='image/favicon (2).ico')}}">
@@ -11,29 +12,30 @@
 
 </head>
 <body>
-<div class="wrap">
     <!-- Header start-->
-    <div class="header">
-        <h1><a href="/">Travle.log</a></h1>
-        <div class="nav">
-            {% if g.user %}
-            <ul class="navbar-nav">
-                <li><a href="/question/list">Blog</a></li>
-                <li><a href="/input">MyPage</a></li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} Loginout</a>
-                </li>
-            </ul>
-            {% else %}
-            <ul>
-                <li><a href="/question/list">Blog</a></li>
-                <li><a href="/input">MyPage</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href=/signup>SignUp</a></li>
-            </ul>
-            {% endif %}
+    <header id="header">
+        <div class="inner">
+            <h1><a href="/">Travelog</a></h1>
+            <div class="gnb">
+                {% if g.user %}
+                <ul>
+                    <li><a href="/question/list">Blog</a></li>
+                    <li><a href="/input">Map</a></li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul>
+                    <li><a href="/question/list">Blog</a></li>
+                    <li><a href="/input">Map</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href=/signup>SignUp</a></li>
+                </ul>
+                {% endif %}
+            </div>
         </div>
-    </div>
+    </header>
     <!-- Header end-->
     <!-- Section start-->
     <div id="section">
@@ -62,7 +64,6 @@
                 {% endif %}
             </div>
         </div>
-
         <!-- Second section-->
         <div class="secondsection">
             <div class="mymaparea">
@@ -75,6 +76,6 @@
         </div>
         <!--second section end-->
     </div>
-</div>
+
 </body>
 </html>

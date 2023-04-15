@@ -14,7 +14,7 @@
         <div class="form-group">
             <label for="subject">제목</label>
             <input type="text" class="form-control" name="subject" id="subject"
-                   value="{{ form.subject.data or '' }}">
+                   value="{{ form.subject.data or '' }}"placeholder="[제목]">
         </div>
 
         <div class="form-group">
@@ -23,9 +23,9 @@
                    value="{{ form.local.data or '' }}" placeholder="[지역]">
         </div>
         <div class="form-group">
-            <br>
-
-            <input type="file" name="title_image" class="form-control">
+            <label for="title_image">대표사진</label>
+            <input type="file" class="form-control" name="local" id="title_image"
+                   value="{{ form.local.data or '' }}" placeholder="[대표사진]">
         </div>
         <div class="form-group">
             <label for="editor">내용</label>

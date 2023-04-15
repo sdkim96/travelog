@@ -15,14 +15,14 @@
     <script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/iscroll.js') }}"></script>
     <script src="{{ url_for('static', filename='js/swiper.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/aos.js') }}"></script>
     <script src="{{ url_for('static', filename='js/assuretee.js') }}"></script>
 
 </head>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <header id="header">
     <div class="inner">
         <h1><a href="#link_jb-box">Travelog</a></h1>
@@ -30,7 +30,7 @@
                 {% if g.user %}
                 <ul>
                     <li><a href="/question/list">Blog</a></li>
-                    <li><a href="/input">MyPage</a></li>
+                    <li><a href="/input">Map</a></li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
                     </li>
@@ -38,7 +38,7 @@
                 {% else %}
                 <ul>
                     <li><a href="/question/list">Blog</a></li>
-                    <li><a href="/input">MyPage</a></li>
+                    <li><a href="/input">Map</a></li>
                     <li><a href="/login">Login</a></li>
                     <li><a href=/signup>SignUp</a></li>
                 </ul>
@@ -122,15 +122,16 @@
         <div class="sec_inner">
             <div class="left_box">
                 <div class="text_area">
-                    <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>추가</h2>
+                    <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">광고없이 <br>직접 여행한 후기</h2>
                     <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
-                        문구 추가 <br class="mo_block">문구 추가<br>문구 추가
+                        여행을 떠나야 하는데,<br class="mo_block"> 검색하면 광고만 나와서<br> 어디로 가야할 지 모르시겠다면 Travel-log를 보세요.
                     </p>
                 </div>
             </div>
             <div class="right_box">
                 <div class="image_area aos-init aos-animate" data-aos="fade-left" data-aos-duration="1000">
-                    <img src="./images/img_program01.png">
+                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_nba5s8al.json" background="transparent"
+                                   speed="1" style="width: 520px; height: 520px;" loop autoplay></lottie-player>
                 </div>
             </div>
         </div>
@@ -140,113 +141,16 @@
         <div class="sec_inner">
             <div class="right_box">
                 <div class="text_area text_white">
-                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>
+                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">Chat Gpt를 <br>사용한 여행 블로그</h2>
                     <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
-                        문구 추가<br>문구 추가<br>문구 추가
+                        Travel-log는 Chat Gpt를 이용해서<br>블로그에서 글을 요약해서 알려드립니다.
                     </p>
                 </div>
             </div>
             <div class="left_box aos-init" data-aos="fade-right" data-aos-duration="1000">
                 <div class="image_area">
-                    <img src="./images/img_program02.png" alt="">
+                    <img src="{{ url_for('static', filename='image/gpt_image.png') }}">
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="sec sec04 sec_program03">
-        <div class="sec_inner">
-            <div class="text_area">
-                <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>
-                <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
-                    문구 추가<br class="mo_block">문구 추가<br>문구 추가
-                    <!-- Tip -->
-                    <span class="tip_box">
-                  <button type="button" class="btn_tip">
-                    <span class="hidden">팁보기</span>
-                  </button>
-                  <span class="tip_text">
-                   문구 추가<br>문구 추가 <br>문구 추가
-                  </span>
-                </span>
-                    <!--// Tip -->
-                </p>
-            </div>
-
-            <!-- slider -->
-            <div class="cate_slider_section aos-init" data-aos="fade-left" data-aos-duration="1000">
-                <div class="cate_slider_wrap">
-                    <div class="cate_slider swiper swiper-container-initialized swiper-container-horizontal">
-                        <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-930px, 0px, 0px);"><div class="slider_item swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="2" style="width: 310px;">
-                            <div class="slider_radius">
-                                <img src="images/slide_phone_3.jpg" alt="slide 3">
-                            </div>
-                        </div>
-                            <div class="slider_item swiper-slide swiper-slide-duplicate-next" data-swiper-slide-index="0" style="width: 310px;">
-                                <div class="slider_radius">
-                                    <img src="images/slide_phone_1.jpg" alt="slide 1">
-                                </div>
-                            </div>
-                            <div class="slider_item swiper-slide swiper-slide-prev" data-swiper-slide-index="1" style="width: 310px;">
-                                <div class="slider_radius">
-                                    <img src="images/slide_phone_2.jpg" alt="slide 2">
-                                </div>
-                            </div>
-                            <div class="slider_item swiper-slide swiper-slide-active" data-swiper-slide-index="2" style="width: 310px;">
-                                <div class="slider_radius">
-                                    <img src="images/slide_phone_3.jpg" alt="slide 3">
-                                </div>
-                            </div>
-                            <div class="slider_item swiper-slide swiper-slide-duplicate swiper-slide-next" data-swiper-slide-index="0" style="width: 310px;">
-                                <div class="slider_radius">
-                                    <img src="images/slide_phone_1.jpg" alt="slide 1">
-                                </div>
-                            </div></div>
-                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-                </div>
-                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
-                <div class="swiper-button-prev nav_arrow" tabindex="0" role="button" aria-label="Previous slide"></div>
-                <div class="swiper-button-next nav_arrow" tabindex="0" role="button" aria-label="Next slide"></div>
-            </div>
-            <!--// slider -->
-
-            <div class="cate_tabs aos-init" data-aos="fade-up" data-aos-duration="1000">
-                <button type="button" class="cate_item is_active" data-origin-text="운전">항목</button>
-                <button type="button" class="cate_item is_disabled" data-origin-text="생활">항목</button>
-                <button type="button" class="cate_item is_disabled" data-origin-text="레저">항목</button>
-                <button type="button" class="cate_item is_disabled" data-origin-text="쇼핑">항목</button>
-                <button type="button" class="cate_item is_disabled" data-origin-text="신용">항목</button>
-                <button type="button" class="cate_item is_disabled" data-origin-text="비즈니스">항목</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="sec sec05 bg_image sec_b2b" data-menu-idx="1">
-        <div class="sec_inner">
-            <div class="right_box">
-                <div class="text_area text_white">
-                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>
-                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
-                        문구 추가<br>문구 추가 <br class="mo_block">문구 추가
-                    </p>
-                </div>
-            </div>
-
-            <div class="left_box aos-init" data-aos="fade-right" data-aos-duration="1000">
-                <div class="image_area">
-                    <img src="./images/img_sec05.png" alt="관리자 화면">
-                </div>
-                <!-- Tip -->
-                <span class="tip_box">
-                <button type="button" class="btn_tip">
-                  <span class="hidden">팁보기</span>
-                </button>
-                <span class="tip_text">
-               문구 추가<br>문구 추가 <br>문구 추가
-
-                </span>
-              </span>
-                <!--// Tip -->
             </div>
         </div>
     </div>
@@ -265,7 +169,8 @@
             </div>
             <div class="right_box">
                 <div class="image_area aos-init" data-aos="fade-left" data-aos-duration="1000">
-                    <img src="./images/img_sec06.png" alt="">
+                    <img src="{{ url_for('static', filename='image/main_01.jpg') }}"
+                    width="850px" height="550px">
                 </div>
             </div>
         </div>
@@ -280,7 +185,8 @@
             </div>
             <div class="left_box aos-init" data-aos="fade-right" data-aos-duration="1000">
                 <div class="image_area">
-                    <img src="./images/img_sec06_2.png" alt="">
+                    <img src="{{ url_for('static', filename='image/main_01.jpg') }}"
+                         width="550" height="750px">
                 </div>
                 <!-- Tip -->
                 <span class="tip_box">

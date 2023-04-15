@@ -59,7 +59,7 @@
                                                                 <dd class="p_photo_d">
                                                                     <p class="p_img">
                                                                         <a href="{{ url_for('question.detail', question_id=question.id) }}">
-                                                                            <img src="{{ url_for('static', filename='image/img3.png') }}"
+                                                                            <img src="{{ url_for('static', filename='image/1.png') }}"
                                                                                  width="179" height="185">
                                                                         </a>
                                                                     </p>
@@ -71,7 +71,8 @@
                                                                             {% endif %}
                                                                         </li>
                                                                         <li>
-                                                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{ question.local }}</a>
+                                                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{
+                                                                                question.local }}</a>
                                                                         </li>
                                                                         <li class="p_date">
                                                                             <span class="pcol2 fil5">{{ question.create_date|datetime }}</span>
@@ -90,31 +91,17 @@
                                                         </div>
                                                     </dl>
                                                 </div><!-- 프롤로그 -->
-
-
                                             </td>
-                                            <td class="bcr" nowrap="nowrap"></td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <table class="post-footer" cellspacing="0" cellpadding="0">
-                                        <tbody>
-                                        <tr>
-                                            <td class="ftl" nowrap="nowrap"></td>
-                                            <td class="ftc"></td>
-                                            <td class="ftr" nowrap="nowrap"></td>
-                                        </tr>
-                                        </tbody>
                                     </table>
                                 </div>
+                                
                             </div>
-
-
                             <script type="text/javascript">
                                 var event_category = "prologue";
                             </script>
-
-
                             <script type="text/javascript">
                                 var fromClosedPost = "" === "true";
 
@@ -163,28 +150,17 @@
                                     } else {
                                         var optional_1 = false;
                                     }
-
                                     try {
                                         new nilNtmForBlogCVAnalyst(sBlogIdForNil, uri, relationType, gdid, dimension_1, referrer, optional_1, event_category, nilNtmLibUrl);
                                     } catch (e) {
                                     }
-
                                 }).attach(window, "load");
-
                             </script>
-
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
-
         <!-- 페이징처리 시작 -->
         <ul class="pagination justify-content-center">
             <!-- 이전페이지 -->

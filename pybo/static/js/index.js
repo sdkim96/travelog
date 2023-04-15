@@ -59,17 +59,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                 text: text,
                 image: image,
             }
-            // 여기서부터 sql로 데이터 전송
-            var textToSQL = editor.innerHTML;
-            var imageToSQL = preview.src;
-            var latToSQL = marker.getPosition().getLat();
-            var lngToSQL = marker.getPosition().getLng();
-            var dataToSQL = {
-                latToSQL: latToSQL,
-                lngToSQL: lngToSQL,
-                textToSQL: textToSQL,
-                imageToSQL: imageToSQL,
-            } // 여기까지
             Swal.showLoading();
             fetch('/input/save', {
                 method: 'POST',
@@ -79,20 +68,16 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                 body: JSON.stringify(data)
             }).then(response => {
                 Swal.close();
-                if (response.ok) {
-                    response.json().then(result => {
-                        marker.id = result.id; // 마커에 데이터베이스에서 할당된 고유 ID를 저장
-                        Swal.fire({
-                            text: '저장되었습니다.'
-                        });
-                    });
-                    marker.data = data; // 마커에 데이터 저장
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        text: '저장 중 오류가 발생했습니다. 다시 시도해주세요.'
-                    });
-                }
+                Swal.fire({
+                    text: '저장되었습니다.'
+                });
+                marker.data = data; // 마커에 데이터 저장
+            }).catch(error => {
+                Swal.close();
+                Swal.fire({
+                    icon: 'error',
+                    text: '저장 중 오류가 발생했습니다. 다시 시도해주세요.'
+                });
             });
         };
     });
@@ -138,5 +123,11 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
         }
     });
 
-
+    // 입력된 데이터를 저장하는 함수
+    function saveData() {
+        var input = document.getElementById('input-box').value;
+        marker.data = input;
+        alert('데이터가 저장되었습니다: ' + input);
+        console.log(marker.data);
+    }
 });
