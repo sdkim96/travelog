@@ -52,6 +52,10 @@ class Question(db.Model):
     modify_date = db.Column(db.DateTime(), nullable=True)
     voter = db.relationship('Signup_Data', secondary=question_voter, backref=db.backref('question_voter_set'))
     local = db.Column(db.String(200), nullable=False)
+    img_name = db.Column(db.String(200))
+    summary = db.Column(db.Text(), nullable=True)
+
+
 
 
 class Answer(db.Model):

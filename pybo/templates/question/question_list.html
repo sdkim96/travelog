@@ -28,14 +28,14 @@
 
     </div>
     <div class="container my-3">
-        <div id="section">
-            <div class="col-4 input-group">
-                <input type="text" class="form-control kw" value="{{ kw or '' }}" placeholder="검색어를 입력해 주세요">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                </div>
-            </div>
-        </div>
+<!--        <div id="section">-->
+<!--            <div class="col-4 input-group">-->
+<!--                <input type="text" class="form-control kw" value="{{ kw or '' }}" placeholder="검색어를 입력해 주세요">-->
+<!--                <div class="input-group-append">-->
+<!--                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div id="whole-body">
             <div id="wrapper" class="clearfix">
                 <div id="twocols" class="clearfix">
@@ -59,24 +59,24 @@
                                                                 <dd class="p_photo_d">
                                                                     <p class="p_img">
                                                                         <a href="{{ url_for('question.detail', question_id=question.id) }}">
-                                                                            <img src="{{ url_for('static', filename='image/1.png') }}"
+<!--                                                                            <img src="{{ url_for('static', filename='src/{}/시스템 구조도.png'.format(question.subject)) }}"-->
+<!--                                                                                 width="179" height="185">-->
+                                                                            <img src="/static/image/{{question.id}}/{{question.img_name}}"
                                                                                  width="179" height="185">
+
                                                                         </a>
                                                                     </p>
                                                                     <ul>
                                                                         <li class="p_title">
-                                                                            <a href="{{ url_for('question.detail', question_id=question.id) }}">{{
-                                                                                question.subject }}</a>
+                                                                            <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
                                                                             {% if question.answer_set|length > 0 %}
                                                                             {% endif %}
                                                                         </li>
                                                                         <li>
-                                                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{
-                                                                                question.local }}</a>
+                                                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{ question.local }}</a>
                                                                         </li>
                                                                         <li class="p_date">
                                                                             <span class="pcol2 fil5">{{ question.create_date|datetime }}</span>
-
                                                                         </li>
 
                                                                     </ul>
@@ -91,17 +91,31 @@
                                                         </div>
                                                     </dl>
                                                 </div><!-- 프롤로그 -->
+
+
                                             </td>
+                                            <td class="bcr" nowrap="nowrap"></td>
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <table class="post-footer" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                        <tr>
+                                            <td class="ftl" nowrap="nowrap"></td>
+                                            <td class="ftc"></td>
+                                            <td class="ftr" nowrap="nowrap"></td>
+                                        </tr>
+                                        </tbody>
                                     </table>
                                 </div>
-                                
                             </div>
+
+
                             <script type="text/javascript">
                                 var event_category = "prologue";
                             </script>
+
+
                             <script type="text/javascript">
                                 var fromClosedPost = "" === "true";
 
@@ -150,17 +164,28 @@
                                     } else {
                                         var optional_1 = false;
                                     }
+
                                     try {
                                         new nilNtmForBlogCVAnalyst(sBlogIdForNil, uri, relationType, gdid, dimension_1, referrer, optional_1, event_category, nilNtmLibUrl);
                                     } catch (e) {
                                     }
+
                                 }).attach(window, "load");
+
                             </script>
+
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
+
         <!-- 페이징처리 시작 -->
         <ul class="pagination justify-content-center">
             <!-- 이전페이지 -->

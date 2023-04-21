@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
-    <form method="post" class="post-form my-3">
+    <form method="post" class="post-form my-3" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <!-- 오류표시 Start -->
         {% for field, errors in form.errors.items() %}
@@ -14,7 +14,7 @@
         <div class="form-group">
             <label for="subject">제목</label>
             <input type="text" class="form-control" name="subject" id="subject"
-                   value="{{ form.subject.data or '' }}"placeholder="[제목]">
+                   value="{{ form.subject.data or '' }}">
         </div>
 
         <div class="form-group">
@@ -23,18 +23,23 @@
                    value="{{ form.local.data or '' }}" placeholder="[지역]">
         </div>
         <div class="form-group">
-            <label for="title_image">대표사진</label>
-            <input type="file" class="form-control" name="local" id="title_image"
-                   value="{{ form.local.data or '' }}" placeholder="[대표사진]">
+            <br>
+                <input type="file" multiple name="file[]" class="form-control" value=""/>
+
         </div>
         <div class="form-group">
             <label for="editor">내용</label>
             <textarea class="form-control" name="content"
                       id="editor" rows="10">{{ form.content.data or '' }}</textarea>
             <script>
+                var editorInstance;
+
                 ClassicEditor
                     .create(document.querySelector('#editor'), {
-                        language: {ui: 'ko', content: 'ko'}
+                        language: { ui: 'ko', content: 'ko' }
+                    })
+                    .then(editor => {
+                        editorInstance = editor;
                     })
                     .catch(error => {
                         console.error(error);
@@ -42,7 +47,37 @@
             </script>
         </div>
 
+        <!-- 성동이 형님 요약 태그 -->
+        <div class="form-group">
+            <label for="summary">요약:</label>
+            <textarea class="form-control" name="summary" id="summary" rows="8" readonly>{{ form.summary.data or '' }}</textarea>
+        </div>
+
         <button type="submit" class="btn btn-primary">저장하기</button>
+        <button type="button" class="btn btn-secondary" id="summary-btn">요약하기</button>
+        <script>
+            $(document).ready(function () {
+                $('#summary-btn').click(function () {
+                    const content = editorInstance.getData();
+                    $.ajax({
+                        url: '/openai/submit',
+                        type: 'POST',
+                        data: {
+                            content: content
+                        },
+                        success: function (response) {
+                            const summary = response.summary;
+                            $("#summary").val(summary);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+
+        </script>
+
     </form>
 </div>
 {% endblock %}
