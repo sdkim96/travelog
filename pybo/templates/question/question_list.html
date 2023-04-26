@@ -1,191 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="mainpage">
-    <div class="firstsection">
-        <div class="myprofilearea">
-            <div class="myprofile">
-                {% if g.user%}
-                <p>프로필</p>
-                <h2 class="username">{{ g.user.user_name}} </h2>
-                <br>
-                <h6 class="email">{{ g.user.user_}}</h6>
-                <br>
-                {% if profile_last_exercise %}
-                <br>
-                {% else %}
-
-                <br>
-                {% endif %}
-                <p class="phonenumber"> {{ g.user.phone}}<br>핸드폰 번호</p>
-                <br><br><br>
-                <input type="button" value="프로필 수정하기" class="button" onClick="location.href='/input/profilechange'">
-                {% else %}
-                <h2>마이 프로필</h2>
-                <p class="pleaselogin">로그인을 해주세요</p>
-                {% endif %}
-            </div>
-        </div>
-
-    </div>
-    <div class="container my-3">
-<!--        <div id="section">-->
-<!--            <div class="col-4 input-group">-->
-<!--                <input type="text" class="form-control kw" value="{{ kw or '' }}" placeholder="검색어를 입력해 주세요">-->
-<!--                <div class="input-group-append">-->
-<!--                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div id="whole-body">
-            <div id="wrapper" class="clearfix">
-                <div id="twocols" class="clearfix">
-                    <div id="content-area" class="">
-                        <div id="post-area" class="post-area">
-                            <div class="post">
-                                <div class="post-back">
-
-                                    <table class="post-body" cellspacing="0" cellpadding="0">
-                                        <tbody>
-                                        <tr>
-                                            <td class="bcl" nowrap="nowrap"></td>
-                                            <td class="bcc">
-                                                <div id="prologue">
-                                                    <div id="BlogRecentDiv"></div>
-                                                    <dl class="p_post_top">
-                                                        <div class="row">
-                                                            {% if question_list, signup__data %}
-                                                            {% for question in question_list.items %}
-                                                            <div class="col-md-3">
-                                                                <dd class="p_photo_d">
-                                                                    <p class="p_img">
-                                                                        <a href="{{ url_for('question.detail', question_id=question.id) }}">
-<!--                                                                            <img src="{{ url_for('static', filename='src/{}/시스템 구조도.png'.format(question.subject)) }}"-->
-<!--                                                                                 width="179" height="185">-->
-                                                                            <img src="/static/image/{{question.id}}/{{question.img_name}}"
-                                                                                 width="179" height="185">
-
-                                                                        </a>
-                                                                    </p>
-                                                                    <ul>
-                                                                        <li class="p_title">
-                                                                            <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
-                                                                            {% if question.answer_set|length > 0 %}
-                                                                            {% endif %}
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{ question.local }}</a>
-                                                                        </li>
-                                                                        <li class="p_date">
-                                                                            <span class="pcol2 fil5">{{ question.create_date|datetime }}</span>
-                                                                        </li>
-
-                                                                    </ul>
-                                                                </dd>
-                                                            </div>
-                                                            {% endfor %}
-                                                            {% else %}
-                                                            <div class="col-md-12">
-                                                                <p>No questions found.</p>
-                                                            </div>
-                                                            {% endif %}
-                                                        </div>
-                                                    </dl>
-                                                </div><!-- 프롤로그 -->
-
-
-                                            </td>
-                                            <td class="bcr" nowrap="nowrap"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="post-footer" cellspacing="0" cellpadding="0">
-                                        <tbody>
-                                        <tr>
-                                            <td class="ftl" nowrap="nowrap"></td>
-                                            <td class="ftc"></td>
-                                            <td class="ftr" nowrap="nowrap"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+<div id="mainPjax">
+    <div class="main story">
+        <div id="container">
+            <div id="list">
+                {% if question_list, signup__data %}
+                <div id="con_list" class="con_list" style="overflow: hidden;">
+                    {% for question in question_list.items %}
+                    <div id="c_sty_item_list" class="c_sty_item_list">
+                        <div class="item" style="display: block; float: left;">
+                            <a class="pjax pj_story" href="{{ url_for('question.detail', question_id=question.id) }}"
+                               target="_top">
+                                <div class="card">
+                                    <div class="thumb">
+                                        <a href="{{ url_for('question.detail', question_id=question.id) }}">
+                                            <img src="/static/image/{{question.id}}/{{question.img_name}}"
+                                                 width="308" height="308">
+                                        </a>
+                                    </div>
+                                    <div style="clear: both;" class="conts-infos">
+                                        <h3><a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a></h3>
+                                        <!--    <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{ question.local }}</a>-->
+                                        <p class="note_conts">{{question.content }}</p><a
+                                            href="{{ url_for('question.detail', question_id=question.id) }}"></a></h3>
+                                        {% if question.answer_set|length > 0 %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="tp_cnt">
+                                            <span class="likes"><img alt="좋아요"
+                                                                     src="{{ url_for('static', filename='image/icon-like-heart-off.png') }}">{{ question.answer_set|length }}</span>
+                                        <span class="cmt"><img alt="댓글"
+                                                               src="{{ url_for('static', filename='image/icon-scomment.png') }}"> {{ question.answer_set|length }}</span>
+                                        <li>
+                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{
+                                                question.local }}</a>
+                                        </li>
+                                    </div>
+                                    <div class="user">
+                                        <img data-url="/bz17854" class="usr_img" alt="작성자 프로필 이미지"
+                                             src="https://img.tnote.kr/upload/user/1541753953467_t.jpg">
+                                        <div class="user_info">
+                                            <span class="usr_nm"></span>
+                                            <span class="travel">{{ question.create_date|datetime }}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
-
-                            <script type="text/javascript">
-                                var event_category = "prologue";
-                            </script>
-
-
-                            <script type="text/javascript">
-                                var fromClosedPost = "" === "true";
-
-                                var nilOptions = {
-                                    devMode: "true" === "false",
-                                    topReferer: (function () {
-                                        if (fromClosedPost) {
-                                            return '';
-                                        }
-
-                                        var ref = "";
-                                        var isMobile = function () {
-                                            return window.location.host.indexOf('m.blog.naver.com') >= 0;
-                                        };
-
-                                        if (isMobile()) {
-                                            return document.referrer;
-                                        } else {
-                                            if (ref == '') {
-                                                if (parent != window && parent.location.href == document.referrer) {
-                                                    return '';
-                                                } else {
-                                                    return document.referrer;
-                                                }
-                                            } else {
-                                                return ref;
-                                            }
-                                        }
-                                    })()
-                                }
-                            </script>
-                            <script type="text/javascript"
-                                    src="https://ssl.pstatic.net/t.static.blog/mylog/versioning/versioning_nil_ntm-7795059_https.js"
-                                    charset="UTF-8"></script>
-                            <script type="text/javascript">
-                                $Fn(function () {
-                                    var nilNtmLibUrl = "https://ssl.pstatic.net/t.static.blog/mylog/versioning//common/js/nilForNtm-89afd2f_https.js";
-                                    var sBlogIdForNil = "windchoco";
-                                    var gdid = "";
-                                    var uri = 'http://blog.naver.com/windchoco';
-                                    var relationType = 3;
-                                    var referrer = nilOptions.topReferer;
-                                    var dimension_1 = "";
-                                    if (true) {
-                                        var optional_1 = true;
-                                    } else {
-                                        var optional_1 = false;
-                                    }
-
-                                    try {
-                                        new nilNtmForBlogCVAnalyst(sBlogIdForNil, uri, relationType, gdid, dimension_1, referrer, optional_1, event_category, nilNtmLibUrl);
-                                    } catch (e) {
-                                    }
-
-                                }).attach(window, "load");
-
-                            </script>
-
-
+                            </a>
                         </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
+                        {% endfor %}
+                    </div><!-- c_sty_item_list -->
+                    {% else %}
+                </div><!-- con_list -->
+                {% endif %}
+            </div><!-- list -->
+        </div><!-- container -->
+    </div><!-- main -->
+</div><!-- mainPjax -->
         <!-- 페이징처리 시작 -->
         <ul class="pagination justify-content-center">
             <!-- 이전페이지 -->

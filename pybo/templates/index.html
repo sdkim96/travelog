@@ -65,12 +65,26 @@
             </div>
         </div>
         <!-- Second section-->
+        <!-- 아래는 로그인이 되어있을땐, isLoggedIn 변수에 true값이 집어넣어지고, userId를 키값으로 하여, 유저들의 커스텀맵이미지를 index.js에서 정의합니다. -->
         <div class="secondsection">
             <div class="mymaparea">
                 <div class="mymap">
                     <div id="map" style="width:78%;height:600px;"></div>
                     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db3ede3d0cad5ad581623d2c7eff2265"></script>
-                    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+                    {% if g.user %}
+                    <!-- 로그인이 되어있으면 -->
+                        <script>
+                            var isLoggedIn = true;
+                            var userId = "{{ g.user.user_id }}";
+                        </script>
+                        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+                    {% else %}
+                    <!-- 로그인이 안되어있으면 -->
+                        <script>
+                            var isLoggedIn = false;
+                        </script>
+                        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+                    {% endif %}
                 </div>
             </div>
         </div>

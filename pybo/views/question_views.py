@@ -3,6 +3,8 @@ from sqlalchemy import func
 from flask import Blueprint, render_template, request, url_for, g, flash
 from werkzeug.utils import redirect, secure_filename
 import os
+import shutil
+import re
 
 
 from .. import db
@@ -11,6 +13,27 @@ from ..models import Question, Answer, Signup_Data, question_voter
 from pybo.views.main_views import login_required
 bp = Blueprint('question', __name__, url_prefix='/question')
 # image_path = 'pybo/static/image/'+ Question.user_id
+
+
+def update_image_urls(content, question_id):
+    pattern = re.compile(r'src="/static/temp_uploads/(.*?)"')
+    new_content = pattern.sub(f'src="/static/image/{question_id}/\\1"', content)
+    return new_content
+
+#아랜 create()를 하면 content가 바뀌는 함수
+def move_images(question_id):
+    src_folder = f'pybo/static/temp_uploads/'
+    dest_folder = f'pybo/static/image/' + "{}".format(question_id) + "/"
+
+    if not os.path.exists(dest_folder):
+        os.makedirs(dest_folder)
+
+    for file in os.listdir(src_folder):
+        src_file_path = os.path.join(src_folder, file)
+        dest_file_path = os.path.join(dest_folder, file)
+        shutil.move(src_file_path, dest_file_path)
+
+
 
 @bp.route('/list/')
 def _list():
@@ -63,35 +86,49 @@ def detail(question_id):
     question = Question.query.get_or_404(question_id)
     return render_template('question/question_detail.html', question=question, form=form)
 
+
 @bp.route('/create/', methods=('GET', 'POST'))
 @login_required
 def create():
-    # f = request.files['file']
-    # f.save("static/image/" + secure_filename(f.filename))
     form = QuestionForm()
     if request.method == 'POST' and form.validate_on_submit():
-        question = Question(subject=form.subject.data, content=form.content.data, local=form.local.data, create_date=datetime.now(), user=g.user, img_name=request.files['file[]'].filename, summary=form.summary.data)
+        content = form.content.data
+        question = Question(subject=form.subject.data, content=content, local=form.local.data, create_date=datetime.now(), user=g.user, img_name=None, summary=form.summary.data)
         db.session.add(question)
         db.session.commit()
 
-        # aa = Question.id
-        # f = request.files['file']
+        move_images(question.id)
+        updated_content = update_image_urls(content, question.id)
+
         f = request.files.getlist('file[]')
+        default_image_path = 'main_01.jpg'
 
-        os.makedirs(f'pybo/static/image/'+ "{}".format(question.id) + "/" , exist_ok=True)
-        for fil in f:
-            fil.save(os.path.join('pybo/static/image/' + "{}".format(question.id) + '/' , fil.filename))
+        if f and f[0].filename != '':  # 이미지 파일이 선택된 경우
+            os.makedirs(f'pybo/static/image/' + "{}".format(question.id) + "/", exist_ok=True)
+            for fil in f:
+                fil.save(os.path.join('pybo/static/image/' + "{}".format(question.id) + '/', fil.filename))
+            question.img_name = f[0].filename  # 첫 번째 이미지 파일 이름 저장
+        else:  # 이미지 파일이 선택되지 않은 경우
+            question.img_name = default_image_path
 
-        # f.save('pybo/static/image/'+f.filename)
+        # 이미지 URL을 업데이트하고, 업데이트된 내용을 저장합니다.
+        question.content = updated_content
+        db.session.commit()
+
         return redirect(url_for('question._list', question_subject=question.subject, question_img_name=question.img_name))
     return render_template('question/question_form.html', form=form)
+
 
 
 
 @bp.route('/modify/<int:question_id>', methods=('GET', 'POST'))
 @login_required
 def modify(question_id):
+    form = QuestionForm()
+
+
     question = Question.query.get_or_404(question_id)
+    content = form.content.data
     if g.user != question.user:
         flash('수정권한이 없습니다')
         return redirect(url_for('question.detail', question_id=question_id))
@@ -100,6 +137,24 @@ def modify(question_id):
         if form.validate_on_submit():
             form.populate_obj(question)
             question.modify_date = datetime.now()  # 수정일시 저장
+            db.session.commit()
+
+            move_images(question.id)
+            updated_content = update_image_urls(content, question.id)
+
+            f = request.files.getlist('file[]')
+            default_image_path = 'main_01.jpg'
+
+            if f and f[0].filename != '':  # 이미지 파일이 선택된 경우
+                os.makedirs(f'pybo/static/image/' + "{}".format(question.id) + "/", exist_ok=True)
+                for fil in f:
+                    fil.save(os.path.join('pybo/static/image/' + "{}".format(question.id) + '/', fil.filename))
+                question.img_name = f[0].filename  # 첫 번째 이미지 파일 이름 저장
+            else:  # 이미지 파일이 선택되지 않은 경우
+                question.img_name = default_image_path
+
+            # 이미지 URL을 업데이트하고, 업데이트된 내용을 저장합니다.
+            question.content = updated_content
             db.session.commit()
             return redirect(url_for('question.detail', question_id=question_id))
     else:

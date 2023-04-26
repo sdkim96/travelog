@@ -8,11 +8,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <!-- pybo CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/com.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/story.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tonte.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper.min.css') }}">
     <title>Travelog</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
-    <script src="{{ url_for('static', filename='js/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/ckeditor/ckeditor.js') }}"></script>
+
+    <!-- 2023-04-25 여기 아래 3줄 일단 주석처리함. 오늘 기준 26번째줄하고 코드가 겹쳐서 일단 요거 주석처리하고 필요한거만 주석 빼면 될듯.-->
+    <!--<script src="{{ url_for('static', filename='js/ckeditor 2/ckeditor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/translations/en.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ckfinder.js') }}"></script> -->
+
     <script type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"></script>
@@ -21,8 +32,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
 
-    <!-- 챗봇 JavaScript 코드 -->
-    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script src="//cdn.ckeditor.com/4.21.0/full/ckeditor.js"></script>
+<!--    <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>-->
 
     <style>
         .ck-editor__editable {
@@ -64,6 +75,9 @@
         </div>
     </div>
 </div>
+
+ <!-- 챗봇 JavaScript 코드 -->
+ <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
 
 </body>
 </html>

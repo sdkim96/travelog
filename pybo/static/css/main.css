@@ -351,7 +351,7 @@ body.fixed #header:after {
 }
 
 body.fixed #header h1 a {
-    background-image: url('../image/logo.png');
+    background-image: url('../image/logo2.png');
 
 }
 
@@ -495,7 +495,9 @@ body.fixed #header .gnb ul li.active a:after {
     color: #000;
     white-space: nowrap;
 }
-
+h2.sec_tit.aos-init.aos-animate {
+    color: black;
+}
 .sec_desc {
     margin-top: 42px;
     font-size: 18px;
@@ -1090,7 +1092,7 @@ body.fixed #header .gnb ul li.active a:after {
     display: block;
     width: 100%;
     height: 100%;
-    background: #000;
+
     opacity: 0.44;
 }
 

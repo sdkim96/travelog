@@ -1,142 +1,161 @@
-var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+// 아래 js는 커스텀 맵에대한 내용을 구성하고 있습니다. 커스텀 맵의 구성단계는 크계 4단계입니다. 
+// 맵 구현 -> 마커의 데이터를 디비에서 가져옴 -> 인포윈도우 구현 -> 마커 구현 -> 최종 구현 단계를 따르고 있습니다.
+// 커스텀 맵을 구현하기 위해 큰 구성요소 2개가 있습니다. 로그인 여부(var isLoggedin), 유효한 디렉토리인지(def is_directory)
+// 각각의 단계에 대한 주석은 자세하게 달아두었으니, 보고 참고하세요
 
+// 1단계: 맵 구현하기
+var mapContainer = document.getElementById('map');
 var mapOption = {
-    center: new kakao.maps.LatLng(37.402707, 126.922044), // 지도의 중심좌표
-    level: 5, // 지도의 확대 레벨
+    center: new kakao.maps.LatLng(37.58, 127), // 지도의 중심좌표
+    level: 9, // 지도의 확대 레벨
     mapTypeId: kakao.maps.MapTypeId.ROADMAP, // 지도종류
 };
-
-// 지도를 생성한다
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
-// 맵에 좌클릭 이벤트 등록
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    var latlng = mouseEvent.latLng;
+// 2단계: route_views의 엔드포인트 route/get_markers 를 통해, 마커의 정보를 json 형식으로 가져옴 그리고 마커의 데이터를 반환하는 함수를 '정의'만함 호출은 나중에 할거임
+async function fetchMarkers() {
+    const response = await fetch('/route/get_markers');
+    const markers = await response.json();
+    return markers;
+}
 
-    // 새로운 마커 생성
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: latlng,
-        title: '새로운 마커'
+// 3단계: 인포윈도우 구현하기(커스텀 오버레이로)
+async function createCustomOverlay(markerData) {
+
+    //해당 이미지가 그 위치에 있는지에 대한 검증입니다. utils.py 참고
+    var imageSrc0 = `/static/image/${markerData.id}/${markerData.img_name}`;
+    const isValidPath = await is_directory(imageSrc0);
+    if (!isValidPath) {
+      imageSrc0 = "/static/image/main_02.jpg";
+    }
+
+    //검증된 imageSrc0엔 대표이미지있는 경로와 없는 경로 두개가 들어가있습니다.
+    //옆으로 슬라이딩 할 수 있고 없고는 html코드에 주석처리된 부분입니다. 230426)일단 기능구현은 안함.
+    //아래 a href부분도 차후에 경로 수정해야함.
+    const content = `
+        <div class="custom-overlay">
+            <div class="info-window">
+                <div class="image-container">
+                    <button class="slide-button left">&lt;</button>
+                    <img src="${imageSrc0}" class="active" /> 
+                    <!-- 추가 이미지를 아래와 같이 추가합니다 -->
+                    <!-- <img src="/static/image/another_image.jpg" /> -->
+                    <button class="slide-button right">&gt;</button>
+                </div>
+                <p>${markerData.subject}</p>
+                <p><a href="http://127.0.0.1:5000/question/detail/${markerData.id}">바로가기</a></p>
+                <button class="infoClose" onclick="closeOverlay()">X</button>
+            </div>
+        </div>
+    `;
+
+    //인포윈도우 객체를 만듭니다. (얘는 함수가 호출되면 구현되야함)
+    const customOverlay = new kakao.maps.CustomOverlay({
+        content: content,
+        map: null,
+        position: new kakao.maps.LatLng(markerData.local.split(',')[0], markerData.local.split(',')[1]),
+        xAnchor: 0.5,
+        yAnchor: 1.5,
+        zIndex: 10
     });
 
+    //인포윈도우에 들어가는 좌우 버튼을 구현합니다.
+    const leftButton = customOverlay.a.querySelector('.left');
+    const rightButton = customOverlay.a.querySelector('.right');
+    const images = customOverlay.a.querySelectorAll('img');
+    let activeImageIndex = 0;
 
-    // 마커에 클릭 이벤트 등록
-    kakao.maps.event.addListener(marker, 'click', function () {
-        var popup = document.createElement('div');
-        popup.className = 'popup';
-        var editor = document.createElement('div');
-        editor.className = 'editor';
-        editor.setAttribute('contenteditable', true); // 에디터로 사용할 수 있도록 설정
-        editor.style.width = '300px'; // 너비 300px로 설정
-        editor.style.height = '200px'; // 높이 200px로 설정
-        popup.appendChild(editor);
-        var imageUpload = document.createElement('input');
-        imageUpload.type = 'file';
-        popup.appendChild(imageUpload);
-        var preview = document.createElement('img');
-        preview.className = 'image-preview';
-        popup.appendChild(preview);
-        var saveButton = document.createElement('button');
-        saveButton.innerText = '저장';
-        popup.appendChild(saveButton);
-        Swal.fire({
-            html: popup,
-            showConfirmButton: false,
-        });
-        imageUpload.onchange = function() {
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function() {
-                preview.src = reader.result; // 이미지 미리보기 표시
-            }
-            reader.readAsDataURL(file);
-        };
-        saveButton.onclick = function() {
-            var text = editor.innerHTML;
-            var image = preview.src;
-            var data = {
-                text: text,
-                image: image,
-            }
-            // 여기서부터 sql로 데이터 전송
-            var textToSQL = editor.innerHTML;
-            var imageToSQL = preview.src;
-            var latToSQL = marker.getPosition().getLat();
-            var lngToSQL = marker.getPosition().getLng();
-            var dataToSQL = {
-                latToSQL: latToSQL,
-                lngToSQL: lngToSQL,
-                textToSQL: textToSQL,
-                imageToSQL: imageToSQL,
-            } // 여기까지
-            Swal.showLoading();
-            fetch('/input/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(response => {
-                Swal.close();
-                if (response.ok) {
-                    response.json().then(result => {
-                        marker.id = result.id; // 마커에 데이터베이스에서 할당된 고유 ID를 저장
-                        Swal.fire({
-                            text: '저장되었습니다.'
-                        });
-                    });
-                    marker.data = data; // 마커에 데이터 저장
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        text: '저장 중 오류가 발생했습니다. 다시 시도해주세요.'
-                    });
-                }
-            });
-        };
+    leftButton.addEventListener('click', () => {
+        images[activeImageIndex].style.left = '100%';
+        activeImageIndex = (activeImageIndex - 1 + images.length) % images.length;
+        images[activeImageIndex].style.left = '0';
     });
 
-// 마커에 우클릭 이벤트 등록
-    kakao.maps.event.addListener(marker, 'rightclick', function () {
-        var data = marker.data; // 마커에 저장된 데이터 가져오기
-        if (data) {
-            var popup = document.createElement('div');
-            popup.className = 'popup';
-            var content = document.createElement('div');
-            content.className = 'content';
-            content.innerHTML = data.text; // 수정된 부분
-            popup.appendChild(content);
-            var image = document.createElement('img');
-            image.className = 'image-preview';
-            image.src = data.image; // 수정된 부분
-            popup.appendChild(image);
-            Swal.fire({
-                html: popup,
-                showConfirmButton: false,
-                onOpen: function() {
-                    // 저장된 이미지가 있다면 미리보기 이미지를 설정
-                    fetch('/image/' + marker.id).then(response => {
-                        if (response.ok) {
-                            image.src = '/image/' + marker.id;
-                        }
-                    });
-                    // 모든 contenteditable 요소를 찾아서 contenteditable 속성을 false로 설정
-                    var contentEditableElems = document.querySelectorAll('[contenteditable=true]');
-                    for (var i = 0; i < contentEditableElems.length; i++) {
-                        contentEditableElems[i].setAttribute('contenteditable', false);
-                    }
-                },
-                onClose: function() {
-                    content.setAttribute('contenteditable', false); // contenteditable 속성을 false로 설정
-                }
-            });
-        } else {
-            Swal.fire({
-                text: '저장된 데이터가 없습니다.'
-            });
+    rightButton.addEventListener('click', () => {
+        images[activeImageIndex].style.left = '-100%';
+        activeImageIndex = (activeImageIndex + 1) % images.length;
+        images[activeImageIndex].style.left = '0';
+    });
+
+    return customOverlay;
+}
+
+//해당 이미지가 그 위치에 있는지에 대한 검증입니다. utils.py 참고 (얘는 js용임)
+async function is_directory(path) {
+    try {
+      const response = await fetch(path, { method: 'HEAD' });
+      return response.ok;
+    } catch (error) {
+      return false;
+    }
+  }
+
+// 4단계: 마커 구현인데, 얘는 로그인이 되어야 하기때문에, isloggedin 매개변수를 기본으로 가져감
+async function displayMarkers() {
+    if (!isLoggedIn) {
+        return;
+    }
+
+    //아까 2단계의 마커에 대한 함수를 구현함. markers엔 json형식으로 되어있는 게시물의 대한 정보가 들어감. 이걸 마커에 넣어줄거임
+    const markers = await fetchMarkers();
+
+    //각각의 마커의 정보에 대해서.
+    //마커의 정보!
+    // marker.id : question.id,
+    // marker.subject: question.subject,
+    // 'marker.user_id': user_id_to_name[question.user_id],
+    // 'marker.local': question.local,
+    // 'marker.content': question.content,
+    // 'marker.img_name' : question.img_name
+    //가 있음 현재. route_views.py 참고
+
+    markers.forEach(async (marker) => {
+        if (marker.user_id !== userId) {
+            return;
         }
+
+        //마커의 위도경보정보를 ,를 기준으로 나눠줌. 데이터정제하는 과정임.
+        const localArray = marker.local.split(',');
+        const position = new kakao.maps.LatLng(localArray[0], localArray[1]);
+
+            // 아까 이미지 검증했던 로직에 대한 참거짓값이 imagesrc1에 들어가있음.
+            var imageSrc1 = `/static/image/${marker.id}/${marker.img_name}`;
+            if (!(await is_directory(imageSrc1))) {
+                imageSrc1 = '/static/image/main_02.jpg';
+              }
+            var imageSize = new kakao.maps.Size(64, 69);
+            var imageOption = {offset: new kakao.maps.Point(27, 69)};
+            var markerImage = new kakao.maps.MarkerImage(imageSrc1, imageSize, imageOption);
+
+        // 마커를 생성.
+        const newMarker = new kakao.maps.Marker({
+            map: map,
+            position: position,
+            image: markerImage
+        });
+
+        //마커 및 인포윈도우를 생성.
+        const customOverlay = await createCustomOverlay(marker);
+
+        // 마커에 클릭 이벤트를 등록
+        kakao.maps.event.addListener(newMarker, 'click', function() {
+            // 클릭한 마커에 인포윈도우 연결
+            customOverlay.setMap(map);
+        });
+
+        // 인포윈도우의 닫기 버튼에 클릭 이벤트를 등록
+        const closeButton = customOverlay.a.querySelector('.infoClose');
+        closeButton.addEventListener('click', () => {
+            customOverlay.setMap(null);
+        });
     });
+}
 
+//5단계 최종구현
+displayMarkers();
 
-});
+//html에 오버레이 닫기 함수
+function closeOverlay(){
+    customOverlay.setMap(null);
+}
+

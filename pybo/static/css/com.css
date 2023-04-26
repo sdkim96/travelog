@@ -1,0 +1,345 @@
+/* LAYOUT */
+#id_cmm_list
+{
+	padding:10px 0 0 0;
+}
+
+#list{	
+    margin-top: 18px;
+}
+
+#con_list {
+	position: relative;
+
+	padding: 0;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+#con_list .listSearch
+{
+	margin-top:20px;
+	margin-right:45px;
+	font-size:14px;
+	-webkit-appearance: none;
+	border: 1px solid #d8d7d8;
+	border-radius:10px;
+	float:right;
+} 
+
+#con_list.list{
+	display:block;
+	padding-top:50px;
+	padding-left:48px;
+	margin:0 auto; 
+    min-height:100%; 
+}
+
+#con_list .c_sty_item_list
+{
+	height:100%;
+	max-width:1340px;
+	min-height: 100px;
+	position: relative;
+	flex-flow: row wrap;
+	display: inline;
+	counter-reset: brick;
+	flex-wrap: wrap;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+#con_list .item
+{
+	margin: 1.15VW .8% 1.15VW .8%;
+	width: 23.4%; 
+	max-width:310px;
+	flex: 0 1 auto;
+}
+#con_list .item.ad_double{
+	width:97.2%;
+}
+#con_list .item .ad{
+	height: 86.66666666666667VW;
+	border-radius: 0.2777777777777778VW;
+}
+
+#con_list .item .ad img{
+  width: 100%;
+  height: 100%;
+  border-radius: 0.2777777777777778VW;
+}
+#con_list .item-sizer
+{
+	width:100%;
+}
+#con_list .card
+{
+    display: flex;
+    flex-direction: column;
+    border:1px solid #e1e1e1;
+	background-color:#fff;
+	font-size:0px;
+	border-radius: 0.2777777777777778VW;
+	/* margin-bottom: 2.5VW; */
+	/* -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.33);
+	-moz-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.33);
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.33);
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#b0b0b0', Direction=180, Strength=1); */
+	 /* IE8 and below */  
+
+ /* IE7 and below */
+} 
+#con_list .card .thumb
+{
+	position:relative;
+	width:100%;
+	overflow: hidden;
+	margin-left:0px;
+	margin-right:0px;
+
+}
+#con_list .card .thumb>IMG{
+	 width: 100%;
+	 height: 100%;
+	 background-color:#f0f0ec;
+	 position: absolute;
+	 top: 0;
+    object-fit: cover;
+}
+#con_list .item .conts-infos {
+	height: 98px;/*7.77vw*/
+	overflow: hidden;
+	padding: 18px 20px 0 20px;
+}
+#con_list .card H3
+{
+	font-size: 18px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	text-align: left;
+	color: #3f3f3f;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+    word-break:keep-all;
+    margin: 0;
+}  
+#con_list .card .scr_lock
+{
+	width:11px;
+	height:11px;
+	vertical-align: top;
+	margin-top: 1px;
+	display:none;
+}
+#con_list .card .scr_lock.locked
+{
+	display:inline-block;
+}
+.card .place_list{
+	font-size: 16px;;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.37;
+	letter-spacing: -0.1px;
+	text-align: left;
+	color: #c9c9c9;
+	height: 60px;
+	overflow: hidden;
+	margin-top:6px; 
+	text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word; 
+    word-break: break-all;
+    display:inline;
+}
+.card .place_list span{
+    background-color: #ebebeb; 
+    padding: 2px 9px;
+    margin-top:5px;
+    margin-right:5px; 
+    color: #949393;
+    position: relative;
+    display: inline;
+    line-height: 36px;
+}
+#con_list .card .tp_cnt{
+	font-size:0;
+}
+#con_list .card .tp_cnt span{
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	letter-spacing: -0.16px;
+	text-align: left;
+	color: #a5a5a5;
+} 
+#con_list .card .tp_cnt img{
+	width: 20px;
+	margin-right: 6px;
+	margin-left: 21px;
+	margin-bottom: 2px;
+}
+#con_list .item .user {
+	text-align: left;
+	margin: 0px;
+	padding: 20px;
+	display:flex;
+}
+
+#con_list .item .usr_img
+{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #dadbcd;
+    border-radius: 40px;
+}
+
+#con_list .item .user_info
+{
+	margin-left: 13px;
+	margin-bottom: 7px;
+}
+#con_list .item .usr_nm
+{
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	text-align: left;
+	color: #3f3f3f;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+	display:inline-block;
+}
+#con_list .item .travel
+{
+	color: #a5a5a5;
+	font-size: 14px;
+	display: block;
+}
+.card .note_conts{
+	font-size: 16px;;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.63;
+	letter-spacing: -0.1px;
+	text-align: left;
+	color: #949393;
+	height: 56px;
+	overflow: hidden; 
+	margin-top:6px; 
+	text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+    word-break:keep-all;
+}
+.note_conts.long{  
+	-webkit-line-clamp: 3;
+	height: 76px;
+}
+
+
+@media only screen and (min-width: 640px) and (max-width: 1080px){ 
+	#con_list .item{
+		width:31.73%;
+	}
+	.card .place_list span{
+		margin-top: 2px;
+    		margin-right: 2px;
+    		padding: 2px 8px; 
+	}
+}
+@media only screen and (max-width: 640px){
+	#con_list .c_sty_item_list{
+		padding:0 !important;
+	}
+	#con_list .item{
+		width:48.6% !important;
+	}
+	.c_sty_item_list .item:nth-child(odd){
+		margin-left:0 !important;
+	}
+	.c_sty_item_list .item:nth-child(2n){
+		margin-right:0 !important;
+	}
+	#con_list .card{
+		position : relative;
+	}
+	#con_list .card H3{ 
+		font-size: 3.43vw;
+	    -webkit-line-clamp: 1; /* 라인수 */
+	}  
+	#con_list .item .conts-infos {
+		height:18.22vw;
+		padding: 3.43vw 3.12vw 2.81vw 3.43vw;
+	}
+	.card .place_list{
+		display:inline;
+		font-size: 12px;
+		line-height: 0;
+		letter-spacing: -0.1px;
+		height: 45px;  
+		margin-top:6px; 
+	    -webkit-line-clamp: 2; /* 라인수 */
+	    word-wrap: break-word; 
+	    word-break: break-all;
+	    position: absolute;
+	    margin-right: 3.43vw;
+	}
+	.card .place_list span{
+		padding: 0px 4px;  
+		margin-right: 3px; 
+		display:inline;
+	    overflow: hidden;
+		text-overflow: ellipsis;	    
+		    line-height: 23px;
+	}
+	#con_list .card .tp_cnt img{
+		width: 3.59vw;
+	}
+	#con_list .card .tp_cnt span{ font-size: 2.8vw;}
+	#con_list .item .user{
+		padding: 3.5vw;
+	}
+	#con_list .item .user_info{
+		width:73%;    
+		margin-left: 2.03vw;
+    		margin-bottom: 1.09vw;
+	}
+	#con_list .item .usr_img{
+		width:7.3vw;
+		height:7.3vw;
+		border-radius: 50%;
+	}
+	#con_list .item .usr_nm{
+		font-size: 2.9vw; 	
+	}
+	#con_list .item .travel{ font-size: 2.5vw; }
+	.card .note_conts{
+		font-size: 12px;
+	    height: 38px;
+	    line-height: 18px;
+	}  
+	.card .note_conts.long{
+		height: 54px;
+	}  
+} 

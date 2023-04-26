@@ -363,6 +363,12 @@ output {
     display: inline-block;
 }
 
+.summary_test {
+    text-align : center;
+
+}
+
+
 summary {
     display: list-item;
     cursor: pointer;
@@ -2379,7 +2385,41 @@ pre code {
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.form-control2 {
+    display: block;
+    width: 100%;
+    height: 200px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
+.cke_editor_editor .cke_contents{
+     min-height:550px;
+}
+
+.form-control3 {
+    display: block;
+    width: 100%;
+    height: 700px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 @media (prefers-reduced-motion: reduce) {
     .form-control {
         transition: none;
@@ -4764,7 +4804,6 @@ input[type="submit"].btn-block {
 
 .nav-link {
     display: block;
-    padding: 0.5rem 1rem;
 }
 
 .nav-link:focus,
@@ -5620,9 +5659,10 @@ input[type="submit"].btn-block {
 
 .pagination {
     display: -ms-flexbox;
-    display: flex;
+    display: inline-flex;
     padding-left: 0;
     list-style: none;
+    margin-left: 40%;
     border-radius: 0.25rem;
 }
 
@@ -7531,11 +7571,46 @@ button.bg-dark:hover {
 .border-right {
     border-right: 1px solid #dee2e6 !important;
 }
-
+.cke_editor_editor .cke_contents{
+    min-height:800px;
+}
+.summary_box .wrap textarea {
+    width: 100%;
+    resize: none;
+    overflow-y: hidden; /* prevents scroll bar flash */
+    padding: 1.1em; /* prevents text jump on Enter keypress */
+    padding-bottom: 0.2em;
+    line-height: 1.6;
+    /*border-color : green;*/
+    border-radius : 50px;
+    /*border-width : thick;*/
+    /*border-style : dashed;*/
+    text-align : center;
+    font-weight : bold;
+    /*background-color : lightgreen;*/
+}
+.form-control3 {
+    display: block;
+    width: 100%;
+    height: 700px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 .border-bottom {
     border-bottom: 1px solid #dee2e6 !important;
     background-color: white;
-    text-align: center;
+    text-align: left;
+    padding:20px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .border-left {
@@ -9110,7 +9185,7 @@ button.bg-dark:hover {
 
 .mt-3,
 .my-3 {
-    margin-top: 1rem !important;
+    margin-top: 5rem !important;
 }
 
 .mr-3,

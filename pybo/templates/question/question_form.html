@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+
     <form method="post" class="post-form my-3" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <!-- 오류표시 Start -->
@@ -24,46 +24,61 @@
         </div>
         <div class="form-group">
             <br>
-                <input type="file" multiple name="file[]" class="form-control" value=""/>
+            <label for="local">대표 사진(필수)</label>
+            <input type="file" multiple name="file[]" class="form-control" value="" />
 
         </div>
         <div class="form-group">
             <label for="editor">내용</label>
-            <textarea class="form-control" name="content"
-                      id="editor" rows="10">{{ form.content.data or '' }}</textarea>
-            <script>
-                var editorInstance;
+            <textarea class="form-control3 cke_editor_editor cke_contents " name="content" id="editor" rows="20" >{{ form.content.data or '' }}</textarea>
+            
+            <!-- 아래 스크립트는 2023-04-25로 수정됨.  -->
+            <script> 
+                // 이미지 업로드 URL 
+                var imageUploadURL = '/image/fileupload'; 
 
-                ClassicEditor
-                    .create(document.querySelector('#editor'), {
-                        language: { ui: 'ko', content: 'ko' }
-                    })
-                    .then(editor => {
-                        editorInstance = editor;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+                CKEDITOR.replace('editor', {
+                    // 파일 업로드 설정
+                    filebrowserUploadUrl: imageUploadURL,
+                    // 이미지 업로드 설정
+                    filebrowserImageUploadUrl: imageUploadURL,
+                    // 업로드할 수 있는 이미지 형식 설정
+                    filebrowserImageUploadAllowedExtensions: 'jpg;png;gif;bmp',
+
+                        // 추가: 이미지 업로드 처리를 위한 설정
+
+                    uploadUrl: imageUploadURL,
+                    imageUploadUrl: imageUploadURL,
+                    image_prefillDimensions: false
+
+
+                });
             </script>
         </div>
-
         <!-- 성동이 형님 요약 태그 -->
         <div class="form-group">
-            <label for="summary">요약:</label>
-            <textarea class="form-control" name="summary" id="summary" rows="8" readonly>{{ form.summary.data or '' }}</textarea>
+            <h3 for="summary" class="summary_test">&lt;내 블로그 내용 요약하기&gt;</h3>
+            <textarea class="form-control2" name="summary" id="summary" rows="20" readonly>{{ form.summary.data or '' }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">저장하기</button>
         <button type="button" class="btn btn-secondary" id="summary-btn">요약하기</button>
         <script>
+            function extractTextFromHtml(html) {
+                return $('<div>').html(html).text();
+            }
+
             $(document).ready(function () {
                 $('#summary-btn').click(function () {
+                    const editorInstance = CKEDITOR.instances['editor'];
                     const content = editorInstance.getData();
+                    const textContent = extractTextFromHtml(content);
+
                     $.ajax({
                         url: '/openai/submit',
                         type: 'POST',
                         data: {
-                            content: content
+                            content: textContent
                         },
                         success: function (response) {
                             const summary = response.summary;
