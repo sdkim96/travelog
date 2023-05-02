@@ -19,16 +19,18 @@
             <div class="gnb">
                 {% if g.user %}
                 <ul>
-                    <li><a href="/question/list">Blog</a></li>
-                    <li><a href="/input">Map</a></li>
+                    <li><a href='/friends/find_friends'>친구찾기</a></li>
+                    <li><a href="/question/list">블로그</a></li>
+                    <li><a href="/input">나만의 지도</a></li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
                     </li>
                 </ul>
                 {% else %}
                 <ul>
-                    <li><a href="/question/list">Blog</a></li>
-                    <li><a href="/input">Map</a></li>
+                    <li><a href='/friends/find_friends'>친구찾기</a></li>
+                    <li><a href="/question/list">블로그</a></li>
+                    <li><a href="/input">나만의 지도</a></li>
                     <li><a href="/login">Login</a></li>
                     <li><a href=/signup>SignUp</a></li>
                 </ul>
@@ -47,6 +49,7 @@
                 <p>프로필</p>
                 <h2 class="username">{{ g.user.user_name}} </h2>
                 <br>
+                <img src="{{ url_for('static', filename='image/User.png') }}" width="190" height="190">
                 <h6 class="email">{{ g.user.user_}}</h6>
                 <br>
                 {% if profile_last_exercise %}
@@ -73,6 +76,14 @@
                     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db3ede3d0cad5ad581623d2c7eff2265"></script>
                     {% if g.user %}
                     <!-- 로그인이 되어있으면 -->
+                        <div class="filter-section">
+                            <input type="radio" id="myMarkers" name="markerFilter" value="myMarkers" checked>
+                            <label for="myMarkers">내 게시물</label><br>
+                            <input type="radio" id="friendsMarkers" name="markerFilter" value="friendsMarkers">
+                            <label for="friendsMarkers">친구 게시물</label><br>
+                            <input type="radio" id="allMarkers" name="markerFilter" value="allMarkers">
+                            <label for="allMarkers">전체 게시물</label>
+                        </div>
                         <script>
                             var isLoggedIn = true;
                             var userId = "{{ g.user.user_id }}";

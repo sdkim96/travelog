@@ -41,6 +41,25 @@ class Signup_Data(db.Model):
     user_password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     phone = db.Column(db.String(150), nullable=False)
+    friends = db.relationship("Signup_Data",
+                            secondary="friendship",
+                            primaryjoin="Signup_Data.id==Friendship.user1_id",
+                            secondaryjoin="Signup_Data.id==Friendship.user2_id",
+                            backref=db.backref("followers", lazy="dynamic"),
+                            lazy="dynamic")
+
+    def follow(self, user):
+        if user not in self.friends:
+            self.friends.append(user)
+
+    def unfollow(self, user):
+        if user in self.friends:
+            self.friends.remove(user)
+    
+class Friendship(db.Model):
+    user1_id = db.Column(db.Integer, db.ForeignKey("signup__data.id"), primary_key=True)
+    user2_id = db.Column(db.Integer, db.ForeignKey("signup__data.id"), primary_key=True)
+
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)

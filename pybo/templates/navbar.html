@@ -13,16 +13,18 @@
                 <div class="gnb">
                     {% if g.user %}
                     <ul>
-                        <li><a href="/question/list">Blog</a></li>
-                        <li><a href="/input">Map</a></li>
+                        <li><a href='/friends/find_friends'>친구찾기</a></li>
+                        <li><a href="/question/list">블로그</a></li>
+                        <li><a href="/input">나만의 지도</a></li>
                         <li class="nav-item ">
                             <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
                         </li>
                     </ul>
                     {% else %}
                     <ul>
-                        <li><a href="/question/list">Blog</a></li>
-                        <li><a href="/input">Map</a></li>
+                        <li><a href='/friends/find_friends'>친구찾기</a></li>
+                        <li><a href="/question/list">블로그</a></li>
+                        <li><a href="/input">나만의 지도</a></li>
                         <li><a href="/login">Login</a></li>
                         <li><a href=/signup>SignUp</a></li>
                     </ul>

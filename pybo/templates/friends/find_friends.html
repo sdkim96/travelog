@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "navbar.html" %}
+<div class="container">
+    <h2 class="my-4">친구 찾기</h2>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id="searchInput" placeholder="친구 검색" aria-label="친구 검색">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">검색</button>
+        </div>
+    </div>
+    <div id="searchResults" class="row">
+        <!-- 검색 결과가 여기에 동적으로 표시됩니다. -->
+    </div>
+
+    <!-- 나중에 알고리즘을 넣어서, 예를들어서 나랑 관심사 혹은 여행간 곳이 비슷한 사람을 우선배치 하는 알고리즘을 넣으면 재밌을것같음. -->
+    <h3 class="my-4">친구 목록</h3>
+    <ul class="list-group">
+        {% for friend in users %} <!--사인업디비에있는 모든 유저에 대해서 하나하나 friend로 가져옴-->
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="friend-info">
+                    <img src="{{ friend.image }}" alt="Profile picture" width="50" height="50">
+                    <span class="friend-name">{{ friend.user_name }}</span>
+                    <span class="friend-id">{{ friend.id }}</span>
+                    <span class="friend-email">{{ friend.email }}</span>
+                </div>
+                <div class="friend-actions"> <!--friends/follow엔드포인트로 주는 걸 .id인 인티저로 넘김12,11같이-->
+                    <form action="{{ url_for('friends.follow', user_id=friend.id) }}" method="post" class="d-inline">
+                        <input type="submit" value="팔로우" class="btn btn-primary">
+                    </form>
+                    {% if friend in g.user.friends %}
+                    <form action="{{ url_for('friends.unfollow', user_id=friend.id) }}" method="post" class="d-inline">
+                        <input type="submit" value="언팔로우" class="btn btn-danger">
+                    </form>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    document.querySelector('.btn-outline-secondary').addEventListener('click', async () => {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const searchQuery = searchInput.value.trim();
+
+    if (searchQuery) {
+        try {
+            const response = await fetch(`/friends/search?search_query=${encodeURIComponent(searchQuery)}`);
+            const results = await response.json();
+
+            searchResults.innerHTML = '';
+
+            results.forEach(user => {
+                const userElement = document.createElement('div');
+                userElement.className = 'col-12 col-md-6 col-lg-4 mb-3';
+                userElement.innerHTML = `
+                    <div class="card">
+                        <img src="${user.image}" class="card-img-top" alt="Profile picture">
+                        <div class="card-body">
+                            <h5 class="card-title">${user.user_name} (${user.user_id})</h5>
+                            <p class="card-text">${user.email}</p>
+                            {% if g.user is not none %}
+                            <form action="/friends/follow/${user.id}" method="post">
+                                <input type="submit" value="팔로우" class="btn btn-primary">
+                            </form>
+                            {% if users.id in g.user.friend_ids %}
+                            <form action="/friends/unfollow/${user.id}" method="post">
+                                <input type="submit" value="언팔로우" class="btn btn-danger">
+                            </form>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                `;
+
+                searchResults.appendChild(userElement);
+            });
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -14,34 +14,42 @@
                                 <div class="card">
                                     <div class="thumb">
                                         <a href="{{ url_for('question.detail', question_id=question.id) }}">
-                                            <img src="/static/image/{{question.id}}/{{question.img_name}}"
+                                            {% set display_image = "/static/image/" ~ question.id ~ "/" ~ question.img_name %}
+                                            {% if is_directory("pybo/static/image/" ~ (question.id|string) ~ "/" ~ (question.img_name|string)) %}
+                                            <!-- 230426 와 진짜 이 위의 유효한 디렉토리 만들어 내려고 4시간을 해맴.. 위처럼 써야합니다!!!!!!!!!! -->
+                                            {% set display_image = "/static/image/" ~ question.id ~ "/" ~ question.img_name %}
+                                            {% else %}
+                                            {% set display_image = "/static/image/main_01.jpg" %}
+                                            {% endif %}
+                                            <img src="{{ display_image }}"
                                                  width="308" height="308">
                                         </a>
                                     </div>
                                     <div style="clear: both;" class="conts-infos">
                                         <h3><a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a></h3>
                                         <!--    <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{ question.local }}</a>-->
-                                        <p class="note_conts">{{question.content }}</p><a
+                                        <p class="note_conts">{{question.content|striptags}}</p><a
                                             href="{{ url_for('question.detail', question_id=question.id) }}"></a></h3>
                                         {% if question.answer_set|length > 0 %}
                                         {% endif %}
                                     </div>
                                     <div class="tp_cnt">
                                             <span class="likes"><img alt="좋아요"
-                                                                     src="{{ url_for('static', filename='image/icon-like-heart-off.png') }}">{{ question.answer_set|length }}</span>
+                                                                     src="{{ url_for('static', filename='image/icon-like-heart-off.png') }}">{{ question.voter|length }}</span>
                                         <span class="cmt"><img alt="댓글"
-                                                               src="{{ url_for('static', filename='image/icon-scomment.png') }}"> {{ question.answer_set|length }}</span>
+                                                               src="{{ url_for('static', filename='image/icon-scomment.png') }}">{{ question.answer_set|length }}</span>
                                         <li>
-                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{
-                                                question.local }}</a>
+                                            <a href="https://www.google.co.kr/maps/place/{{question.local}}">{{ question.local }}</a>
                                         </li>
                                     </div>
                                     <div class="user">
-                                        <img data-url="/bz17854" class="usr_img" alt="작성자 프로필 이미지"
-                                             src="https://img.tnote.kr/upload/user/1541753953467_t.jpg">
+                                        <img data-url="/bz17854" class="usr_img" alt="작성자 프로필 이미지" src="{{ url_for('static', filename='image/User.png') }}">
                                         <div class="user_info">
                                             <span class="usr_nm"></span>
                                             <span class="travel">{{ question.create_date|datetime }}</span>
+                                            <span class="travel">작성자 : {{ g.user.user_name}}</span>
+
+
                                         </div>
                                     </div>
                                 </div>

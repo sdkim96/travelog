@@ -19,6 +19,15 @@ async function fetchMarkers() {
     return markers;
 }
 
+let allMarkers = []; // 전체 마커를 저장할 배열
+let friends = []; // 팔로우한 친구 목록을 저장할 배열
+
+async function fetchFriends() {
+    const response2 = await fetch('/route/get_friends');
+    const friendList = await response2.json();
+    return friendList;
+}
+
 // 3단계: 인포윈도우 구현하기(커스텀 오버레이로)
 async function createCustomOverlay(markerData) {
 
@@ -26,7 +35,7 @@ async function createCustomOverlay(markerData) {
     var imageSrc0 = `/static/image/${markerData.id}/${markerData.img_name}`;
     const isValidPath = await is_directory(imageSrc0);
     if (!isValidPath) {
-      imageSrc0 = "/static/image/main_02.jpg";
+      imageSrc0 = "/static/image/main_01.jpg";
     }
 
     //검증된 imageSrc0엔 대표이미지있는 경로와 없는 경로 두개가 들어가있습니다.
@@ -80,6 +89,9 @@ async function createCustomOverlay(markerData) {
     return customOverlay;
 }
 
+
+
+
 //해당 이미지가 그 위치에 있는지에 대한 검증입니다. utils.py 참고 (얘는 js용임)
 async function is_directory(path) {
     try {
@@ -98,6 +110,8 @@ async function displayMarkers() {
 
     //아까 2단계의 마커에 대한 함수를 구현함. markers엔 json형식으로 되어있는 게시물의 대한 정보가 들어감. 이걸 마커에 넣어줄거임
     const markers = await fetchMarkers();
+    const friendList = await fetchFriends();
+    friends = friendList.map(friend => friend.user_name);
 
     //각각의 마커의 정보에 대해서.
     //마커의 정보!
@@ -109,47 +123,84 @@ async function displayMarkers() {
     // 'marker.img_name' : question.img_name
     //가 있음 현재. route_views.py 참고
 
-    markers.forEach(async (marker) => {
-        if (marker.user_id !== userId) {
-            return;
-        }
-
-        //마커의 위도경보정보를 ,를 기준으로 나눠줌. 데이터정제하는 과정임.
-        const localArray = marker.local.split(',');
-        const position = new kakao.maps.LatLng(localArray[0], localArray[1]);
-
-            // 아까 이미지 검증했던 로직에 대한 참거짓값이 imagesrc1에 들어가있음.
+    await Promise.all(
+        markers.map(async (marker) => {
+            const localArray = marker.local.split(',');
+            const position = new kakao.maps.LatLng(localArray[0], localArray[1]);
+    
             var imageSrc1 = `/static/image/${marker.id}/${marker.img_name}`;
             if (!(await is_directory(imageSrc1))) {
-                imageSrc1 = '/static/image/main_02.jpg';
-              }
+                imageSrc1 = '/static/image/main_01.jpg';
+            }
             var imageSize = new kakao.maps.Size(64, 69);
-            var imageOption = {offset: new kakao.maps.Point(27, 69)};
-            var markerImage = new kakao.maps.MarkerImage(imageSrc1, imageSize, imageOption);
+            var imageOption = { offset: new kakao.maps.Point(27, 69) };
+            var markerImage = new kakao.maps.MarkerImage(
+                imageSrc1,
+                imageSize,
+                imageOption
+            );
+    
+            const newMarker = new kakao.maps.Marker({
+                map: map,
+                position: position,
+                image: markerImage,
+            });
+    
+            const customOverlay = await createCustomOverlay(marker);
+    
+            kakao.maps.event.addListener(newMarker, 'click', function () {
+                customOverlay.setMap(map);
+            });
+    
+            const closeButton = customOverlay.a.querySelector('.infoClose');
+            closeButton.addEventListener('click', () => {
+                customOverlay.setMap(null);
+            });
+    
+            allMarkers.push({
+                userId: marker.user_id,
+                marker: newMarker,
+                overlay: customOverlay,
+            });
+        })
+    );
+    updateMarkerVisibility();
+}
+    
 
-        // 마커를 생성.
-        const newMarker = new kakao.maps.Marker({
-            map: map,
-            position: position,
-            image: markerImage
-        });
+function updateMarkerVisibility() {
+    const selectedFilter = document.querySelector('input[name="markerFilter"]:checked').value;
+    allMarkers.forEach(markerObj => {
+        const isMyMarker = markerObj.userId === userId;
+        const isFriendsMarker = friends.includes(markerObj.userId);
+        const isNotMyMarker = !isMyMarker && !isFriendsMarker;
 
-        //마커 및 인포윈도우를 생성.
-        const customOverlay = await createCustomOverlay(marker);
+        let showMarker = false;
 
-        // 마커에 클릭 이벤트를 등록
-        kakao.maps.event.addListener(newMarker, 'click', function() {
-            // 클릭한 마커에 인포윈도우 연결
-            customOverlay.setMap(map);
-        });
+        if (isLoggedIn) {
+            showMarker = (selectedFilter === 'myMarkers' && isMyMarker) ||
+                         (selectedFilter === 'friendsMarkers' && isFriendsMarker) ||
+                         (selectedFilter === 'allMarkers');
+        } else {
+            showMarker = (selectedFilter === 'allMarkers');
+        }
 
-        // 인포윈도우의 닫기 버튼에 클릭 이벤트를 등록
-        const closeButton = customOverlay.a.querySelector('.infoClose');
-        closeButton.addEventListener('click', () => {
-            customOverlay.setMap(null);
-        });
+        if (showMarker) {
+            markerObj.marker.setMap(map);
+        } else {
+            markerObj.marker.setMap(null);
+            markerObj.overlay.setMap(null);
+        }
     });
 }
+
+
+
+// 필터를 변경할 때마다 updateMarkerVisibility 함수 호출
+document.querySelectorAll('input[name="markerFilter"]').forEach(filterInput => {
+    filterInput.addEventListener('change', updateMarkerVisibility);
+});
+
 
 //5단계 최종구현
 displayMarkers();
