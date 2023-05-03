@@ -20,7 +20,7 @@ def get_markers():
 
     user_id_to_name={}
     for sign in signs:
-        user_id_to_name[sign.id] = sign.user_name
+        user_id_to_name[sign.id] = sign.id
     
     for question in questions:
         marker_info = {
@@ -35,31 +35,57 @@ def get_markers():
 
     return jsonify(markers)
 
+# @bp.route('/get_friends_posts', methods=['GET'])
+# @login_required
+# def get_friends():
+#     user = g.user
+#     friends_questions = []
+
+#     if user is not None:
+#         # 현재 로그인한 사용자와 친구 관계인 사용자들의 user_id를 얻습니다.
+#         friend_user_ids = [friendship.user2_id for friendship in Friendship.query.filter_by(user1_id=user.id).all()]
+
+#         for friend_user_id in friend_user_ids:
+#             friend_questions = Question.query.filter_by(user_id=friend_user_id).all()
+#             friend = Signup_Data.query.get(friend_user_id)
+#             for question in friend_questions:
+#                 question_data = {
+#                     "id": question.id,
+#                     "subject": question.subject,
+#                     "user_name": friend.user_name,
+#                     "local": question.local,
+#                     "content": question.content,
+#                     "img_name": question.img_name
+#                 }
+#                 friends_questions.append(question_data)
+
+#     return jsonify(friends_questions)
+
 @bp.route('/get_friends', methods=['GET'])
 @login_required
 def get_friends():
     user = g.user
-    friends_questions = []
+    friends_list = []
 
     if user is not None:
         # 현재 로그인한 사용자와 친구 관계인 사용자들의 user_id를 얻습니다.
         friend_user_ids = [friendship.user2_id for friendship in Friendship.query.filter_by(user1_id=user.id).all()]
 
         for friend_user_id in friend_user_ids:
-            friend_questions = Question.query.filter_by(user_id=friend_user_id).all()
             friend = Signup_Data.query.get(friend_user_id)
-            for question in friend_questions:
-                question_data = {
-                    "id": question.id,
-                    "subject": question.subject,
-                    "user_name": friend.user_name,
-                    "local": question.local,
-                    "content": question.content,
-                    "img_name": question.img_name
-                }
-                friends_questions.append(question_data)
+            friend_data = {
+                "user_id": friend.id,
+                "user_name": friend.user_name,
+            }
+            friends_list.append(friend_data)
 
-    return jsonify(friends_questions)
+    return jsonify(friends_list)
+
+@bp.route('/get_my_id', methods=['GET'])
+@login_required
+def get_my_id():
+    user = g.user
+    return jsonify(user.id)
 
 
 
