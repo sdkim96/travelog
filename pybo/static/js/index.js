@@ -19,13 +19,27 @@ async function fetchMarkers() {
     return markers;
 }
 
-let allMarkers = []; // 전체 마커를 저장할 배열
-let friends = []; // 팔로우한 친구 목록을 저장할 배열
-
 async function fetchFriends() {
     const response2 = await fetch('/route/get_friends');
-    const friendList = await response2.json();
-    return friendList;
+    const friendsList = await response2.json();
+    return friendsList;
+}
+
+let allMarkers = []; // 전체 마커를 저장할 배열
+let friends = []; // 팔로우한 친구 목록을 저장할 배열
+let myIDval;
+
+// async function fetchFriendsPosts() {
+//     const response2 = await fetch('/route/get_friends_posts');
+//     const friendList = await response2.json();
+//     return friendList;
+// }
+
+
+async function fetchMyID() {
+    const response = await fetch('/route/get_my_id');
+    const myID = await response.json();
+    return myID;
 }
 
 // 3단계: 인포윈도우 구현하기(커스텀 오버레이로)
@@ -111,7 +125,9 @@ async function displayMarkers() {
     //아까 2단계의 마커에 대한 함수를 구현함. markers엔 json형식으로 되어있는 게시물의 대한 정보가 들어감. 이걸 마커에 넣어줄거임
     const markers = await fetchMarkers();
     const friendList = await fetchFriends();
-    friends = friendList.map(friend => friend.user_name);
+    friends = friendList.map(friend => friend.user_id);
+    const friendsMarkers = markers.filter(marker => friends.includes(marker.user_id));
+    myIDval = await fetchMyID();
 
     //각각의 마커의 정보에 대해서.
     //마커의 정보!
@@ -171,8 +187,9 @@ async function displayMarkers() {
 function updateMarkerVisibility() {
     const selectedFilter = document.querySelector('input[name="markerFilter"]:checked').value;
     allMarkers.forEach(markerObj => {
-        const isMyMarker = markerObj.userId === userId;
+        const isMyMarker = markerObj.userId === myIDval;
         const isFriendsMarker = friends.includes(markerObj.userId);
+        console.log(markerObj.userId);
         const isNotMyMarker = !isMyMarker && !isFriendsMarker;
 
         let showMarker = false;
@@ -193,7 +210,6 @@ function updateMarkerVisibility() {
         }
     });
 }
-
 
 
 // 필터를 변경할 때마다 updateMarkerVisibility 함수 호출
