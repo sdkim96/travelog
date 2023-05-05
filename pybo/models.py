@@ -35,7 +35,7 @@ class Exercise_Data(db.Model):
 
 
 class Signup_Data(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True) # 이 값은 question table의 user_id와 같은 값임.
     user_name = db.Column(db.String(150), nullable=False)
     user_id = db.Column(db.String(200), unique=True,nullable=False)
     user_password = db.Column(db.String(200), nullable=False)
@@ -73,6 +73,16 @@ class Question(db.Model):
     local = db.Column(db.String(200), nullable=False)
     img_name = db.Column(db.String(200))
     summary = db.Column(db.Text(), nullable=True)
+
+class AddMarker(db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # Marker id
+    user_id = db.Column(db.Integer, db.ForeignKey('signup__data.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship('Signup_Data', backref=db.backref('marker_set'))
+    latitude = db.Column(db.Float, nullable=False)  # Marker latitude
+    longitude = db.Column(db.Float, nullable=False)  # Marker longitude
+    title = db.Column(db.String(200), nullable=False)  # Marker title
+    content = db.Column(db.Text(), nullable=False)  # Marker content
+    image_dir = db.Column(db.String(200), nullable=True)  # Marker image directory
 
 
 

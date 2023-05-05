@@ -226,3 +226,55 @@ function closeOverlay(){
     customOverlay.setMap(null);
 }
 
+
+//아래는 좌클릭으로 생성된 마커에 대한 정의내용입니다.
+function addMarker(position) {
+    var marker2 = new kakao.maps.Marker({
+        position: position
+    });
+    marker2.setMap(map);
+    // 마커를 생성합니다
+    kakao.maps.event.addListener(marker2, 'click', function() {
+        $('#myModal').modal('show');
+    });
+
+    $('#markerForm').on('submit', function(e) {
+        e.preventDefault();
+
+        // user_id=data.get('user_id'),
+        // latitude=data.get('latitude'),
+        // longitude=data.get('longitude'),
+        // title=data.get('title'),
+        // content=data.get('content'),
+        // image_dir=data.get('image_dir')
+
+
+        var formData = new FormData(this);
+        formData.append('user_id', myIDval); // 실제 user_id 값을 사용하십시오.
+        formData.append('latitude', marker2.getPosition().getLat());
+        formData.append('longitude', marker2.getPosition().getLng());
+        console.log(formData);
+    
+        $.ajax({
+            url: '/route/add_marker',  // 서버의 URL을 여기에 입력하십시오.
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                console.log('서버로 전송완료')
+            }
+        // var infowindow = new kakao.maps.InfoWindow({ /* options */ });
+        });
+        $('#myModal').modal('hide');
+
+        // 마우스 오른쪽 클릭시 마커를 제거하는 이벤트를 등록합니다
+        kakao.maps.event.addListener(marker2, 'rightclick', function() {
+        marker2.setMap(null);
+        });
+    });
+}
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    // 클릭한 위치에 마커를 표시합니다
+    addMarker(mouseEvent.latLng);
+    });

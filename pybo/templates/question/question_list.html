@@ -4,6 +4,21 @@
     <div class="main story">
         <div id="container">
             <div id="list">
+                <div class="category">
+                    <span class="col-2">
+                        <select class="form-control so">
+                            <option value="recent" {% if so=='recent' %}selected{% endif %}>전체게시물</option>
+                            <option value="recommend" {% if so=='recommend' %}selected{% endif %}>내 게시물</option>
+                            <option value="popular" {% if so=='popular' %}selected{% endif %}>친구 게시물</option>
+                        </select>
+                    </span>
+                    <span class="col-4 input-group">
+                        <input type="text" class="form-control kw" value="{{ kw or '' }}" placeholder="검색어를 입력해 주세요">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                        </div>
+                    </span>
+                </div>
                 {% if question_list, signup__data %}
                 <div id="con_list" class="con_list" style="overflow: hidden;">
                     {% for question in question_list.items %}
@@ -47,7 +62,7 @@
                                         <div class="user_info">
                                             <span class="usr_nm"></span>
                                             <span class="travel">{{ question.create_date|datetime }}</span>
-                                            <span class="travel">작성자 : {{ g.user.user_name}}</span>
+                                            <span class="travel">작성자 : {{ question.user.user_id }}</span>
 
 
                                         </div>
