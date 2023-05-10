@@ -189,7 +189,6 @@ function updateMarkerVisibility() {
     allMarkers.forEach(markerObj => {
         const isMyMarker = markerObj.userId === myIDval;
         const isFriendsMarker = friends.includes(markerObj.userId);
-        console.log(markerObj.userId);
         const isNotMyMarker = !isMyMarker && !isFriendsMarker;
 
         let showMarker = false;

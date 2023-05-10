@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template, g, redirect, url_for, jsonify, flash
 from pybo.views.main_views import login_required
-from pybo.models import db, Signup_Data
+from pybo.models import db, Signup_Data, FollowNotification
 
 bp = Blueprint('friends', __name__, url_prefix='/friends')
 
@@ -37,6 +37,7 @@ def follow(user_id): #요건 id값임(singup_data.id인 idkey)
     if g.user is not None:
         if g.user != user_to_follow:
             g.user.follow(user_to_follow)
+            user_to_follow.add_follow_notification(g.user.id)
             db.session.commit()
         else:
             flash('나를 팔로우 할 수 없습니다.')
@@ -62,3 +63,23 @@ def unfollow(user_id):
             return redirect(url_for('friends.find_friends'))
         
     return redirect(url_for('friends.find_friends', user_id=user_id))
+
+@bp.route('/get_follow_notifications', methods=['GET'])
+@login_required
+def get_follow_notifications():
+    user = g.user
+    notifications = []
+
+    if user is not None:
+        all_notifications = user.notifications.order_by(FollowNotification.timestamp.desc()).all()
+        for notification in all_notifications:
+            sender = Signup_Data.query.get(notification.sender_id)
+            notifications.append({
+                "id": notification.id,
+                "sender_id": sender.id,
+                "sender_name": sender.user_name,
+                "timestamp": notification.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+                "is_read": notification.is_read
+            })
+
+    return jsonify(notifications)
