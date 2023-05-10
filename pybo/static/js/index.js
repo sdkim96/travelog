@@ -240,29 +240,27 @@ function addMarker(position) {
     $('#markerForm').on('submit', function(e) {
         e.preventDefault();
 
-        // user_id=data.get('user_id'),
-        // latitude=data.get('latitude'),
-        // longitude=data.get('longitude'),
-        // title=data.get('title'),
-        // content=data.get('content'),
-        // image_dir=data.get('image_dir')
-
+        var title = $('#title').val();
+        var content = $('#content').val();
+        var image = $('#image')[0].files[0];
 
         var formData = new FormData(this);
-        formData.append('user_id', myIDval); // 실제 user_id 값을 사용하십시오.
+        formData.append('user_id', myIDval); // Replace with actual user_id value
         formData.append('latitude', marker2.getPosition().getLat());
         formData.append('longitude', marker2.getPosition().getLng());
-        console.log(formData);
+        formData.append('title', title);
+        formData.append('content', content);
+        formData.append('image_dir', image); // If you're not uploading a file, remove this line
     
         $.ajax({
-            url: '/route/add_marker',  // 서버의 URL을 여기에 입력하십시오.
+            url: '/route/add_marker',  // Replace with server's URL
             method: 'POST',
             data: formData,
             contentType: false,
             processData: false,
             success: function(data) {
                 console.log('서버로 전송완료')
-            }
+                }
         // var infowindow = new kakao.maps.InfoWindow({ /* options */ });
         });
         $('#myModal').modal('hide');
