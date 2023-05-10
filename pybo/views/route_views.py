@@ -64,7 +64,14 @@ def get_my_id():
 @bp.route('/add_marker', methods=['POST'])
 @login_required
 def add_marker():
-    data = request.get_json()
+    data = request.form
+
+    image = request.files.get('image_dir')
+    image_path = None
+
+    if image:
+        # Save the image and set image_path to the location it was saved to
+        pass  # Replace this with your image saving logic
 
     marker2 = AddMarker(
         user_id=data.get('user_id'),
@@ -72,13 +79,14 @@ def add_marker():
         longitude=data.get('longitude'),
         title=data.get('title'),
         content=data.get('content'),
-        image_dir=data.get('image_dir')
+        image_dir=image_path  # Replace with the saved image path
     )
 
     db.session.add(marker2)
     db.session.commit()
 
     return {'message': 'New marker added successfully'}, 201
+
 
 # def create_posting_dict(posting):
 #     return {
