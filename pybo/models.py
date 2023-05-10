@@ -99,7 +99,7 @@ class AddMarker(db.Model):
     longitude = db.Column(db.Float, nullable=False)  # Marker longitude
     title = db.Column(db.String(200), nullable=False)  # Marker title
     content = db.Column(db.Text(), nullable=False)  # Marker content
-    image_dir = db.Column(db.String(200), nullable=True)  # Marker image directory
+    img_name = db.Column(db.String(200), nullable=True)  # Marker image directory
 
 
 

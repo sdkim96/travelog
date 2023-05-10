@@ -11,6 +11,7 @@
         </div>
         {% endfor %}
         <!-- 오류표시 End -->
+
         <div class="form-group">
             <label for="subject">제목</label>
             <input type="text" class="form-control" name="subject" id="subject"
@@ -22,12 +23,42 @@
             <input type="text" class="form-control" name="local" id="local"
                    value="{{ form.local.data or '' }}" placeholder="[지역]">
         </div>
+
+
+
         <div class="form-group">
             <br>
             <label for="local">대표 사진(필수)</label>
-            <input type="file" multiple name="file[]" class="form-control" value="" />
-
+            <label class="custom-file-upload">
+                이미지 선택
+                <input type="file" multiple name="file[]" class="form-control" value="" onchange="previewImages(this);" />
+            </label>
         </div>
+        <div id="image-preview"></div>
+        <script>
+            function previewImages(input) {
+                const imagePreviewContainer = document.getElementById('image-preview');
+                imagePreviewContainer.innerHTML = '';
+
+                if (input.files) {
+                    const filesAmount = input.files.length;
+                    for (let i = 0; i < filesAmount; i++) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (event) {
+                            const img = document.createElement('img');
+                            img.src = event.target.result;
+                            img.style.width = '200px';
+                            img.style.height = '200px';
+                            img.style.margin = '10px';
+                            imagePreviewContainer.appendChild(img);
+                        };
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            }
+        </script>
         <div class="form-group">
             <label for="editor">내용</label>
             <textarea class="form-control3 cke_editor_editor cke_contents " name="content" id="editor" rows="20" >{{ form.content.data or '' }}</textarea>

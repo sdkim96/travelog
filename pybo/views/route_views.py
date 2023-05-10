@@ -87,6 +87,13 @@ def add_marker():
 
     return {'message': 'New marker added successfully'}, 201
 
+    
+@bp.route('/get_markers2', methods=['GET'])
+@login_required
+def get_added_markers():
+    markers = AddMarker.query.all()
+    markers_data = [{'id': marker.id, 'user_id': marker.user_id, 'latitude': marker.latitude, 'longitude': marker.longitude, 'title': marker.title, 'content': marker.content, 'img_name': marker.img_name} for marker in markers]
+    return jsonify(markers_data)
 
 # def create_posting_dict(posting):
 #     return {
