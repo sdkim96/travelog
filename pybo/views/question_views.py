@@ -9,8 +9,9 @@ import re
 
 from .. import db
 from ..forms import QuestionForm, AnswerForm
-from ..models import Question, Answer, Signup_Data, question_voter
+from ..models import Question, Answer, Signup_Data, Friendship,question_voter
 from pybo.views.main_views import login_required
+from geopy.geocoders import Nominatim
 bp = Blueprint('question', __name__, url_prefix='/question')
 # image_path = 'pybo/static/image/'+ Question.user_id
 
@@ -33,7 +34,19 @@ def move_images(question_id):
         dest_file_path = os.path.join(dest_folder, file)
         shutil.move(src_file_path, dest_file_path)
 
+geolocator = Nominatim(user_agent="geoapiExercises")
 
+@bp.route('/get_location', methods=['GET'])
+def get_location():
+    address = request.args.get('address')
+    if address:
+        location = geolocator.geocode(address)
+        if location:
+            return jsonify({'latitude': location.latitude, 'longitude': location.longitude})
+        else:
+            return jsonify({'error': 'Unable to find the location for the given address.'})
+    else:
+        return jsonify({'error': 'Address parameter is missing.'})
 
 @bp.route('/list/')
 def _list():
@@ -44,17 +57,13 @@ def _list():
 
         # 정렬
         if so == 'recommend':
-            sub_query = db.session.query(question_voter.c.question_id, func.count('*').label('num_voter')) \
-                .group_by(question_voter.c.question_id).subquery()
-            question_list = Question.query \
-                .outerjoin(sub_query, Question.id == sub_query.c.question_id) \
-                .order_by(sub_query.c.num_voter.desc(), Question.create_date.desc())
+            question_list = Question.query.filter(Question.user_id == "{}".format(g.user.id)).order_by(Question.create_date.desc())
+
         elif so == 'popular':
-            sub_query = db.session.query(Answer.question_id, func.count('*').label('num_answer')) \
-                .group_by(Answer.question_id).subquery()
-            question_list = Question.query \
-                .outerjoin(sub_query, Question.id == sub_query.c.question_id) \
-                .order_by(sub_query.c.num_answer.desc(), Question.create_date.desc())
+            friend_ids = [friendship.user2_id for friendship in Friendship.query.filter_by(user1_id="{}".format(g.user.id)).all()]
+
+
+            question_list = Question.query.filter(Question.user_id.in_(friend_ids)).order_by(Question.create_date.desc())
         else:  # recent
             question_list = Question.query.order_by(Question.create_date.desc())
 
