@@ -19,6 +19,15 @@
                         <li class="nav-item ">
                             <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" id="notifications-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell" id="notifications-icon"></i>
+                                <span class="badge badge-danger" id="unread-notifications-count" style="display: none;"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifications-dropdown" id="notifications-dropdown-menu">
+                                <div id="notifications-placeholder">로딩 중...</div>
+                            </div>
+                        </li>
                     </ul>
                     {% else %}
                     <ul>
@@ -34,4 +43,70 @@
         </header>
     </nav>
 </div>
+<script>
+    async function fetchFollowNotifications() {
+        const response = await fetch('/friends/get_follow_notifications');
+        const notifications = await response.json();
+        return notifications;
+    }
+    
+    async function displayFollowNotifications() {
+        const notifications = await fetchFollowNotifications();
+        const notificationsDropdownMenu = document.getElementById("notifications-dropdown-menu");
+        const unreadNotificationsCount = document.getElementById("unread-notifications-count");
+    
+        // 알림 목록 초기화
+        notificationsDropdownMenu.innerHTML = '';
+    
+        // 안 읽은 알림 개수 초기화
+        let count = 0;
+    
+        notifications.forEach(notification => {
+            // 새로운 알림 항목 생성
+            const notificationItem = document.createElement("a");
+            notificationItem.classList.add("dropdown-item");
+            notificationItem.setAttribute("href", "#");
+    
+            // 알림 텍스트 설정
+            notificationItem.textContent = `${notification.sender_name}님이 팔로우하였습니다.`;
+    
+            // 안 읽은 알림 처리
+            if (!notification.is_read) {
+                notificationItem.classList.add("unread");
+                count++;
+            }
+    
+            // 알림 목록에 추가
+            notificationsDropdownMenu.appendChild(notificationItem);
+        });
+    
+        // 안 읽은 알림 개수 업데이트
+        unreadNotificationsCount.textContent = count;
+    
+        // 종 모양 아이콘에 빨간 점 표시
+        if (count > 0) {
+            document.getElementById("notifications-icon").classList.add("has-unread");
+        } else {
+            document.getElementById("notifications-icon").classList.remove("has-unread");
+        }
+    }
+    
+    // 알림 드롭다운 메뉴 초기 상태 설정
+    const notificationsDropdownMenu = document.getElementById("notifications-dropdown-menu");
+    notificationsDropdownMenu.style.display = 'none';
+    
+    // 클릭 이벤트 리스너 추가
+    document.getElementById("notifications-dropdown").addEventListener("click", function() {
+        if (notificationsDropdownMenu.style.display === 'none') {
+            notificationsDropdownMenu.style.display = 'block';
+        } else {
+            notificationsDropdownMenu.style.display = 'none';
+        }
+    });
+    
+    // 페이지 로드 시 알림 데이터 가져오기
+    document.addEventListener("DOMContentLoaded", displayFollowNotifications);
+    </script>
+    
+
 

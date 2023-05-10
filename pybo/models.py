@@ -1,4 +1,5 @@
 from pybo import db
+from datetime import datetime
 
 
 question_voter = db.Table(
@@ -34,6 +35,14 @@ class Exercise_Data(db.Model):
     user2 = db.relationship('Signup_Data', backref=db.backref('exercise_set'))
 
 
+#팔로우 알람을 저장할 테이블
+class FollowNotification(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("signup__data.id"), nullable=False)
+    sender_id = db.Column(db.Integer, db.ForeignKey("signup__data.id"), nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    is_read = db.Column(db.Boolean, default=False)
+
 class Signup_Data(db.Model):
     id = db.Column(db.Integer, primary_key=True) # 이 값은 question table의 user_id와 같은 값임.
     user_name = db.Column(db.String(150), nullable=False)
@@ -41,6 +50,7 @@ class Signup_Data(db.Model):
     user_password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     phone = db.Column(db.String(150), nullable=False)
+    notifications = db.relationship("FollowNotification", foreign_keys=[FollowNotification.user_id], backref="user", lazy="dynamic")
     friends = db.relationship("Signup_Data",
                             secondary="friendship",
                             primaryjoin="Signup_Data.id==Friendship.user1_id",
@@ -55,10 +65,17 @@ class Signup_Data(db.Model):
     def unfollow(self, user):
         if user in self.friends:
             self.friends.remove(user)
+
+    def add_follow_notification(self, sender_id):
+        notification = FollowNotification(sender_id=sender_id, user_id=self.id)
+        db.session.add(notification)
+        db.session.commit()
     
 class Friendship(db.Model):
     user1_id = db.Column(db.Integer, db.ForeignKey("signup__data.id"), primary_key=True)
     user2_id = db.Column(db.Integer, db.ForeignKey("signup__data.id"), primary_key=True)
+
+
 
 
 class Question(db.Model):
