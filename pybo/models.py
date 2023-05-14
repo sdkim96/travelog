@@ -15,26 +15,6 @@ answer_voter = db.Table(
 )
 
 
-class Health_Data(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    height = db.Column(db.Integer, nullable=False)
-    weight = db.Column(db.Integer, nullable=False)
-    body_fat = db.Column(db.Integer, nullable=False)
-    body_muscle = db.Column(db.Integer, nullable=False)
-    create_date = db.Column(db.DateTime(), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('signup__data.id', ondelete='CASCADE'), nullable=False)
-    user = db.relationship('Signup_Data', backref=db.backref('question_set'))
-
-class Exercise_Data(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    exercise_type = db.Column(db.String(200), nullable=False)
-    exercise_time = db.Column(db.Integer, nullable=False)
-    exercise_note = db.Column(db.Text(), nullable=False)
-    create_date = db.Column(db.DateTime(), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('signup__data.id', ondelete='CASCADE'), nullable=False)
-    user2 = db.relationship('Signup_Data', backref=db.backref('exercise_set'))
-
-
 #팔로우 알람을 저장할 테이블
 class FollowNotification(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,6 +37,7 @@ class Signup_Data(db.Model):
                             secondaryjoin="Signup_Data.id==Friendship.user2_id",
                             backref=db.backref("followers", lazy="dynamic"),
                             lazy="dynamic")
+    profile_img = db.Column(db.String(200))
 
     def follow(self, user):
         if user not in self.friends:
@@ -99,7 +80,8 @@ class AddMarker(db.Model):
     longitude = db.Column(db.Float, nullable=False)  # Marker longitude
     title = db.Column(db.String(200), nullable=False)  # Marker title
     content = db.Column(db.Text(), nullable=False)  # Marker content
-    img_name = db.Column(db.String(200), nullable=True)  # Marker image directory
+    img_name = db.Column(db.String(200), nullable=True)
+    image_dir = db.Column(db.String(200))  # Marker image directory
 
 
 

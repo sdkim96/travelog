@@ -47,10 +47,9 @@ def create_app():
     from . import models
 
     # 블루프린트
-    from .views import main_views, input_views, list_views, question_views, answer_views, comment_views, vote_views, openai_views, image_views, route_views, friends_views
+    from .views import main_views, input_views, question_views, answer_views, comment_views, vote_views, openai_views, image_views, route_views, friends_views
     app.register_blueprint(main_views.bp)
     app.register_blueprint(input_views.bp)
-    app.register_blueprint(list_views.bp)
     app.register_blueprint(question_views.bp)
     app.register_blueprint(answer_views.bp)
     app.register_blueprint(comment_views.bp)

@@ -8,6 +8,8 @@
 from flask import Blueprint, jsonify, g, session, request
 from pybo.models import db, Question, Signup_Data, Friendship, AddMarker
 from pybo.views.main_views import login_required
+from werkzeug.utils import secure_filename
+import os
 
 
 bp = Blueprint('route', __name__, url_prefix='/route')
@@ -66,12 +68,18 @@ def get_my_id():
 def add_marker():
     data = request.form
 
-    image = request.files.get('image_dir')
+    image = request.files.get('img_name')
     image_path = None
 
     if image:
-        # Save the image and set image_path to the location it was saved to
-        pass  # Replace this with your image saving logic
+        # Ensure the filename is secure
+        secure_image_name = secure_filename(image.filename)
+        # Construct the new filename
+        new_image_name = secure_image_name.rsplit('.', 1)[0] + '_' + str(data.get('user_id')) + '.' + secure_image_name.rsplit('.', 1)[1]
+        # Construct the full path for the image
+        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'static', 'image', 'marker2_images', new_image_name)
+        # Save the image
+        image.save(image_path)
 
     marker2 = AddMarker(
         user_id=data.get('user_id'),
@@ -79,7 +87,7 @@ def add_marker():
         longitude=data.get('longitude'),
         title=data.get('title'),
         content=data.get('content'),
-        image_dir=image_path  # Replace with the saved image path
+        image_dir=image_path
     )
 
     db.session.add(marker2)
@@ -87,12 +95,14 @@ def add_marker():
 
     return {'message': 'New marker added successfully'}, 201
 
+
     
 @bp.route('/get_markers2', methods=['GET'])
 @login_required
 def get_added_markers():
     markers = AddMarker.query.all()
-    markers_data = [{'id': marker.id, 'user_id': marker.user_id, 'latitude': marker.latitude, 'longitude': marker.longitude, 'title': marker.title, 'content': marker.content, 'img_name': marker.img_name} for marker in markers]
+    markers_data = [{'id': marker.id, 'user_id': marker.user_id, 'latitude': marker.latitude,
+                    'longitude': marker.longitude, 'title': marker.title, 'content': marker.content, 'img_name': marker.image_dir} for marker in markers]
     return jsonify(markers_data)
 
 # def create_posting_dict(posting):

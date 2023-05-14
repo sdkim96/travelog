@@ -42,19 +42,43 @@ async function fetchMyID() {
     return myID;
 }
 
+// marker, marker2 데이터필드 통합
+function createUnifiedMarkerData(markerData, isMarker2) {
+    let unifiedMarkerData = {};
+
+    if (isMarker2) {
+        unifiedMarkerData = {
+            ...markerData,
+            local: `${markerData.latitude},${markerData.longitude}`,
+            subject: markerData.title
+        };
+    } else {
+        unifiedMarkerData = {
+            ...markerData,
+            title: markerData.subject
+        };
+    }
+
+    return unifiedMarkerData;
+}
+
+
 // 3단계: 인포윈도우 구현하기(커스텀 오버레이로)
-async function createCustomOverlay(markerData, isMarker2) {
+async function createCustomOverlay(unifiedMarkerData, isMarker2) {
 
     //해당 이미지가 그 위치에 있는지에 대한 검증입니다. utils.py 참고
-    var imageSrc0 = `/static/image/${markerData.id}/${markerData.img_name}`;
+    var imageSrc0;
+    if (isMarker2) {
+        imageSrc0 = `/static/image/marker2_images/${unifiedMarkerData.img_name}`;
+    } else {
+        imageSrc0 = `/static/image/${unifiedMarkerData.id}/${unifiedMarkerData.img_name}`;
+    }
+
     const isValidPath = await is_directory(imageSrc0);
     if (!isValidPath) {
       imageSrc0 = "/static/image/main_01.jpg";
-    }
+    } 
 
-    //검증된 imageSrc0엔 대표이미지있는 경로와 없는 경로 두개가 들어가있습니다.
-    //옆으로 슬라이딩 할 수 있고 없고는 html코드에 주석처리된 부분입니다. 230426)일단 기능구현은 안함.
-    //아래 a href부분도 차후에 경로 수정해야함.
     const content = `
         <div class="custom-overlay">
             <div class="info-window">
@@ -65,22 +89,16 @@ async function createCustomOverlay(markerData, isMarker2) {
                     <!-- <img src="/static/image/another_image.jpg" /> -->
                     <button class="slide-button right">&gt;</button>
                 </div>
-                <p>${markerData.subject}</p>
-                <p><a href="http://127.0.0.1:5000/question/detail/${markerData.id}">바로가기</a></p>
+                <p>${unifiedMarkerData.subject}</p>
+                <p><a href="http://127.0.0.1:5000/question/detail/${unifiedMarkerData.id}">바로가기</a></p>
                 <button class="infoClose" onclick="closeOverlay()">X</button>
             </div>
         </div>
     `;
 
-    let positionWhenOverlay;
-    if (isMarker2) {
-        positionWhenOverlay = new kakao.maps.LatLng(markerData.latitude, markerData.longitude);
-    } else {
-        const [latitude, longitude] = markerData.local.split(',').map(Number);
-        positionWhenOverlay = new kakao.maps.LatLng(latitude, longitude);
-    }
+    const [latitude, longitude] = unifiedMarkerData.local.split(',').map(Number);
+    let positionWhenOverlay = new kakao.maps.LatLng(latitude, longitude);
 
-    //인포윈도우 객체를 만듭니다. (얘는 함수가 호출되면 구현되야함)
     const customOverlay = new kakao.maps.CustomOverlay({
         content: content,
         map: null,
@@ -90,7 +108,6 @@ async function createCustomOverlay(markerData, isMarker2) {
         zIndex: 10
     });
 
-    //인포윈도우에 들어가는 좌우 버튼을 구현합니다.
     const leftButton = customOverlay.a.querySelector('.left');
     const rightButton = customOverlay.a.querySelector('.right');
     const images = customOverlay.a.querySelectorAll('img');
@@ -110,7 +127,6 @@ async function createCustomOverlay(markerData, isMarker2) {
 
     return customOverlay;
 }
-
 
 
 
@@ -317,7 +333,7 @@ function addMarker(position) {
         formData.append('longitude', marker2.getPosition().getLng());
         formData.append('title', title);
         formData.append('content', content);
-        formData.append('image_dir', image); // If you're not uploading a file, remove this line
+        formData.append('img_name', image); // If you're not uploading a file, remove this line
     
         $.ajax({
             url: '/route/add_marker',  // Replace with server's URL

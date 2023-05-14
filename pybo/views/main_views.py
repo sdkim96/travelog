@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
 from pybo import db
-from pybo.models import Health_Data, Exercise_Data, Signup_Data
+from pybo.models import Signup_Data
 from ..forms import UserCreateForm, UserLoginForm
 
 import functools
