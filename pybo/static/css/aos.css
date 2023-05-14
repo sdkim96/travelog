@@ -863,7 +863,8 @@
 
 [data-aos^=fade][data-aos^=fade].aos-animate {
     opacity: 1;
-    transform: translateZ(0)
+    transform: translateZ(0);
+    display: inline;
 }
 
 [data-aos=fade-up] {

@@ -6,7 +6,6 @@ from werkzeug.utils import redirect, secure_filename
 from flask import current_app as app
 from pybo import db
 from pybo.models import Signup_Data
-from ..forms import InputForm
 from pybo.views.main_views import login_required
 
 bp = Blueprint('input', __name__, url_prefix='/input')

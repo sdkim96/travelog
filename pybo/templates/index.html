@@ -56,7 +56,34 @@
                 <p>프로필</p>
                 <h2 class="username">{{ g.user.user_name}} </h2>
                 <br>
-                <img src="{{ url_for('static', filename='image/User.png') }}" width="190" height="190">
+                <form method="POST" action="{{ url_for('input.upload_file') }}" enctype="multipart/form-data">
+                    <input type="file" id="file" name="file" accept="image/*" style="display: none;" onchange="uploadImage(event)" required>
+                    <img id="profileImg"
+                         src="{{ url_for('static', filename='image/profile/' + g.user.user_id + '/' + g.user.profile_img if g.user.profile_img else 'image/User.png') }}"
+                         style="border-radius: 50%; width: 190px; height: 190px;" />
+                    <button type="button" id="uploadButton" style="background-color: skyblue; color: white; margin-top: 10px; border-radius: 5px; padding: 10px 20px; border: none; cursor: pointer; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);">프로필 변경</button>
+                </form>
+
+                <script>
+                    var loadFile = function(event) {
+                        var reader = new FileReader();
+                        reader.onload = function() {
+                            var output = document.getElementById('profileImg');
+                            output.src = reader.result;
+                        };
+                        reader.readAsDataURL(event.target.files[0]);
+                    };
+
+                    var uploadImage = function(event) {
+                        loadFile(event);
+                        // Trigger the form submission
+                        event.target.form.submit();
+                    }
+
+                    document.getElementById('uploadButton').addEventListener('click', function() {
+                        document.getElementById('file').click();
+                    });
+                </script>
                 <h6 class="email">{{ g.user.user_}}</h6>
                 <br>
                 {% if profile_last_exercise %}

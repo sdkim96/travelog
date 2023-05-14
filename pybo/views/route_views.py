@@ -76,22 +76,24 @@ def add_marker():
         secure_image_name = secure_filename(image.filename)
         # Construct the new filename
         new_image_name = secure_image_name.rsplit('.', 1)[0] + '_' + str(data.get('user_id')) + '.' + secure_image_name.rsplit('.', 1)[1]
-        # Construct the full path for the image
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'static', 'image', 'marker2_images', new_image_name)
         # Save the image
         image.save(image_path)
 
-    marker2 = AddMarker(
-        user_id=data.get('user_id'),
-        latitude=data.get('latitude'),
-        longitude=data.get('longitude'),
-        title=data.get('title'),
-        content=data.get('content'),
-        image_dir=image_path
-    )
+        # Instead of storing the full path in the database, just store the filename
+        local_str = ','.join(map(str, (data.get('latitude'), data.get('longitude'))))
 
-    db.session.add(marker2)
-    db.session.commit()
+        marker2 = AddMarker(
+            user_id=data.get('user_id'),
+            local=local_str,  # Store latitude and longitude as a string
+            subject=data.get('title'),
+            content=data.get('content'),
+            img_name=new_image_name  # Here, store only the filename
+        )
+
+        db.session.add(marker2)
+        db.session.commit()
+
 
     return {'message': 'New marker added successfully'}, 201
 
@@ -101,8 +103,12 @@ def add_marker():
 @login_required
 def get_added_markers():
     markers = AddMarker.query.all()
-    markers_data = [{'id': marker.id, 'user_id': marker.user_id, 'latitude': marker.latitude,
-                    'longitude': marker.longitude, 'title': marker.title, 'content': marker.content, 'img_name': marker.image_dir} for marker in markers]
+    markers_data = [{'id': marker.id, 
+                    'user_id': marker.user_id, 
+                    'local': marker.local, 
+                    'subject': marker.subject, 
+                    'content': marker.content, 
+                    'img_name': marker.img_name} for marker in markers]
     return jsonify(markers_data)
 
 # def create_posting_dict(posting):

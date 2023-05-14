@@ -7,10 +7,15 @@
 
     <title>Travelog</title>
 
-    <link rel="icon" href="{{url_for('static', filename='favicon (2).ico')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/aos.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/swiper.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon (2).ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
 
     <script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/iscroll.js') }}"></script>
@@ -25,9 +30,9 @@
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <header id="header">
     <div class="inner">
-        <h1><a href="#link_jb-box">Travelog</a></h1>
-            <div class="gnb">
-                {% if g.user %}
+        <h1><a href="#top">Travelog</a></h1>
+        <div class="gnb">
+            {% if g.user %}
                 <ul>
                     <li><a href='/friends/find_friends'>친구찾기</a></li>
                     <li><a href="/question/list">블로그</a></li>
@@ -36,7 +41,7 @@
                         <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
                     </li>
                 </ul>
-                {% else %}
+            {% else %}
                 <ul>
                     <li><a href='/friends/find_friends'>친구찾기</a></li>
                     <li><a href="/question/list">블로그</a></li>
@@ -44,8 +49,8 @@
                     <li><a href="/login">Login</a></li>
                     <li><a href=/signup>SignUp</a></li>
                 </ul>
-                {% endif %}
-            </div>
+            {% endif %}
+        </div>
     </div>
 </header>
 <!-- container -->
@@ -53,39 +58,145 @@
     <div class="sec sec_kv">
         <div class="kv_slider swiper swiper-container-fade swiper-container-initialized swiper-container-horizontal">
             <div class="swiper-wrapper" style="transition-duration: 0ms;">
-                <div class="kv_slide slide01 bg_image swiper-slide" style="width: 1903px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"></div>
-                <div class="kv_slide slide02 bg_image swiper-slide swiper-slide-prev" style="width: 1903px; opacity: 1; transform: translate3d(-1903px, 0px, 0px); transition-duration: 0ms;"></div>
-                <div class="kv_slide slide03 bg_image swiper-slide swiper-slide-active" style="width: 1903px; opacity: 1; transform: translate3d(-3806px, 0px, 0px); transition-duration: 0ms;"></div>
+                <div class="kv_slide slide01 bg_image swiper-slide"
+                     style="width: 1903px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"></div>
+                <div class="kv_slide slide02 bg_image swiper-slide swiper-slide-prev"
+                     style="width: 1903px; opacity: 1; transform: translate3d(-1903px, 0px, 0px); transition-duration: 0ms;"></div>
+                <div class="kv_slide slide03 bg_image swiper-slide swiper-slide-active"
+                     style="width: 1903px; opacity: 1; transform: translate3d(-3806px, 0px, 0px); transition-duration: 0ms;"></div>
             </div>
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-        <h2 class="sec_tit text_white aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">지도와 블로그에<br>설레는 여행을 기록하고,<br>기억해보세요. </h2>
+        <h2 class="sec_tit text_white aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">지도와 블로그에<br>설레는
+            여행을 기록하고,<br>기억해보세요 </h2>
     </div>
+    <div class="sec sec04 sec_program03">
+        <div class="sec_inner">
+{#            <div class="text_area">#}
+{#                <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">블로그</h2>#}
+{#                <p class="sec_desc aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">#}
+{#                    여행기록을 <br class="mo_block">블로그에 남겨보아요<br>#}
+{#                </p>#}
+{#            </div>#}
 
+            <!-- slider -->
+            <div class="cate_slider_section aos-init aos-animate" data-aos="fade-left" data-aos-duration="1000">
+                <div class="cate_slider_wrap">
+                    <div class="cate_slider swiper swiper-container-initialized swiper-container-horizontal">
+                        <div class="swiper-wrapper"
+                             style="transition-duration: 300ms; transform: translate3d(-4000px, 0px, 0px);">
+                            <div class="slider_item swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
+                                 data-swiper-slide-index="2" style="width: 1440px;">
+                                <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">1</h2>
+                                <p class="sec_desc aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                                    여행기록을 <br class="mo_block">블로그에 남겨보아요<br>
+                                </p>
+                                <div class="slider_radius">
+                                    <img src="{{ url_for('static', filename='image/1.png') }}" alt="slide 3">
+                                </div>
+                            </div>
+                            <div class="slider_item swiper-slide swiper-slide-duplicate-next"
+                                 data-swiper-slide-index="0" style="width: 1440px;">
+                                <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">1</h2>
+                                <p class="sec_desc aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                                    여행기록을 <br class="mo_block">블로그에 남겨보아요<br>
+                                </p>
+
+                                <div class="slider_radius">
+                                    <img src="{{ url_for('static', filename='image/2.png') }}" alt="slide 1">
+                                </div>
+                            </div>
+                            <div class="slider_item swiper-slide swiper-slide-prev" data-swiper-slide-index="1"
+                                 style="width: 1440px;">
+                                <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">2</h2>
+                                <p class="sec_desc aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                                    여행기록을 <br class="mo_block">블로그에 남겨보아요<br>
+                                </p>
+                                <div class="slider_radius">
+                                    <img src="{{ url_for('static', filename='image/3.png') }}" alt="slide 2">
+                                </div>
+                            </div>
+                            <div class="slider_item swiper-slide swiper-slide-active" data-swiper-slide-index="2"
+                                 style="width: 1440px;">
+                                <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">3</h2>
+                                <p class="sec_desc aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                                    여행기록을 <br class="mo_block">블로그에 남겨보아요<br>
+                                </p>
+                                <div class="slider_radius">
+                                    <img src="{{ url_for('static', filename='image/1.png') }}" alt="slide 3">
+                                </div>
+                            </div>
+                            <div class="slider_item swiper-slide swiper-slide-duplicate swiper-slide-next"
+                                 data-swiper-slide-index="0" style="width: 1440px;">
+                                <div class="slider_radius">
+                                    <img src="{{ url_for('static', filename='image/2.png') }}" alt="slide 1">
+                                </div>
+                            </div>
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                </div>
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span
+                        class="swiper-pagination-bullet" tabindex="0" role="button"
+                        aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0"
+                                                                role="button" aria-label="Go to slide 2"></span><span
+                        class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+                        aria-label="Go to slide 3"></span></div>
+                <div class="swiper-button-prev nav_arrow" tabindex="0" role="button" aria-label="Previous slide"></div>
+                <div class="swiper-button-next nav_arrow" tabindex="0" role="button" aria-label="Next slide"></div>
+            </div>
+            <!--// slider -->
+
+            <div class="cate_tabs aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+{#                <ul class="block">#}
+{#                    <li>#}
+{#                        <div class="feature1">#}
+{#                            <p>#}
+{#                                여행 블로그에 최적화된 Travel-log#}
+{#                            </p>#}
+{#                        </div>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <div class="feature2">#}
+{#                            <p>#}
+{#                                친구들과 함께 블로그에 여행기록을 작성해보세요#}
+{#                            </p>#}
+{#                        </div>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <div class="feature3">#}
+{#                            <p>#}
+{#                                블로그 특징3#}
+{#                            </p>#}
+{#                        </div>#}
+{#                    </li>#}
+{#                </ul>#}
+            </div>
+        </div>
+    </div>
     <div class="sec sec01 sec_life">
         <div class="bg_image">
             <div class="sec_inner">
                 <div class="text_area">
-                    <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">지도에 사진을<br>추가해서<br>기록해보세요.</h2>
+                    <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">지도에 사진을<br>추가해서<br>기록해보세요
+                    </h2>
                     <p class="sec_desc aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
-<!--                        간단한<br>문구<br>추가 가능-->
+                        <!--                        간단한<br>문구<br>추가 가능-->
                     </p>
-
                 </div>
-
                 <!-- service -->
-                <div class="service_list_section swiper swiper-container-initialized swiper-container-horizontal aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                <div class="service_list_section swiper swiper-container-initialized swiper-container-horizontal aos-init aos-animate"
+                     data-aos="fade-up" data-aos-duration="1000">
                     <div class="service_list swiper-wrapper">
                         <div class="service_item swiper-slide swiper-slide-active now-show">
                             <div class="service_box">
                                 <strong class="sv_tit">Blog</strong>
-                                <p class="sv_cont">다녀왔던 지역의 사진과 여행기만 추려서 여행을 추억할 수 있습니다.</p>
+                                <p class="sv_cont">다녀왔던 지역의 사진과 여행기만 추려서 여행을 추억할 수 있습니다</p>
                                 <a href="/question/list" class="btn_anchor">Blog</a>
                             </div>
                         </div>
                         <div class="service_item swiper-slide swiper-slide-next now-show">
                             <div class="service_box">
                                 <strong class="sv_tit">Map</strong>
-                                <p class="sv_cont">지도에 직접 마커를 추가 해보세요.</p>
+                                <p class="sv_cont">지도에 직접 마커를 추가 해보세요</p>
                                 <a href="/input" class="btn_anchor">Map</a>
                             </div>
                         </div>
@@ -93,14 +204,14 @@
                             <div class="service_box">
                                 <strong class="sv_tit">ChatGpt</strong>
                                 <p class="sv_cont">인공지능을 활용한 블로그 내용 요약해 필요한 정보를 한눈에</p>
-                                <a href=""  class="btn_anchor">자세히보기</a>
+                                <a href="" class="btn_anchor">자세히보기</a>
                             </div>
                         </div>
                         <div class="service_item swiper-slide">
                             <div class="service_box">
                                 <strong class="sv_tit">ChatBot</strong>
-                                <p class="sv_cont">챗봇을 이용하여 여행지 관련 정보를 얻어보세요.</p>
-                                <a href=""  class="btn_anchor">자세히보기</a>
+                                <p class="sv_cont">챗봇을 이용하여 여행지 관련 정보를 얻어보세요</p>
+                                <a href="" class="btn_anchor">자세히보기</a>
                             </div>
                         </div>
                         <div class="service_item swiper-slide">
@@ -111,9 +222,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
-                    <div class="swiper-button-prev nav_arrow swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
-                    <div class="swiper-button-next nav_arrow" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+                    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span
+                            class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+                            aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0"
+                                                                    role="button"
+                                                                    aria-label="Go to slide 2"></span><span
+                            class="swiper-pagination-bullet" tabindex="0" role="button"
+                            aria-label="Go to slide 3"></span></div>
+                    <div class="swiper-button-prev nav_arrow swiper-button-disabled" tabindex="0" role="button"
+                         aria-label="Previous slide" aria-disabled="true"></div>
+                    <div class="swiper-button-next nav_arrow" tabindex="0" role="button" aria-label="Next slide"
+                         aria-disabled="false"></div>
                     <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
                 <!--// service -->
             </div>
@@ -124,16 +243,16 @@
         <div class="sec_inner">
             <div class="left_box">
                 <div class="text_area">
-                    <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">광고없이 <br>직접 여행한 후기</h2>
+                    <h2 class="sec_tit aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">광고없이 <br>직접 여행한
+                        후기</h2>
                     <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
-                        여행을 떠나야 하는데,<br class="mo_block"> 검색하면 광고만 나와서<br> 어디로 가야할 지 모르시겠다면 Travel-log를 보세요.
+                        여행을 떠나야 하는데,<br class="mo_block"> 검색하면 광고만 나와서<br> 어디로 가야할 지 모르시겠다면 Travel-log를 보세요
                     </p>
                 </div>
             </div>
             <div class="right_box">
                 <div class="image_area aos-init aos-animate" data-aos="fade-left" data-aos-duration="1000">
-                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_nba5s8al.json" background="transparent"
-                                   speed="1" style="width: 520px; height: 520px;" loop autoplay></lottie-player>
+                    <img src="{{ url_for('static', filename='image/morkupimage2.png') }}">
                 </div>
             </div>
         </div>
@@ -143,9 +262,10 @@
         <div class="sec_inner">
             <div class="right_box">
                 <div class="text_area text_white">
-                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">Chat Gpt를 <br>사용한 여행 블로그</h2>
+                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">Chat Gpt를 <br>사용한 여행 블로그
+                    </h2>
                     <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
-                        Travel-log는 Chat Gpt를 이용해서<br>블로그에서 글을 요약해서 알려드립니다.
+                        Travel-log는 Chat Gpt를 이용해서<br>블로그에서 글을 요약해서 알려드립니다
                     </p>
                 </div>
             </div>
@@ -157,57 +277,55 @@
         </div>
     </div>
 
-<!--    <div class="sec sec06 sec_case" data-menu-idx="2">-->
-<!--        <div class="sec_inner sec_inner&#45;&#45;1st">-->
-<!--            <div class="left_box">-->
-<!--                <div class="text_area">-->
-<!--                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>-->
-<!--                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">-->
-<!--                        문구 추가<br class="mo_block">-->
-<!--                        문구 추가<br>문구 추가-->
-<!--                    </p>-->
-<!--                    <a href="" target="_blank" class="btn_anchor aos-init" data-aos="fade-up" data-aos-duration="1000">자세히보기</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="right_box">-->
-<!--                <div class="image_area aos-init" data-aos="fade-left" data-aos-duration="1000">-->
-<!--                    <img src="{{ url_for('static', filename='image/main_01.jpg') }}"-->
-<!--                    width="850px" height="550px">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="sec_inner sec_inner&#45;&#45;2nd">-->
-<!--            <div class="right_box">-->
-<!--                <div class="text_area">-->
-<!--                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">-->
-<!--                        문구 추가 <br>문구 추가<br class="mo_block">문구 추가<br class="pc_block">문구 추가-->
-<!--                    </h2>-->
-<!--                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가 <br>문구 추가</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="left_box aos-init" data-aos="fade-right" data-aos-duration="1000">-->
-<!--                <div class="image_area">-->
-<!--                    <img src="{{ url_for('static', filename='image/main_01.jpg') }}"-->
-<!--                         width="550" height="750px">-->
-<!--                </div>-->
-<!--                &lt;!&ndash; Tip &ndash;&gt;-->
-<!--                <span class="tip_box">-->
-<!--                <span class="tip_text">-->
-<!--                  Android / iOS App은 2022년 6월 출시 예정 <br>입니다.-->
-<!--                  <button type="button" class="btn_close">-->
-<!--                    <span class="hidden">팁닫기</span>-->
-<!--                  </button>-->
-<!--                </span>-->
-<!--              </span>-->
-<!--                &lt;!&ndash;// Tip &ndash;&gt;-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="sec sec06 sec_case" data-menu-idx="2">
+        <div class="sec_inner sec_inner&#45;&#45;1st">
+            <div class="left_box">-->
+                <div class="text_area">
+                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가<br>문구 추가</h2>
+                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">
+                        문구 추가<br class="mo_block">
+                        문구 추가<br>문구 추가
+                    </p>
+                    <a href="" target="_blank" class="btn_anchor aos-init" data-aos="fade-up" data-aos-duration="1000">자세히보기</a>
+                </div>
+            </div>
+            <div class="right_box">
+                <div class="image_area aos-init" data-aos="fade-left" data-aos-duration="1000">
+                    <img src="{{ url_for('static', filename='image/main_01.jpg') }}"
+                         width="850px" height="550px">
+                </div>
+            </div>
+        </div>
+        <div class="sec_inner sec_inner&#45;&#45;2nd">
+            <div class="right_box">
+                <div class="text_area">
+                    <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">
+                        문구 추가 <br>문구 추가<br class="mo_block">문구 추가<br class="pc_block">문구 추가
+                    </h2>
+                    <p class="sec_desc aos-init" data-aos="fade-up" data-aos-duration="1000">문구 추가 <br>문구 추가</p>
+                </div>
+            </div>
+            <div class="left_box aos-init" data-aos="fade-right" data-aos-duration="1000">
+                <div class="image_area">
+                    <img src="{{ url_for('static', filename='image/main_01.jpg') }}"
+                         width="550" height="750px">
+                </div>
+                <span class="tip_box">
+           <span class="tip_text">
+              <button type="button" class="btn_close">
+                <span class="hidden">팁닫기</span>
+               </button>
+             </span>
+           </span>
 
+            </div>
+        </div>
+    </div>
     <div class="sec sec07 bg_image sec_contact" data-menu-idx="3">
         <section class="sec_inner">
             <div class="text_area text_white">
-                <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">지금 바로<br>Travel-log<br>시작해보세요.</h2>
+                <h2 class="sec_tit aos-init" data-aos="fade-up" data-aos-duration="1000">지금 바로<br>Travel-log<br>시작해보세요
+                </h2>
             </div>
         </section>
     </div>
@@ -220,4 +338,4 @@
 <!-- //agreePop -->
 </body>
 
-</body></html>
+</html>

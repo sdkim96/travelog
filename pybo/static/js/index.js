@@ -42,36 +42,16 @@ async function fetchMyID() {
     return myID;
 }
 
-// marker, marker2 데이터필드 통합
-function createUnifiedMarkerData(markerData, isMarker2) {
-    let unifiedMarkerData = {};
-
-    if (isMarker2) {
-        unifiedMarkerData = {
-            ...markerData,
-            local: `${markerData.latitude},${markerData.longitude}`,
-            subject: markerData.title
-        };
-    } else {
-        unifiedMarkerData = {
-            ...markerData,
-            title: markerData.subject
-        };
-    }
-
-    return unifiedMarkerData;
-}
-
 
 // 3단계: 인포윈도우 구현하기(커스텀 오버레이로)
-async function createCustomOverlay(unifiedMarkerData, isMarker2) {
+async function createCustomOverlay(markerData, isMarker2) {
 
     //해당 이미지가 그 위치에 있는지에 대한 검증입니다. utils.py 참고
     var imageSrc0;
-    if (isMarker2) {
-        imageSrc0 = `/static/image/marker2_images/${unifiedMarkerData.img_name}`;
+    if (isMarker2==true) {
+        imageSrc0 = `/static/image/marker2_images/${markerData.img_name}`;
     } else {
-        imageSrc0 = `/static/image/${unifiedMarkerData.id}/${unifiedMarkerData.img_name}`;
+        imageSrc0 = `/static/image/${markerData.id}/${markerData.img_name}`;
     }
 
     const isValidPath = await is_directory(imageSrc0);
@@ -89,14 +69,14 @@ async function createCustomOverlay(unifiedMarkerData, isMarker2) {
                     <!-- <img src="/static/image/another_image.jpg" /> -->
                     <button class="slide-button right">&gt;</button>
                 </div>
-                <p>${unifiedMarkerData.subject}</p>
-                <p><a href="http://127.0.0.1:5000/question/detail/${unifiedMarkerData.id}">바로가기</a></p>
+                <p>${markerData.subject}</p>
+                <p><a href="http://127.0.0.1:5000/question/detail/${markerData.id}">바로가기</a></p>
                 <button class="infoClose" onclick="closeOverlay()">X</button>
             </div>
         </div>
     `;
 
-    const [latitude, longitude] = unifiedMarkerData.local.split(',').map(Number);
+    const [latitude, longitude] = markerData.local.split(',').map(Number);
     let positionWhenOverlay = new kakao.maps.LatLng(latitude, longitude);
 
     const customOverlay = new kakao.maps.CustomOverlay({
@@ -207,8 +187,10 @@ async function displayMarkers() {
     );
     await Promise.all(
         addedMarkers.map(async (marker2) => {
-            const position = new kakao.maps.LatLng(marker2.latitude, marker2.longitude);
-            var imageSrc2 = `/static/image/${marker2.id}/${marker2.img_name}`;
+            const localArray = marker2.local.split(',');
+            const position2 = new kakao.maps.LatLng(localArray[0], localArray[1]);
+    
+            var imageSrc2 = `/static/image/marker2_images/${marker2.img_name}`;
             if (!(await is_directory(imageSrc2))) {
                 imageSrc2 = '/static/image/main_01.jpg';
             }
@@ -219,28 +201,28 @@ async function displayMarkers() {
                 imageSize2,
                 imageOption2
             );
-
+    
             const newMarker2 = new kakao.maps.Marker({
                 map: map,
-                position: position,
+                position: position2,
                 image: markerImage2,
             });
-
+    
             const customOverlay = await createCustomOverlay(marker2, true);
-
+            
             kakao.maps.event.addListener(newMarker2, 'click', function () {
                 customOverlay.setMap(map);
             });
-
+    
             const closeButton = customOverlay.a.querySelector('.infoClose');
             closeButton.addEventListener('click', () => {
                 customOverlay.setMap(null);
             });
-
-            allMarkers2.push({
-                userId2: marker2.user_id,
-                marker2: newMarker2,
-                overlay2: customOverlay,
+    
+            allMarkers.push({
+                userId: marker2.user_id,
+                marker: newMarker2,
+                overlay: customOverlay,
             });
         })
     );

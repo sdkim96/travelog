@@ -76,14 +76,11 @@ class AddMarker(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # Marker id
     user_id = db.Column(db.Integer, db.ForeignKey('signup__data.id', ondelete='CASCADE'), nullable=False)
     user = db.relationship('Signup_Data', backref=db.backref('marker_set'))
-    latitude = db.Column(db.Float, nullable=False)  # Marker latitude
-    longitude = db.Column(db.Float, nullable=False)  # Marker longitude
-    title = db.Column(db.String(200), nullable=False)  # Marker title
+    local =  db.Column(db.String(200)) # Marker longitude
+    subject = db.Column(db.String(200), nullable=False)  # Marker title
     content = db.Column(db.Text(), nullable=False)  # Marker content
-    img_name = db.Column(db.String(200), nullable=True)
+    img_name = db.Column(db.String(200))
     image_dir = db.Column(db.String(200))  # Marker image directory
-
-
 
 
 class Answer(db.Model):
