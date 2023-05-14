@@ -57,6 +57,7 @@ class Signup_Data(db.Model):
                             secondaryjoin="Signup_Data.id==Friendship.user2_id",
                             backref=db.backref("followers", lazy="dynamic"),
                             lazy="dynamic")
+    profile_img = db.Column(db.String(200))
 
     def follow(self, user):
         if user not in self.friends:
@@ -99,7 +100,7 @@ class AddMarker(db.Model):
     longitude = db.Column(db.Float, nullable=False)  # Marker longitude
     title = db.Column(db.String(200), nullable=False)  # Marker title
     content = db.Column(db.Text(), nullable=False)  # Marker content
-    image_dir = db.Column(db.String(200), nullable=True)  # Marker image directory
+    img_name = db.Column(db.String(200), nullable=True)  # Marker image directory
 
 
 

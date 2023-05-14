@@ -16,8 +16,17 @@
                         <li><a href='/friends/find_friends'>친구찾기</a></li>
                         <li><a href="/question/list">블로그</a></li>
                         <li><a href="/input">나만의 지도</a></li>
+                        <li>
+                            <a href="/input/profilechange">
+                                {% if g.user.profile_img %}
+                                <img data-url="/bz17854" class="usr_img" alt="작성자 프로필 이미지" style="width : 50px; height : 50px;" src="{{ url_for('static', filename='image/profile/' + g.user.user_id + '/' + g.user.profile_img) }}">
+                                {% else %}
+                                <img data-url="/bz17854" class="usr_img" alt="작성자 프로필 이미지" src="{{ url_for('static', filename='image/User.png') }}">
+                                {% endif %}
+                            </a>
+                        </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{ url_for('main.logout') }}">{{ g.user.user_name }} (Loginout)</a>
+                            <a class="nav-link" href="{{ url_for('main.logout') }}">로그아웃</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="notifications-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -3,8 +3,12 @@
  * Story
  *
  */
+.classification {
+    float : left;
+    margin-left : 130px;
+}
  #container{
-    padding-top: 56px;
+    padding-top: 5px;
     width:90%;
     margin:auto;
    -webkit-tap-highlight-color: rgba(0,0,0,0);

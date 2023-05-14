@@ -5,19 +5,19 @@
         <div id="container">
             <div id="list">
                 <div class="category">
-                    <span class="col-2">
+                    <div class="col-2 classification">
                         <select class="form-control so">
                             <option value="recent" {% if so=='recent' %}selected{% endif %}>전체게시물</option>
                             <option value="recommend" {% if so=='recommend' %}selected{% endif %}>내 게시물</option>
                             <option value="popular" {% if so=='popular' %}selected{% endif %}>친구 게시물</option>
                         </select>
-                    </span>
-                    <span class="col-4 input-group">
+                    </div>
+                    <div class="col-4 input-group">
                         <input type="text" class="form-control kw" value="{{ kw or '' }}" placeholder="검색어를 입력해 주세요">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
                         </div>
-                    </span>
+                    </div>
                 </div>
                 {% if question_list, signup__data %}
                 <div id="con_list" class="con_list" style="overflow: hidden;">
@@ -58,7 +58,11 @@
                                         </li>
                                     </div>
                                     <div class="user">
-                                        <img data-url="/bz17854" class="usr_img" alt="작성자 프로필 이미지" src="{{ url_for('static', filename='image/User.png') }}">
+                                        {% if question.user.profile_img %}
+                                            <img data-url="/bz17854" class="usr_img" alt="작성자 프로필 이미지" src="{{ url_for('static', filename='image/profile/' + question.user.user_id + '/' + question.user.profile_img) }}">
+                                        {% else %}
+                                            <img data-url="/bz17854" class="usr_img" alt="작성자 프로필 이미지" src="{{ url_for('static', filename='image/User.png') }}">
+                                        {% endif %}
                                         <div class="user_info">
                                             <span class="usr_nm"></span>
                                             <span class="travel">{{ question.create_date|datetime }}</span>

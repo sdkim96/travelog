@@ -35,57 +35,24 @@ def defalut_health_data():
         # db.session.add(defalut_value)
         # db.session.commit()
 
+@bp.route('/upload', methods=('GET', 'POST'))
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        os.makedirs(f'pybo/static/image/profile/' + "{}".format(g.user.user_id) + "/", exist_ok=True)
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join('pybo/static/image/profile/' + "{}".format(g.user.user_id) + '/', filename))
+            g.user.profile_img = filename
+            db.session.commit()
+        return redirect(url_for('input.upload_file'))
+    return render_template('index.html')
 
-@bp.route('/')
+
+@bp.route('/', methods=['GET', 'POST'])
 def input_index():
-    check_user_id = session.get('user_id')
-    if g.user:
-        health_data = Health_Data.query.filter(Health_Data.user_id == check_user_id).all()
-        health_data_count = len(health_data)
+    return render_template('index.html')
 
-        if health_data_count >= 3:
-            recent_month1 = \
-            Health_Data.query.filter(Health_Data.user_id == check_user_id).order_by(Health_Data.id.desc())[0]
-            recent_month2 = \
-            Health_Data.query.filter(Health_Data.user_id == check_user_id).order_by(Health_Data.id.desc())[1]
-            recent_month3 = \
-            Health_Data.query.filter(Health_Data.user_id == check_user_id).order_by(Health_Data.id.desc())[2]
-        elif 0 < health_data_count < 3:
-            recent_month1 = \
-            Health_Data.query.filter(Health_Data.user_id == check_user_id).order_by(Health_Data.id.desc())[0]
-            recent_month2 = Health_Data.query.filter(Health_Data.height == 1)[0]
-            recent_month3 = Health_Data.query.filter(Health_Data.height == 1)[0]
-    else:
-        recent_month1 = Health_Data.query.filter(Health_Data.height == 1)[0]
-        recent_month2 = Health_Data.query.filter(Health_Data.height == 1)[0]
-        recent_month3 = Health_Data.query.filter(Health_Data.height == 1)[0]
-
-    test = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    c = 0
-    default_last_exercise = Exercise_Data.query.filter(Exercise_Data.exercise_time == 0)[0]
-
-    if g.user:
-        last_exercise = Exercise_Data.query.filter(Exercise_Data.user_id == check_user_id).order_by(
-            (Exercise_Data.create_date.desc()))
-
-        for i in last_exercise:
-            test.insert(c, i)
-            c += 1
-
-    else:
-        for i in range(31):
-            test.append(default_last_exercise)
-
-    last_exercise = Exercise_Data.query.filter(Exercise_Data.user_id == check_user_id).all()
-    count_last_exercise = len(last_exercise)
-    profile_last_exercise = 0
-
-    if count_last_exercise > 0:
-        profile_last_exercise = Exercise_Data.query.filter(Exercise_Data.user_id == check_user_id).order_by(
-            (Exercise_Data.create_date.desc()))
-
-    return render_template('index.html', recent_month1=recent_month1, recent_month2=recent_month2,
-                           recent_month3=recent_month3, test=test, profile_last_exercise=profile_last_exercise)
 
 
 @bp.route('/inputdata1')
